@@ -1,4 +1,5 @@
 # Project Name #
+AI Travel Agent
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -18,27 +19,44 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+Tripz
+Planez
+Planz
+TP
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-
+Travelers/Adventurers too lazy to sift through TripAdvisor
+People who want to travel with friends
+People who enjoy doing things with others
+Most useful for fb users (can connect you to your friends)
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
 ## Problem ##
   > Describe the problem your product solves.
+Traveling is fun, but planning your trip is tedious. It becomes even harder when you are traveling as a group, with people with different interests and desires. How do you balance your itinerary so everyone enjoys the trip?
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+Eliminates planning time by providing a platform where you can invite your traveling companions to make travel plans with you.  We take everyone’s preferences by simply making them select badges for each trip and suggest itineraries that everyone is happy with. 
+API: google places, yelp, possibly tripadvisor
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+“Don’t trip, go on your trip!”
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+Set up an account
+Create a trip event
+Invite your friends
+Make your preference selections
+Watch your trip form
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+Traveling has never been so easy. 
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.

@@ -1,12 +1,12 @@
 # Project Name
-
+AI Travel Agent
 > Pithy project description
-
+An intelligent, group-oriented decision-making travel app to help find places that fit your interests.
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Leran Firer
+  - __Scrum Master__: Boya Jiang
+  - __Development Team Members__: Akshay Buddiga, Xuejing Lu
 
 ## Table of Contents
 
