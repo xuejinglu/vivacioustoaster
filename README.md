@@ -52,6 +52,7 @@ Root
   |   |   |- tripTypeItem.js
   |   |   |- homeActions.js
   |   |   |- homeReducer.js
+  |   |   |- destSearch.js
   |   |
   |   |__friend__
   |   |   |- friendList.js
@@ -78,7 +79,12 @@ Root
   |   |   |- tripReducers.js
   |   |    
   |   |__tripPlan__
-  |   |   |
+  |   |   |__tripOverview__
+  |   |   |   |- travelFriendList.js
+  |   |   |   |- travelFriendItem.js
+  |   |   |   |- travelFriendActions.js
+  |   |   |   |- travelFriendReducers.js
+  |   |   |   
   |   |   |__dest__
   |   |   |   |- destList.js
   |   |   |   |- destItem.js
