@@ -1,0 +1,25 @@
+{
+  "name": "vivacioustoaster",
+  "version": "1.0.0",
+  "description": "Group travel made easy",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vivacioustoaster/vivacioustoaster.git"
+  },
+  "keywords": [
+    "travel"
+  ],
+  "author": "Akshay Buddiga, Jing Lu, Boya Jiang, Leran Firer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivacioustoaster/vivacioustoaster/issues"
+  },
+  "homepage": "https://github.com/vivacioustoaster/vivacioustoaster#readme",
+  "dependencies": {
+    "webpack": "^1.12.14"
+  }
+}
