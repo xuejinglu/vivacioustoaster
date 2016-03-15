@@ -20,9 +20,10 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-# Compiled Dirs (http://nodejs.org/api/addons.html)
+# Compiled Dirs and Files (http://nodejs.org/api/addons.html)
 build/
 dist/
+*.min.js
 
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
