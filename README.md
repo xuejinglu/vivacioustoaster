@@ -77,18 +77,19 @@ Root
   |   |   |- tripActions.js
   |   |   |- tripReducers.js
   |   |__tripPlan__
-      |   |
-      |   |__dest__
-      |   |   |- destList.js
-      |   |   |- destItem.js
-      |   |   |- destActions.js
-      |   |   |- destReducers.js
-      |   |
-      |   |__event__
-      |   |   |- eventList.js
-      |   |   |- eventItem.js
-      |   |   |- eventActions.js
-      |   |   |- eventReducers.js
+  |   |   |
+  |   |   |__dest__
+  |   |   |   |- destList.js
+  |   |   |   |- destItem.js
+  |   |   |   |- destActions.js
+  |   |   |   |- destReducers.js
+  |   |   |
+  |   |   |__event__
+  |   |   |   |- eventList.js
+  |   |   |   |- eventItem.js
+  |   |   |   |- eventActions.js
+  |   |   |   |- eventReducers.js
+  |   |   |
   |__specs__
   |   |__client__
   |   |   |- app-spec.js
