@@ -37,6 +37,7 @@ Root
   |__client__
   |		|__app__
   |		|		|- app.js
+  |		|		|- header.js
   |		|		|- reducers.js
   |		|		|- routes.js
   |		|		
@@ -47,6 +48,8 @@ Root
   |		|		
   |		|__home__
   |		|		|- home.js
+  |		|		|- tripTypeList.js
+  |		|		|- tripTypeItem.js
   |		|		|- homeActions.js
   |		|		|- homeReducer.js
   |		|
@@ -73,18 +76,19 @@ Root
   |		|		|- tripItem.js
   |		|		|- tripActions.js
   |		|		|- tripReducers.js
-  |		|
-  |		|__dest__
-  |		|		|- destList.js
-  |		|		|- destItem.js
-  |		|		|- destActions.js
-  |		|		|- destReducers.js
-  |		|
- 	|		|__event__
-  |		|		|- eventList.js
-  |		|		|- eventItem.js
-  |		|		|- eventActions.js
-  |		|		|- eventReducers.js
+  |		|__tripPlan__
+		  |		|
+		  |		|__dest__
+		  |		|		|- destList.js
+		  |		|		|- destItem.js
+		  |		|		|- destActions.js
+		  |		|		|- destReducers.js
+		  |		|
+		 	|		|__event__
+		  |		|		|- eventList.js
+		  |		|		|- eventItem.js
+		  |		|		|- eventActions.js
+		  |		|		|- eventReducers.js
   |__specs__
   |		|__client__
   |		|		|- app-spec.js
