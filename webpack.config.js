@@ -1,34 +1,38 @@
-var debug = process.env.NODE_ENV !== "production";
-var webpack = require('webpack');
-var path = require('path');
+const debug = process.env.NODE_ENV !== 'production';
+const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, "client"),
-  devtool: debug ? "inline-sourcemap" : null,
-  entry: "./index.js",
+  context: path.join(__dirname, 'client'),
+  devtool: debug ? 'inline-sourcemap' : null,
+  entry: './index.js',
   module: {
     preLoaders: [
       {
         test: /\.jsx?$/,
         loader: 'eslint',
-        exclude: /node_modules/
-      }
+        exclude: [/node_modules/, /\*\.min\.js/],
+      },
     ],
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: [/(node_modules|bower_components)/, /\*\.min\.js/],
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
-      }
-    ]
+          plugins: [
+            'react-html-attrs',
+            'transform-class-properties',
+            'transform-decorators-legacy',
+          ],
+        },
+      },
+    ],
   },
   output: {
-    path: __dirname + "/client/",
-    filename: "index.min.js"
+    path: `${__dirname}/client/`,
+    filename: 'index.min.js',
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),
