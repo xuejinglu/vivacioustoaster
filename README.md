@@ -76,6 +76,7 @@ Root
   |   |   |- tripItem.js
   |   |   |- tripActions.js
   |   |   |- tripReducers.js
+  |   |    
   |   |__tripPlan__
   |   |   |
   |   |   |__dest__
@@ -89,7 +90,7 @@ Root
   |   |   |   |- eventItem.js
   |   |   |   |- eventActions.js
   |   |   |   |- eventReducers.js
-  |   |   |
+  |   
   |__specs__
   |   |__client__
   |   |   |- app-spec.js
