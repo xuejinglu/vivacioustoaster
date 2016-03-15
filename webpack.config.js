@@ -7,6 +7,13 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: "./scripts.js",
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'eslint',
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       {
         test: /\.jsx?$/,
