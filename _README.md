@@ -59,7 +59,7 @@ Root
   |   |   |- friendActions.js
   |   |   |- friendReducer.js
   |   |   
-  |   |__tag_
+  |   |__tag__
   |   |   |- tagList.js
   |   |   |- tagItem.js
   |   |   |- tagActions.js
