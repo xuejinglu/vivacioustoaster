@@ -35,74 +35,73 @@ An intelligent, group-oriented decision-making travel app to help find places th
 ### File Hierarchy 
 Root
   |__client__
-  |		|__app__
-  |		|		|- app.js
-  |		|		|- header.js
-  |		|		|- reducers.js
-  |		|		|- routes.js
-  |		|		
-  |		|__auth__
-  |		|		|- auth.js
-  |		|		|- authAction.js
-  |		|		|- authReducer.js
-  |		|		
-  |		|__home__
-  |		|		|- home.js
-  |		|		|- tripTypeList.js
-  |		|		|- tripTypeItem.js
-  |		|		|- homeActions.js
-  |		|		|- homeReducer.js
-  |		|
-  |		|__friend__
-  |		|		|- friendList.js
-  |		|		|- friendItem.js
-  |		|		|- friendActions.js
-  |		|		|- friendReducer.js
-  |		|		
-  |		|__tag_
-  |		|		|- tagList.js
-  |		|		|- tagItem.js
-  |		|		|- tagActions.js
-  |		|		|- tagReducer.js
-  |		|		
-  |		|__query__
-  |		|		|- queryList.js
- 	|		|		|- queryItem.js
- 	|		|		|- queryActions.js
-	|		|		|- queryReducer.js
-	|		|		
-	|		|__trip__
-  |		|		|- tripList.js
-  |		|		|- tripItem.js
-  |		|		|- tripActions.js
-  |		|		|- tripReducers.js
-  |		|__tripPlan__
-		  |		|
-		  |		|__dest__
-		  |		|		|- destList.js
-		  |		|		|- destItem.js
-		  |		|		|- destActions.js
-		  |		|		|- destReducers.js
-		  |		|
-		 	|		|__event__
-		  |		|		|- eventList.js
-		  |		|		|- eventItem.js
-		  |		|		|- eventActions.js
-		  |		|		|- eventReducers.js
+  |   |__app__
+  |   |   |- app.js
+  |   |   |- header.js
+  |   |   |- reducers.js
+  |   |   |- routes.js
+  |   |   
+  |   |__auth__
+  |   |   |- auth.js
+  |   |   |- authAction.js
+  |   |   |- authReducer.js
+  |   |   
+  |   |__home__
+  |   |   |- home.js
+  |   |   |- tripTypeList.js
+  |   |   |- tripTypeItem.js
+  |   |   |- homeActions.js
+  |   |   |- homeReducer.js
+  |   |
+  |   |__friend__
+  |   |   |- friendList.js
+  |   |   |- friendItem.js
+  |   |   |- friendActions.js
+  |   |   |- friendReducer.js
+  |   |   
+  |   |__tag_
+  |   |   |- tagList.js
+  |   |   |- tagItem.js
+  |   |   |- tagActions.js
+  |   |   |- tagReducer.js
+  |   |   
+  |   |__query__
+  |   |   |- queryList.js
+  |   |   |- queryItem.js
+  |   |   |- queryActions.js
+  |   |   |- queryReducer.js
+  |   |   
+  |   |__trip__
+  |   |   |- tripList.js
+  |   |   |- tripItem.js
+  |   |   |- tripActions.js
+  |   |   |- tripReducers.js
+  |   |__tripPlan__
+      |   |
+      |   |__dest__
+      |   |   |- destList.js
+      |   |   |- destItem.js
+      |   |   |- destActions.js
+      |   |   |- destReducers.js
+      |   |
+      |   |__event__
+      |   |   |- eventList.js
+      |   |   |- eventItem.js
+      |   |   |- eventActions.js
+      |   |   |- eventReducers.js
   |__specs__
-  |		|__client__
-  |		|		|- app-spec.js
-  |		|		|- event-spec.js
-  |		|		|- dest-spec.js
-  |		|		|- trip-spec.js
-  |		|		|- query-spec.js
-  |		|		|- friend-spec.js
-  |		|		|- home-spec.js
-  |		|		|- tag-spec.js
-  |		|		|- auth-spec.js
-  |		|
-  |		|__server__
-  |		|		|
+  |   |__client__
+  |   |   |- app-spec.js
+  |   |   |- event-spec.js
+  |   |   |- dest-spec.js
+  |   |   |- trip-spec.js
+  |   |   |- query-spec.js
+  |   |   |- friend-spec.js
+  |   |   |- home-spec.js
+  |   |   |- tag-spec.js
+  |   |   |- auth-spec.js
+  |   |
+  |   |__server__
 
 ### Installing Dependencies
 
