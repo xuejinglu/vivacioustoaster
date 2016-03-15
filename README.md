@@ -20,7 +20,7 @@ An intelligent, group-oriented decision-making travel app to help find places th
 
 ## Usage
 
-> Some usage instructions
+Run `webpack` in the root to start the app in dev mode. Run `NODE_ENV=production webpack` to start the app in production mode.
 
 ## Requirements
 
@@ -116,9 +116,7 @@ Root
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
