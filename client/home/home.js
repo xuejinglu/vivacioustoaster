@@ -1,8 +1,9 @@
 import React from 'react';
+import DestSearch from './destSearch';
 
 const Home = () => (
   <div>
-  we are on home page!
+    <DestSearch />
   </div>
 );
 
