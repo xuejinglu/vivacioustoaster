@@ -5,7 +5,6 @@ const Destination = db.define('destinations', {
   startDate: Sequelize.DATE,
   endDate: Sequelize.DATE,
   location: Sequelize.STRING,
-  tripId: Sequelize.INTEGER,
 });
 
 Destination.sync();
