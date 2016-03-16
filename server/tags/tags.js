@@ -7,9 +7,7 @@ const Tag = db.define('tags', {
   name: Sequelize.STRING,
 });
 
-// creates userId column in tags table
 // creates eventId column in tags table
-Tag.belongsTo(User);
 Tag.belongsTo(Event);
 
 Tag.sync();
