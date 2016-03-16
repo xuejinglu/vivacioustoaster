@@ -7,7 +7,7 @@ const Trip = db.define('trips', {
 });
 
 const UserTrip = db.define('userTrips', {
-  viewed: Sequelize.INTEGER,
+  viewed: Sequelize.BOOLEAN,
 });
 
 User.belongsToMany(Trip, { through: UserTrip });
