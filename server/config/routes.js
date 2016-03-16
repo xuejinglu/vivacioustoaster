@@ -1,4 +1,7 @@
-module.exports = (app, express) => {
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
+
+module.exports = function (app, express) {
   app.get('/auth/facebook'/* , controller function here */);
   app.get('/auth/facebook/callback'/* , controller function here */);
   app.get('api/me'/* , controller function here */);
@@ -19,5 +22,19 @@ module.exports = (app, express) => {
   app.get('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
   app.post('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
   app.delete('/api/votes/:vote_id'/* , controller function here */);
-};
 
+// FACEBOOK AUTH
+  app.get('/auth/facebook',
+    passport.authenticate('facebook', { scope: ['user_friends', 'email'] }));
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/' }),
+    (req, res) => {
+      // send user info to client side via cookies
+      res.cookie('name', req.user.displayName);
+      res.cookie('fbId', req.user.id);
+      res.cookie('picture', req.user.photos[0].value);
+      // res.cookie('url', req.user.profileUrl);
+      // res.cookie('email', req.user.email);
+      // res.redirect('mainPageRoute');
+    });
+};
