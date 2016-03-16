@@ -1,18 +1,13 @@
-var db = require( '../config/db' );
-var Sequelize = require( 'sequelize' );
+const db = require('../config/db');
+const Sequelize = require('sequelize');
 
-var Destination = db.define( 'destinations', {
-	startDate : Sequelize.DATE,
-	endDate : Sequelize.DATE,
-	location : Sequelize.STRING,
-	tripId : Sequelize.INTEGER,
+const Destination = db.define('destinations', {
+  startDate: Sequelize.DATE,
+  endDate: Sequelize.DATE,
+  location: Sequelize.STRING,
+  tripId: Sequelize.INTEGER,
 });
 
-Genre.sync().then( function() {
-  console.log( "destinations table created" );
-} )
-.catch( function( err ) {
-  console.error( err );
-} );
+Destination.sync();
 
 module.exports = Destination;
