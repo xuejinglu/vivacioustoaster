@@ -11,7 +11,7 @@ const UserFriend = db.define('friends', {});
 
 User.belongsToMany(User, { as: 'friends', through: UserFriend });
 
-UserFriend.sync();
 User.sync();
+UserFriend.sync();
 
 module.exports = User;
