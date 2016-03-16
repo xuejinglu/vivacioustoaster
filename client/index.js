@@ -6,6 +6,7 @@ import tripApp from './app/reducers';
 import App from './app/app';
 import { Router, Route, Link, browserHistory } from 'react-router';
 
+// eslint disabled because store is not changed for now
 let store = createStore(tripApp); // eslint-disable-line prefer-const
 
 render(
