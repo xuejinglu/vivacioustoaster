@@ -11,13 +11,13 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'eslint',
-        exclude: [/node_modules/, /\*\.min\.js/],
+        exclude: [/node_modules/, /.*\.min\.js/],
       },
     ],
     loaders: [
       {
         test: /\.jsx?$/,
-        exclude: [/(node_modules|bower_components)/, /\*\.min\.js/],
+        exclude: [/(node_modules|bower_components)/, /.*\.min\.js/],
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-0'],
