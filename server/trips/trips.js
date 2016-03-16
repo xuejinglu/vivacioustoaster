@@ -10,11 +10,13 @@ const UserTrip = db.define('userTrips', {
   viewed: Sequelize.BOOLEAN,
 });
 
+// creates tripId column in userTrips join table
+// creates userId column in userTrips join table
 User.belongsToMany(Trip, { through: UserTrip });
 Trip.belongsToMany(User, { through: UserTrip });
 
 Trip.sync();
-UserTrip.sync();
 User.sync();
+UserTrip.sync();
 
 module.exports = Trip;

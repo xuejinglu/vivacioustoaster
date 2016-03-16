@@ -5,6 +5,8 @@ const Event = require('../events/events');
 
 const Vote = db.define('votes', {});
 
+// creates userId column in votes table
+// creates eventId column in votes table
 Vote.belongsTo(User);
 Vote.belongsTo(Event);
 

@@ -9,7 +9,10 @@ const User = db.define('users', {
 
 const UserFriend = db.define('friends', {});
 
-User.belongsToMany(User, { as: 'friends', through: UserFriend });
+// defines a self reference to user
+// creates userId column in friends join table
+// creates friendId column in friends join table
+User.belongsToMany(User, { as: 'friend', through: UserFriend });
 
 User.sync();
 UserFriend.sync();

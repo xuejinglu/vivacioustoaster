@@ -8,7 +8,9 @@ const Destination = db.define('destinations', {
   location: Sequelize.STRING,
 });
 
+// creates tripId column in destinations table
 Destination.belongsTo(Trip);
+
 Destination.sync();
 
 module.exports = Destination;
