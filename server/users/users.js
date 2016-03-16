@@ -7,6 +7,11 @@ const User = db.define('users', {
   picUrl: Sequelize.STRING,
 });
 
+const UserFriend = db.define('friends', {});
+
+User.belongsToMany(User, { as: 'friends', through: UserFriend });
+
+UserFriend.sync();
 User.sync();
 
 module.exports = User;
