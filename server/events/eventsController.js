@@ -5,18 +5,6 @@ const Tag = require('../tags/tags');
 
 module.exports = {
 
-  getTags: (req, res, next) => {
-    Event.findOne({ where: { id: req.params.eventId } })
-      .then((event) => {
-        // after we've selected the correct event, get it's tags with
-        // the Sequelize method given to us by the hasMany relationship
-        res.json(event.getTags());
-      })
-      .catch((err) => {
-        helpers.errorHandler(err, req, res, next);
-      });
-  },
-
   // Params: req.body.tags is an array of tag objects.
   // Returns: array of created tags
   createTags: (req, res, next) => {
@@ -31,6 +19,18 @@ module.exports = {
     .catch((err) => {
       helpers.errorHandler(err, req, res, next);
     });
+  },
+
+  getTags: (req, res, next) => {
+    Event.findOne({ where: { id: req.params.eventId } })
+      .then((event) => {
+        // after we've selected the correct event, get it's tags with
+        // the Sequelize method given to us by the hasMany relationship
+        res.json(event.getTags());
+      })
+      .catch((err) => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 
   deleteTag: (req, res, next) => {
