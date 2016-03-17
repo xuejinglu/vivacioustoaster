@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 1337;
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const auth = require('./config/auth.js');
-const db = require('./config/trips');
+const db = require('./config/db.js');
 const usersController = require('./users/usersController');
 
 
@@ -58,7 +58,5 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.listen(1337);
-
->>>>>>> Implement facebook OAuth in server file
 
 module.exports = app;
