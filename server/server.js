@@ -26,7 +26,7 @@ console.log(`Listening on port ${app.get('port')}`);
 passport.use(new Strategy({
   clientID: process.env.FACEBOOK_APP_ID || auth.facebookAuth.clientID,
   clientSecret: process.env.FACEBOOK_SECRET || auth.facebookAuth.clientSecret,
-  callbackURL: 'http://localhost:1337/auth/facebook/callback',
+  callbackURL: `http://localhost:${PORT}/auth/facebook/callback`,
   profileFields: ['id', 'displayName', 'picture.height(150).width(150)', 'friends'],
 },
   (accessToken, refreshToken, profile, cb) => {

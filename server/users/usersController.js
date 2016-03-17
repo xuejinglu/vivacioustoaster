@@ -1,7 +1,5 @@
 const User = require('./users/usersController.js');
-const Q = require('q');
 const jwt = require('jwt-simple');
-const helper = require('./config/helpers.js');
 
 module.exports = {
   findOrCreate: (profile) => {
@@ -29,9 +27,9 @@ module.exports = {
         };
         return match.update(updatedInfo)
         .then((data) => data)
-        .catch(error => {console.error('findOrCreate error: ', error);});
+        .catch(error => { console.error('findOrCreate error: ', error); });
       })
-      .fail((error) => {
+      .catch((error) => {
         console.error('findOrCreate error: ', error);
       });
   },
