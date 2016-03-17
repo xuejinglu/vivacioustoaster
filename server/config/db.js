@@ -1,10 +1,10 @@
+const pg = require('pg');
 const Sequelize = require('sequelize');
-const db = new Sequelize('tripsApp', null, null, {
+const db = new Sequelize('tripsapp', null, null, {
   dialect: 'postgres',
   define: {
     underscored: true,
   },
-  storage: './server/config/tripsApp',
 });
 
 module.exports = db;
