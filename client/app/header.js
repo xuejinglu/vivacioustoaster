@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { AppBar, Tabs, Tab } from 'material-ui';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 const Header = () => (
   <AppBar title="Name This">
