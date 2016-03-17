@@ -1,4 +1,4 @@
-module.exports = function (app, express) {
+module.exports = (app, express) => {
   app.get('/auth/facebook'/* , controller function here */);
   app.get('/auth/facebook/callback'/* , controller function here */);
   app.get('api/me'/* , controller function here */);
