@@ -7,7 +7,10 @@ const Trip = db.define('trips', {
 });
 
 const UserTrip = db.define('userTrips', {
-  viewed: Sequelize.BOOLEAN,
+  viewed: {
+    type:Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 // creates tripId column in userTrips join table
