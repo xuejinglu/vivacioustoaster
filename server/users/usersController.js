@@ -1,4 +1,4 @@
-const User = require('./users/usersController.js');
+const User = require('./users');
 const jwt = require('jwt-simple');
 
 module.exports = {
