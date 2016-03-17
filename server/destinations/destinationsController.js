@@ -4,7 +4,7 @@ const Destination = require('./destinations');
 const Trip = require('../trips/trips');
 
 module.exports = {
-  // Params: req.body is an array of destination objects.
+  // Params: req.body.destinations is an array of destination objects.
   // Returns: array of created destinations
   createAll: (req, res, next) => {
     // extend destination objects with tripId from url param
