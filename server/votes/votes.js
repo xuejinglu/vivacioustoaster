@@ -10,8 +10,8 @@ const Vote = db.define('votes', {});
 Vote.belongsTo(User);
 Vote.belongsTo(Event);
 
-// creates relationship to use User.getVotes()
-// creates relationship to use Event.getVotes()
+// will add methods to User (ex. User.getEvents())
+// will add methods to Event (ex. Event.getVotes())
 User.hasMany(Vote);
 Event.hasMany(Vote);
 

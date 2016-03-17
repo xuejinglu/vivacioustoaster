@@ -10,7 +10,7 @@ const Tag = db.define('tags', {
 // creates eventId column in tags table
 Tag.belongsTo(Event);
 
-// creates relationship to use Event.getTags()
+// will add methods to Event (ex. Event.getTags())
 Event.hasMany(Tag);
 
 Tag.sync();

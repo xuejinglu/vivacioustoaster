@@ -12,14 +12,9 @@ const UserTrip = db.define('userTrips', {
 
 // creates tripId column in userTrips join table
 // creates userId column in userTrips join table
+// will add methods to User and Trip (ex. User.getTrips(), Trip.getUsers())
 User.belongsToMany(Trip, { through: UserTrip });
 Trip.belongsToMany(User, { through: UserTrip });
-
-// creates relationship to use User.getTrips()
-// creates relationship to use Trip.getUsers()
-User.hasMany(Trip);
-Trip.hasMany(User);
-
 
 UserTrip.sync();
 Trip.sync();
