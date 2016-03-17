@@ -5,15 +5,16 @@ const helper = require('./config/helpers.js');
 
 module.exports = {
   findOrCreate: (profile) => {
+    const name = profile.displayName;
+    const picture = profile.photos[0].value;
     const fbId = {
       fbId: profile.id,
     };
-    const name = profile.displayName;
-    const picture = profile.photos[0].value;
 
     User.findOne(fbId)
       .then((match) => {
-        if (match === null) {
+        // create user if there's no match
+        if (!match) {
           const newUser = {
             name,
             fbId,
@@ -21,7 +22,7 @@ module.exports = {
           };
           return User.create(newUser);
         }
-        // if user already exists, update user's friends and prof pic in the database
+        // if user already exists, update user entry in the database
         const updatedInfo = {
           name,
           picture,
