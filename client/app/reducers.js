@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 import auth from '../auth/authReducers';
 import friend from '../friend/friendReducers';
 import home from '../home/homeReducers';
@@ -9,7 +11,7 @@ import dest from '../tripPlan/dest/destReducers';
 import event from '../tripPlan/event/eventReducers';
 import tripOverview from '../tripPlan/tripOverview/travelFriendReducers';
 
-const tripApp = combineReducers({
+const rootReducer = combineReducers({
   auth,
   friend,
   home,
@@ -19,6 +21,7 @@ const tripApp = combineReducers({
   dest,
   event,
   tripOverview,
+  routing: routerReducer,
 });
 
-export default tripApp;
+export default rootReducer;
