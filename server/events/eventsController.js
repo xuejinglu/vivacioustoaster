@@ -5,6 +5,22 @@ const Tag = require('../tags/tags');
 
 module.exports = {
 
+  // Params: req.body.events is an array of event objects.
+  // Returns: array of created events
+  createAll: (req, res, next) => {
+    // extend event objects with destId from url param
+    const destIds = Array(req.body.events.length).fill({ destId: req.params.destId });
+    const newEvents = _.merge(req.body.events, destIds);
+
+    Event.bulkCreate(newEvents)
+      .then((events) => {
+        res.json(events);
+      })
+      .catch((err) => {
+        helpers.errorHandler(err, req, res, next);
+      });
+  },
+
   // Params: req.body.tags is an array of tag objects.
   // Returns: array of created tags
   createTags: (req, res, next) => {
@@ -13,12 +29,12 @@ module.exports = {
     const newTags = _.merge(req.body.tags, eventIds);
 
     Tag.bulkCreate(newTags)
-    .then((tags) => {
-      res.json(tags);
-    })
-    .catch((err) => {
-      helpers.errorHandler(err, req, res, next);
-    });
+      .then((tags) => {
+        res.json(tags);
+      })
+      .catch((err) => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 
   getTags: (req, res, next) => {
