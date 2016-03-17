@@ -11,6 +11,10 @@ const Destination = db.define('destinations', {
 // creates tripId column in destinations table
 Destination.belongsTo(Trip);
 
+// creates relationship to use Trip.getDestinations()
+Trip.hasMany(Destination);
+
 Destination.sync();
+Trip.sync();
 
 module.exports = Destination;

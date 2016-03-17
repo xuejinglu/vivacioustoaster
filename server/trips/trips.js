@@ -15,8 +15,14 @@ const UserTrip = db.define('userTrips', {
 User.belongsToMany(Trip, { through: UserTrip });
 Trip.belongsToMany(User, { through: UserTrip });
 
+// creates relationship to use User.getTrips()
+// creates relationship to use Trip.getUsers()
+User.hasMany(Trip);
+Trip.hasMany(User);
+
+
+UserTrip.sync();
 Trip.sync();
 User.sync();
-UserTrip.sync();
 
 module.exports = Trip;
