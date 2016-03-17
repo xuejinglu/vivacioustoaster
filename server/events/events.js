@@ -6,8 +6,8 @@ const Event = db.define('events', {
   // event: this will have many attrs
 });
 
-// creates destId column in tags table
-Event.belongsTo(Destination);
+// creates destId column in events table
+Event.belongsTo(Destination, { foreignKey: 'destId' });
 
 // will add methods to Destination (ex. Destination.getEvents())
 Destination.hasMany(Event);
