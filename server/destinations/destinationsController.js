@@ -41,6 +41,13 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    res.end();
+    Destination.destroy({ where: {id: req.params.destId}})
+    .then(() => {
+      res.end();
+    })
+    .catch((err) => {
+      helpers.errorLogger(err, req, res, next);
+      helpers.errorHandler(err, req, res, next);
+    });
   },
 };
