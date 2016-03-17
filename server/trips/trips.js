@@ -8,7 +8,7 @@ const Trip = db.define('trips', {
 
 const UserTrip = db.define('userTrips', {
   viewed: {
-    type:Sequelize.BOOLEAN,
+    type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
 });
