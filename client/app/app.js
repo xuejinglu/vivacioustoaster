@@ -1,28 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import Header from './header';
-import Home from '../home/home';
-import Auth from '../auth/auth';
-import Friend from '../friend/friendList';
-import Query from '../query/queryList';
-import Tag from '../tag/tagList';
-import Trip from '../trip/tripList';
-import TripOverview from '../tripPlan/tripOverview/travelFriendList';
-import Dest from '../tripPlan/dest/destList';
-import Event from '../tripPlan/event/eventList';
+import { routeActions } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
 
-const App = () => (
+const App = ({ children }) => (
   <div>
-  <Header />
-  <Home />
-  <Auth />
-  <Friend />
-  <Query />
-  <Tag />
-  <Trip />
-  <TripOverview />
-  <Dest />
-  <Event />
+    <Header />
+    <div>{children}</div>
   </div>
 );
+
+App.propTypes = {
+  children: React.PropTypes.element,
+};
 
 export default App;

@@ -1,17 +1,23 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import tripApp from './app/reducers';
-import App from './app/app';
 import { Router, Route, Link, browserHistory } from 'react-router';
+import configureStore from './store/configureStore';
+import routes from './app/routes';
+import { syncHistoryWithStore } from 'react-router-redux';
+import DevTools from './containers/DevTools';
 
-// eslint disabled because store is not changed for now
-let store = createStore(tripApp); // eslint-disable-line prefer-const
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 render(
   <Provider store={store}>
-    <App />
+    <div>
+    <Router history={history}>
+      {routes}
+    </Router>
+      <DevTools />
+    </div>
   </Provider>,
   document.getElementById('root')
 );
