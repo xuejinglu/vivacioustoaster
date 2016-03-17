@@ -21,6 +21,31 @@ module.exports = {
       });
   },
 
+  get: (req, res, next) => {
+    // TODO
+    res.end();
+  },
+
+  getAll: (req, res, next) => {
+    Event.findAll({ where: { destId: req.params.destId } })
+      .then((events) => {
+        res.json(events);
+      })
+      .catch((err) => {
+        helpers.errorHandler(err, req, res, next);
+      });
+  },
+
+  update: (req, res, next) => {
+    // TODO
+    res.end();
+  },
+
+  delete: (req, res, next) => {
+    // TODO
+    res.end();
+  },
+
   // Params: req.body.tags is an array of tag objects.
   // Returns: array of created tags
   createTags: (req, res, next) => {
