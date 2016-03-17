@@ -3,10 +3,11 @@ const app = express();
 const PORT = process.env.PORT || 1337;
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
-const auth = require('./config/auth.js');
 const db = require('./config/db.js');
 const usersController = require('./users/usersController');
-
+if (!process.env.FACEBOOK_APP_ID) {
+  const auth = require('./config/auth.js');
+}
 
 require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, express);
@@ -24,8 +25,8 @@ console.log(`Listening on port ${app.get('port')}`);
 // authentication.
 
 passport.use(new Strategy({
-  clientID: auth.facebookAuth.clientID,
-  clientSecret: auth.facebookAuth.clientSecret,
+  clientID:  process.env.FACEBOOK_APP_ID || auth.facebookAuth.clientID,
+  clientSecret: process.env.FACEBOOK_SECRET || auth.facebookAuth.clientSecret,
   callbackURL: 'http://localhost:1337/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'picture.height(150).width(150)', 'friends'],
 },
