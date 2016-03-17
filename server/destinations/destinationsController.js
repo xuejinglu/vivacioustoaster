@@ -16,7 +16,6 @@ module.exports = {
       res.json(destinations);
     })
     .catch((err) => {
-      helpers.errorLogger(err, req, res, next);
       helpers.errorHandler(err, req, res, next);
     });
   },
@@ -31,7 +30,6 @@ module.exports = {
       res.json(destinations);
     })
     .catch((err) => {
-      helpers.errorLogger(err, req, res, next);
       helpers.errorHandler(err, req, res, next);
     });
   },
@@ -41,12 +39,11 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-    Destination.destroy({ where: {id: req.params.destId}})
+    Destination.destroy({ where: { id: req.params.destId } })
     .then(() => {
       res.end();
     })
     .catch((err) => {
-      helpers.errorLogger(err, req, res, next);
       helpers.errorHandler(err, req, res, next);
     });
   },
