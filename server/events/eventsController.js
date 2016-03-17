@@ -75,10 +75,9 @@ module.exports = {
   },
 
   deleteTag: (req, res, next) => {
-    Tag.findOne({ where: { id: req.params.tagId } })
+    Tag.destroy({ where: { id: req.params.tagId } })
       .then((tag) => {
-        // deletes the tag from the db
-        tag.destroy();
+        res.end();
       })
       .catch((err) => {
         helpers.errorHandler(err, req, res, next);
