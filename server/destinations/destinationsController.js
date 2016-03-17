@@ -8,8 +8,8 @@ module.exports = {
   // Returns: array of created destinations
   createAll: (req, res, next) => {
     // extend destination objects with tripId from url param
-    const tripIds = Array(req.body.length).fill({ tripId: req.params.tripId });
-    const newDestinations = _.merge(req.body, tripIds);
+    const tripIds = Array(req.body.destinations.length).fill({ tripId: req.params.tripId });
+    const newDestinations = _.merge(req.body.destinations, tripIds);
 
     Destination.bulkCreate(newDestinations)
     .then((destinations) => {
