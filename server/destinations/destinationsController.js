@@ -21,6 +21,7 @@ module.exports = {
   },
 
   get: (req, res, next) => {
+    // TODO
     res.end();
   },
 
@@ -35,6 +36,7 @@ module.exports = {
   },
 
   update: (req, res, next) => {
+    // TODO
     res.end();
   },
 
