@@ -21,7 +21,7 @@ const clearDB = () => Promise.all([
 
 const testUsers = testData.testUsers;
 describe('User Controller', () => {
-  
+
   beforeEach(() => clearDB().then(() => {
     Promise.all(testUsers.map(user => UserController.createOne(user)));
     Promise.all(testUsers.map(user => user.addFriend(testUsers[0])));
@@ -62,4 +62,3 @@ describe('User Controller', () => {
   });
 
 });
-
