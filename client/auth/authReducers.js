@@ -10,12 +10,12 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
-        action.payload.isFetchingAuth,
+        isFetchingAuth: action.payload.isFetchingAuth,
         isAuthenticated: false,
       });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        action.payload.isFetchingAuth,
+        isFetchingAuth: action.payload.isFetchingAuth,
         user: action.user,
         isAuthenticated: true,
       });

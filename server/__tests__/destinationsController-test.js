@@ -1,6 +1,4 @@
-import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
-import expect from 'expect';
+const expect = require('expect');
 
 describe('Destination Controller', () => {
   before(() => {

@@ -4,7 +4,7 @@
   "description": "Group travel made easy",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "npm test",
+    "test": "karma start && mocha server/__tests__/.",
     "lint": "eslint .",
     "validate": "npm ls"
   },
@@ -53,6 +53,7 @@
     "redux-devtools-dock-monitor": "^1.1.0",
     "redux-devtools-log-monitor": "^1.0.5",
     "redux-form": "^4.2.2",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
     "require": "^2.4.20",
     "sequelize": "^3.19.3",

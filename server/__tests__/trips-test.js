@@ -1,31 +1,37 @@
-import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
-import expect from 'expect';
-import User from '../users/users';
-import Trip from '../trips/trips';
-import { testUsers, testTrips } from './testData';
+const expect = require('expect');
+const Promise = require('bluebird');
+const User = require('../users/users');
+const Trip = require('../trips/trips');
+const testData = require('./testData');
+
+const clearDB = () => {
+  return Promise.all([
+    () => User.sync({ force: true }),
+    () => Trip.sync({ force: true }),
+  ]);
+};
 
 describe('Trip Model', () => {
   before(() => {
     // don't still need to connect to db...
   });
-  beforeEach(done => {
-    // drop table and recreate it
-    // Trip.sync({ force: true });
-    // User.sync({ force: true })
-    //   .then(done => {
-    //     return User.bulkCreate(testUsers);
+  beforeEach(() => {
+    // return clearDB()
+    //   .then(() => {
+    //     const createUsers = () => User.bulkCreate(testUsers);
+    //     const createTrips = () => Trip.bulkCreate(testTrips);
+    //     return Promise.all([createUsers, createTrips]);
     //   })
-    //   .then(users => Trip.bulkCreate(testTrips))
-    //   .then(trips => {
-    //     return trips[0].addUsers(testUsers)
-    //       .then(() => trips[1].addUsers(testUsers))
+    //   .then(array => {
+    //     const [users, trips] = array;
+    //     return Promise.all(trips.map(trip => trip.addUsers(users)));
     //   })
     //   .then(() => done())
-    //   .catch(err => done(err));
+    //   .catch(err => console.error(err));
   });
 
-  it('creates a new trip', () => {
+  it('creates a new trip with friends', () => {
+    console.log('hello');
     // const me = testUsers[0];
     // Trip.create('HR39', me, testUsers.slice(1))
     //   .then(trip => Trip.findOne({ where { id: trip.id } }))
