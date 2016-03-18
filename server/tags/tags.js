@@ -18,7 +18,6 @@ Event.sync();
 module.exports = Tag;
 
 Tag.create = tags => Tag.bulkCreate(tags)
-    .then(newTags => newTags)
     .catch(err => err);
 
 Tag.get = eventId => Event.findOne({ where: { id: eventId } })
