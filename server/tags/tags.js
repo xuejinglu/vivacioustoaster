@@ -12,6 +12,9 @@ Tag.belongsTo(Event);
 // will add methods to Event (ex. Event.getTags())
 Event.hasMany(Tag);
 
+Tag.sync();
+Event.sync();
+
 Tag.create = tags => Tag.bulkCreate(tags)
     .catch(err => err);
 
@@ -19,11 +22,5 @@ Tag.get = eventId => Event.findOne({ where: { id: eventId } })
     // Sequelize method given to us by the hasMany relationship
     .then(event => event.getTags())
     .catch(err => err);
-
-Tag.delete = tagId => Tag.destroy({ where: { id: tagId } })
-    .catch(err => err);
-
-Tag.sync();
-Event.sync();
 
 module.exports = Tag;

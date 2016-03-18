@@ -30,14 +30,4 @@ module.exports = {
       });
   },
 
-  delete: (req, res, next) => {
-    Event.delete(req.params.destId)
-      .then(affectedRows => {
-        res.end();
-      })
-      .catch(err => {
-        helpers.errorHandler(err, req, res, next);
-      });
-  },
-
 };

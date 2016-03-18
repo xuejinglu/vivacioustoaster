@@ -30,14 +30,4 @@ module.exports = {
       });
   },
 
-  delete: (req, res, next) => {
-    Tag.delete(req.params.tagId)
-      .then(affectedRows => {
-        res.end();
-      })
-      .catch(err => {
-        helpers.errorHandler(err, req, res, next);
-      });
-  },
-
 };
