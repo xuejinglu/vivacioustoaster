@@ -9,19 +9,25 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 
 export const requestLogin = () => ({
   type: LOGIN_REQUEST,
-  isFetchingAuth: true,
+  payload: {
+    isFetchingAuth: true,
+  },
 });
 
 export const receiveLogin = (user) => ({
   type: LOGIN_SUCCESS,
-  isFetchingAuth: false,
-  user,
+  payload: {
+    isFetchingAuth: false,
+    user,
+  }
 });
 
 export const loginError = (message) => ({
   type: LOGIN_FAILURE,
-  isFetchingAuth: false,
-  message,
+  payload: {
+    isFetchingAuth: false,
+    message,
+  }
 });
 
 export const requestLogout = () => ({
