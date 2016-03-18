@@ -28,8 +28,8 @@ User.sync();
 Trip.createTrip = (name, user, friends) =>
   Trip.create({ name })
   .then(trip => {
-    trip.addUsers([...friends, user]);
-    return trip;
+    trip.addUsers([...friends, user])
+    .then(() => trip);
   })
   .catch(err => err);
 
