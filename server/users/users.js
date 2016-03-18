@@ -17,7 +17,7 @@ const UserFriend = db.define('friends', {});
 User.belongsToMany(User, { as: 'Friends', through: UserFriend });
 
 User.getUserInfo = fbId => {
-  User.find({ where: { fbId } })
+  User.findOne({ where: { fbId } })
     .then(user => {
       const token = jwt.encode(user, 'secret');
       const response = {
@@ -29,14 +29,7 @@ User.getUserInfo = fbId => {
     .catch(err => err);
 };
 
-User.getUserFriends = userId => {
-  User.find({
-    where: { id: userId },
-    include: [{ model: User, as: 'Friends' }],
-  })
-  .then(user => user.Friends)
-  .catch(err => err);
-};
+User.getUserFriends = user => getFriends().catch(err => err);
 
 User.findOrCreate = profile => {
   const name = profile.displayName;

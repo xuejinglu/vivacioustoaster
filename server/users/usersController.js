@@ -14,7 +14,7 @@ module.exports = {
   },
 
   getFriends: (req, res, next) => {
-    User.getUserFriends(req.params.id)
+    User.getUserFriends(req.user)
     .then(friends => {
       res.json(friends);
     })
