@@ -15,15 +15,15 @@ Destination.hasMany(Event);
 Event.sync();
 Destination.sync();
 
-Event.create = (events) => Event.bulkCreate(events)
+Event.create = events => Event.bulkCreate(events)
     .then(newEvents => newEvents)
     .catch(err => err);
 
-Event.get = (destId) => Event.findAll({ where: { destId } })
+Event.get = destId => Event.findAll({ where: { destId } })
     .then(events => events)
     .catch(err => err);
 
-Event.delete = (destId) => Event.destroy({ where: { destId } })
+Event.delete = destId => Event.destroy({ where: { destId } })
     .then(affectedRows => affectedRows)
     .catch(err => err);
 
