@@ -1,11 +1,13 @@
 import React from 'react';
-import { Checkbox } from 'material-ui';
+import { RadioButton, RadioButtonGroup } from 'material-ui';
 
 const TripTypeList = () => (
   <div>
-    <Checkbox label="Group" />
-    <Checkbox label="Solo" />
-    <Checkbox label="Couple" />
+    <RadioButtonGroup defaultSelected="Group" >
+      <RadioButton label="Group" value="Group" />
+      <RadioButton label="Solo" value="Solo" />
+      <RadioButton label="Couple" value="Couple" />
+    </RadioButtonGroup>
   </div>
 );
 
