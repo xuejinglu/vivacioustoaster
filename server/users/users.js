@@ -29,7 +29,7 @@ User.getUserInfo = fbId => {
     .catch(err => err);
 };
 
-User.getUserFriends = user => getFriends().catch(err => err);
+User.getUserFriends = user => user.getFriends().catch(err => err);
 
 User.findOrCreate = profile => {
   const name = profile.displayName;
@@ -53,9 +53,7 @@ User.findOrCreate = profile => {
         name,
         picture,
       };
-      return match.update(updatedInfo)
-      .then(data => data)
-      .catch(error => { console.error('findOrCreate error: ', error); });
+      return match.update(updatedInfo);
     })
     .catch(error => {
       console.error('findOrCreate error: ', error);
