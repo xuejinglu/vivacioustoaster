@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import expect from 'expect';
-// import db from '../config/db';
 import User from '../users/users';
 import Trip from '../trips/trips';
-import { testUsers } from './testUsers';
+import { testUsers, testTrips } from './testData';
 
 describe('Trip Model', () => {
   before(() => {
@@ -17,9 +16,7 @@ describe('Trip Model', () => {
       .then(done => {
         return User.bulkCreate(testUsers);
       })
-      .then(users => Trip.bulkCreate([
-        {name: 'Vegas Weekend'}, {name: 'Mexico Vacation'}
-      ]))
+      .then(users => Trip.bulkCreate(testTrips))
       .then(trips => {
         return trips[0].addUsers(testUsers)
           .then(() => trips[1].addUsers(testUsers))
