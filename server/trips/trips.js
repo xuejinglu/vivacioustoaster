@@ -7,7 +7,10 @@ const Trip = db.define('trips', {
 });
 
 const UserTrip = db.define('userTrips', {
-  viewed: Sequelize.BOOLEAN,
+  viewed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 // creates tripId column in userTrips join table
@@ -19,5 +22,17 @@ Trip.belongsToMany(User, { through: UserTrip });
 UserTrip.sync();
 Trip.sync();
 User.sync();
+
+// Model functions
+
+Trip.createTrip = (name, user, friends) =>
+  Trip.create({ name })
+    .then(trip =>
+      trip.addUsers([...friends, user])
+        .then(() => trip)
+    )
+    .catch(err => err);
+
+Trip.getAllTrips = user => user.getTrips().catch(err => err);
 
 module.exports = Trip;
