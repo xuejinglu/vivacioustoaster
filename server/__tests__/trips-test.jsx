@@ -4,46 +4,50 @@ import expect from 'expect';
 // import db from '../config/db';
 import User from '../users/users';
 import Trip from '../trips/trips';
+import { testUsers } from './testUsers';
 
 describe('Trip Model', () => {
   before(() => {
     // don't still need to connect to db...
   });
-  beforeEach(() => {
+  beforeEach(done => {
     // drop table and recreate it
     Trip.sync({ force: true });
     User.sync({ force: true })
       .then(done => {
-        const users = [
-          {
-            name: 'Akshay Buddiga',
-            picUrl: 'akshay.jpg',
-            fbId: 'reg-9gf-sf2',
-          },
-          {
-            name: 'Boya Jiang',
-            picUrl: 'boya.jpg',
-            fbId: 'ad7-lr0-fd8',
-          },
-          {
-            name: 'Leran Firer',
-            picUrl: 'leran.jpg',
-            fbId: 'of8-a6s-lf0',
-          },
-          {
-            name: 'Jing Lu',
-            picUrl: 'jing.jpg',
-            fbId: 'qw0-lm1-pt8',
-          },
-        ];
-        User.bulkCreate(users)
-          .then(users => done());
+        return User.bulkCreate(testUsers);
       })
-      .catch(err => err);
+      .then(users => Trip.bulkCreate([
+        {name: 'Vegas Weekend'}, {name: 'Mexico Vacation'}
+      ]))
+      .then(trips => {
+        return trips[0].addUsers(testUsers)
+          .then(() => trips[1].addUsers(testUsers))
+      })
+      .then(() => done())
+      .catch(err => done(err));
   });
 
   it('creates a new trip', () => {
-    console.log(users);
+    const me = testUsers[0];
+    Trip.create('HR39', me, testUsers.slice(1))
+      .then(trip => Trip.findOne({ where { id: trip.id } }))
+      .then(trip => {
+        expect(trip.name).to.equal('HR39');
+        done();
+      })
+      .catch(err => done(err));
+  });
+
+  it('creates relationship between trip and users', () => {
+    const me = testUsers[0];
+    Trip.create('HR39', me, testUsers.slice(1))
+      .then(trip => trip.getUsers())
+      .then(users => {
+        expect(users).to.have.lengthOf(4);
+        done();
+      })
+      .catch(err => done(err));
   });
 
   it('gets a trip', () => {
