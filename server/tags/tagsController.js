@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const helpers = require('../config/helpers');
-const Tag = require('../tags/tags');
-const Event = require('./events');
+const Tag = require('./tags');
 
 module.exports = {
 
@@ -12,33 +11,31 @@ module.exports = {
     const eventIds = Array(req.body.tags.length).fill({ eventId: req.params.eventId });
     const newTags = _.merge(req.body.tags, eventIds);
 
-    Tag.bulkCreate(newTags)
-      .then((tags) => {
+    Tag.create(newTags)
+      .then(tags => {
         res.json(tags);
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
 
   getAll: (req, res, next) => {
-    Event.findOne({ where: { id: req.params.eventId } })
-      .then((event) => {
-        // after we've selected the correct event, get it's tags with
-        // the Sequelize method given to us by the hasMany relationship
-        res.json(event.getTags());
+    Tag.get(req.params.eventId)
+      .then(tags => {
+        res.json(tags);
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
 
   delete: (req, res, next) => {
-    Tag.destroy({ where: { id: req.params.tagId } })
-      .then((tag) => {
+    Tag.delete(req.params.tagId)
+      .then(affectedRows => {
         res.end();
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
