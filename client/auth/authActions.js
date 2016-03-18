@@ -19,7 +19,7 @@ export const receiveLogin = (user) => ({
   payload: {
     isFetchingAuth: false,
     user,
-  }
+  },
 });
 
 export const loginError = (message) => ({
@@ -27,7 +27,7 @@ export const loginError = (message) => ({
   payload: {
     isFetchingAuth: false,
     message,
-  }
+  },
 });
 
 export const requestLogout = () => ({
