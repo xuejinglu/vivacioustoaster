@@ -8,7 +8,7 @@ module.exports = {
   create: (req, res, next) => {
     Trip.createTrip(req.body.name, req.user, req.body.friends)
     .then(trip => {
-      res.json(trip);
+      res.status(201).json(trip);
     })
     .catch(err => {
       helpers.errorHandler(err, req, res, next);
