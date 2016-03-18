@@ -23,4 +23,16 @@ UserTrip.sync();
 Trip.sync();
 User.sync();
 
+// Model functions
+
+Trip.createTrip = (name, user, friends) =>
+  Trip.create({ name })
+  .then(trip => {
+    trip.addUsers([...friends, user]);
+    return trip;
+  })
+  .catch(err => err);
+
+Trip.getAllTrips = user => user.getTrips().catch(err => err);
+
 module.exports = Trip;
