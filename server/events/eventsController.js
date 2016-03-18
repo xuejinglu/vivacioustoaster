@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const helpers = require('../config/helpers');
 const Event = require('./events');
-const Tag = require('../tags/tags');
 
 module.exports = {
 
@@ -12,31 +11,31 @@ module.exports = {
     const destIds = Array(req.body.events.length).fill({ destId: req.params.destId });
     const newEvents = _.merge(req.body.events, destIds);
 
-    Event.bulkCreate(newEvents)
-      .then((events) => {
+    Event.create(newEvents)
+      .then(events => {
         res.json(events);
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
 
   getAll: (req, res, next) => {
-    Event.findAll({ where: { destId: req.params.destId } })
-      .then((events) => {
+    Event.get(req.params.destId)
+      .then(events => {
         res.json(events);
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
 
   delete: (req, res, next) => {
-    Event.destroy({ where: { id: req.params.destId } })
-      .then(() => {
+    Event.delete(req.params.destId)
+      .then(affectedRows => {
         res.end();
       })
-      .catch((err) => {
+      .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
   },
