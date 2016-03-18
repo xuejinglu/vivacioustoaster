@@ -16,6 +16,9 @@ const UserFriend = db.define('friends', {});
 // will add methods to User (ex. User.getFriends())
 User.belongsToMany(User, { as: 'Friends', through: UserFriend });
 
+UserFriend.sync();
+User.sync();
+
 User.getUserInfo = fbId => {
   User.findOne({ where: { fbId } })
     .then(user => {
@@ -59,8 +62,5 @@ User.findOrCreate = profile => {
       console.error('findOrCreate error: ', error);
     });
 };
-
-UserFriend.sync();
-User.sync();
 
 module.exports = User;

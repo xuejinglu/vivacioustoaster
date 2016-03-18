@@ -1,22 +1,27 @@
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
+const usersController = require('./users/usersController');
+const destinationsController = require('./destinations/destinationsController');
+const eventsController = require('./events/eventsController');
+const tagsController = require('./tags/tagsController');
+const tripsController = require('./trips/tripsController');
+const userController = require('./votes/votesController');
 
 module.exports = function (app, express) {
-  app.get('api/me'/* , controller function here */);
-  app.get('/api/me/friends'/* , controller function here */);
-  app.post('/api/destination/:dest_id/tags'/* , controller function here */);
-  app.get('/api/destinations/:dest_id/tags'/* , controller function here */);
-  app.delete('/api/tags/:tag_id'/* , controller function here */);
+  app.get('api/me', usersController.getUser);
+  app.get('/api/me/friends', usersController.getFriends);
+  app.post('/api/destination/:dest_id/tags', tagsController.createAll);
+  app.get('/api/destinations/:dest_id/tags', tagsController.getAll);
   app.get('/api/trips'/* , controller function here */);
-  app.get('/api/trips/:tag_id'/* , controller function here */);
+  app.get('/api/trips/:trip_id'/* , controller function here */);
   app.post('/api/trips'/* , controller function here */);
   app.get('/api/trips/:trip_id/users'/* , controller function here */);
   app.post('/api/trips/:trip_id/users'/* , controller function here */);
-  app.post('/api/trips/:trip_id/destinations'/* , controller function here */);
-  app.get('/api/trips/:trip_id/destinations'/* , controller function here */);
-  app.delete('/api/destinations/:dest_id'/* , controller function here */);
-  app.post('/api/destinations/:dest_id/events'/* , controller function here */);
-  app.get('/api/destinations/:dest_id/events'/* , controller function here */);
+  app.post('/api/trips/:trip_id/destinations', destinationsController.createAll);
+  app.get('/api/trips/:trip_id/destinations', destinationsController.getAll);
+  app.delete('/api/destinations/:dest_id', destinationsController.getAll);
+  app.post('/api/destinations/:dest_id/events', eventsController.createAll);
+  app.get('/api/destinations/:dest_id/events', eventsController.getAll);
   app.get('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
   app.post('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
   app.delete('/api/votes/:vote_id'/* , controller function here */);
@@ -28,11 +33,6 @@ module.exports = function (app, express) {
     passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
       // send user info to client side via cookies
-      res.cookie('name', req.user.displayName);
-      res.cookie('fbId', req.user.id);
-      res.cookie('picture', req.user.photos[0].value);
-      // res.cookie('url', req.user.profileUrl);
-      // res.cookie('email', req.user.email);
-      // res.redirect('mainPageRoute');
+      // example: res.cookie('name', req.user.displayName);
     });
 };
