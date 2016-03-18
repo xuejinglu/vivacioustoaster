@@ -1,4 +1,7 @@
-import expect from 'expect';
+const expect = require('expect');
+const Promise = require('bluebird');
+const User = require('../users/users');
+const testData = require('./testData.js');
 
 describe('Trip Controller', () => {
   before(() => {
