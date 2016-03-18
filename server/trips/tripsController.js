@@ -3,7 +3,7 @@ const helpers = require('../config/helpers');
 const Trip = require('../trips/trips');
 
 module.exports = {
-  // Params: req.body is a trip
+  // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
     Trip.createTrip(req.body.name, req.user, req.body.friends)
