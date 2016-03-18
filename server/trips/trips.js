@@ -27,11 +27,11 @@ User.sync();
 
 Trip.createTrip = (name, user, friends) =>
   Trip.create({ name })
-  .then(trip => {
-    trip.addUsers([...friends, user])
-    .then(() => trip);
-  })
-  .catch(err => err);
+    .then(trip =>
+      trip.addUsers([...friends, user])
+        .then(() => trip)
+    )
+    .catch(err => err);
 
 Trip.getAllTrips = user => user.getTrips().catch(err => err);
 
