@@ -1,6 +1,5 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
-const User = require('../users/users');
 const Event = require('../events/events');
 
 const Tag = db.define('tags', {
@@ -15,5 +14,20 @@ Event.hasMany(Tag);
 
 Tag.sync();
 Event.sync();
+
+module.exports = Tag;
+
+Tag.create = tags => Tag.bulkCreate(tags)
+    .then(newTags => newTags)
+    .catch(err => err);
+
+Tag.get = eventId => Event.findOne({ where: { id: eventId } })
+    // Sequelize method given to us by the hasMany relationship
+    .then(event => event.getTags())
+    .catch(err => err);
+
+Tag.delete = tagId => Tag.destroy({ where: { id: tagId } })
+    .then(affectedRows => affectedRows)
+    .catch(err => err);
 
 module.exports = Tag;
