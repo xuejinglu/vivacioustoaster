@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const Trip = require('../trips/trips');
@@ -18,13 +17,8 @@ Trip.hasMany(Destination);
 Destination.sync();
 Trip.sync();
 
-Destination.createDestinations = (destinations, tripId) => {
-  // extend destination objects with tripId from url param
-  const tripIds = Array(destinations.length).fill({ tripId });
-  const newDestinations = _.merge(destinations, tripIds);
-
-  return Destination.bulkCreate(newDestinations).catch(err => err);
-};
+Destination.createDestinations = (destinations) =>
+  Destination.bulkCreate(destinations).catch(err => err);
 
 Destination.getDestinations = tripId =>
   Destination.findAll({ where: { tripId } }).catch(err => err);
