@@ -18,7 +18,7 @@ Event.sync();
 Tag.createTags = tags => Tag.bulkCreate(tags)
     .catch(err => err);
 
-Tag.get = eventId => Event.findOne({ where: { id: eventId } })
+Tag.getTags = eventId => Event.findOne({ where: { id: eventId } })
     // Sequelize method given to us by the hasMany relationship
     .then(event => event.getTags())
     .catch(err => err);
