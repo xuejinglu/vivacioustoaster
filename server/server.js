@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 1337;
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const db = require('./config/db.js');
-const usersController = require('./users/usersController');
+const User = require('./users/users');
 const auth = require('./config/auth.js');
 
 
@@ -31,7 +31,7 @@ passport.use(new Strategy({
 },
   (accessToken, refreshToken, profile, cb) => {
     // call a function which checks if user is in db
-    usersController.findOrCreate(profile);
+    User.findOrCreate(profile);
     return cb(null, profile);
   }));
 

@@ -3,7 +3,7 @@ const Strategy = require('passport-facebook').Strategy;
 
 module.exports = function (app, express) {
   app.get('api/me'/* , controller function here */);
-  app.get('/api/users/:user_id/friends'/* , controller function here */);
+  app.get('/api/me/friends'/* , controller function here */);
   app.post('/api/destination/:dest_id/tags'/* , controller function here */);
   app.get('/api/destinations/:dest_id/tags'/* , controller function here */);
   app.delete('/api/tags/:tag_id'/* , controller function here */);
