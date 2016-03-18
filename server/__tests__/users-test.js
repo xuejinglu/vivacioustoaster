@@ -1,6 +1,10 @@
 const expect = require('expect');
 const Promise = require('bluebird');
 const User = require('../users/users');
+const Trip = require('../trips/trips');
+const Destination = require('../destinations/destinations');
+const Event = require('../events/events');
+const Tag = require('../tags/tags');
 const testData = require('./testData');
 
 // The `clearDB` helper function, when invoked, will clear the database
