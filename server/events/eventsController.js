@@ -13,7 +13,7 @@ module.exports = {
 
     Event.create(newEvents)
       .then(events => {
-        res.json(events);
+        res.status(201).json(events);
       })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);

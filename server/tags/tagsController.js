@@ -13,7 +13,7 @@ module.exports = {
 
     Tag.create(newTags)
       .then(tags => {
-        res.json(tags);
+        res.status(201).json(tags);
       })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
