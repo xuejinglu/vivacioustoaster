@@ -1,5 +1,3 @@
-import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
 describe('Trip Controller', () => {
