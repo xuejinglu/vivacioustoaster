@@ -7,7 +7,11 @@ module.exports = {
   // Params: req.body.destinations is an array of destination objects.
   // Returns: array of created destinations
   createAll: (req, res, next) => {
-    Destination.createDestinations(req.body.destinations, req.params.tripId)
+    // extend destination objects with tripId from url param
+    const tripIds = Array(req.body.destinations.length).fill({ tripId: req.params.tripId });
+    const newDestinations = _.merge(req.body.destinations, tripIds);
+
+    Destination.createDestinations(newDestinations)
       .then(destinations => {
         res.status(201).json(destinations);
       })
