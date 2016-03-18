@@ -1,5 +1,5 @@
 module.exports = {
-  users: [{
+  testUsers: [{
     name: 'Akshay Buddiga',
     picUrl: 'akshay.jpg',
     fbId: 'reg-9gf-sf2',
