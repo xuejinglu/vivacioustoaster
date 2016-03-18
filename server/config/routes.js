@@ -34,5 +34,6 @@ module.exports = function (app, express) {
     (req, res) => {
       // send user info to client side via cookies
       // example: res.cookie('name', req.user.displayName);
+      res.redirect('trips');
     });
 };
