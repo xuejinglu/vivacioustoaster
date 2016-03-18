@@ -19,7 +19,7 @@ User.belongsToMany(User, { as: 'Friends', through: UserFriend });
 UserFriend.sync();
 User.sync();
 
-User.getUserInfo = fbId => {
+User.getUserInfo = fbId =>
   User.findOne({ where: { fbId } })
     .then(user => {
       const token = jwt.encode(user, 'secret');
@@ -30,7 +30,6 @@ User.getUserInfo = fbId => {
       return response;
     })
     .catch(err => err);
-};
 
 User.getUserFriends = user => user.getFriends().catch(err => err);
 
@@ -40,7 +39,7 @@ User.findOrCreate = profile => {
   const fbId = {
     fbId: profile.id,
   };
-  User.findOne(fbId)
+  return User.findOne(fbId)
     .then(match => {
       // create user if there's no match
       if (!match) {
