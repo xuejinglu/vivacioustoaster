@@ -6,7 +6,7 @@ module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
-    Trip.createTrip(req.body.name, req.user, req.body.friends)
+    Trip.createTripWithFriends(req.body.name, req.user, req.body.friends)
     .then(trip => {
       res.status(201).json(trip);
     })
