@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import expect from 'expect';
+import Promise from 'bluebird';
 import User from '../users/users';
 import Trip from '../trips/trips';
 import { testUsers, testTrips } from './testData';
+
+const clearDB = () => {
+  return Promise.all([
+    () => User.sync({ force: true }),
+    () => Trip.sync({ force: true }),
+  ]);
+};
 
 describe('Trip Model', () => {
   before(() => {
