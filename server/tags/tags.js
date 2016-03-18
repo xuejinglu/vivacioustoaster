@@ -12,11 +12,6 @@ Tag.belongsTo(Event);
 // will add methods to Event (ex. Event.getTags())
 Event.hasMany(Tag);
 
-Tag.sync();
-Event.sync();
-
-module.exports = Tag;
-
 Tag.create = tags => Tag.bulkCreate(tags)
     .catch(err => err);
 
@@ -28,5 +23,8 @@ Tag.get = eventId => Event.findOne({ where: { id: eventId } })
 Tag.delete = tagId => Tag.destroy({ where: { id: tagId } })
     .then(affectedRows => affectedRows)
     .catch(err => err);
+
+Tag.sync();
+Event.sync();
 
 module.exports = Tag;
