@@ -19,7 +19,6 @@ Event.get = destId => Event.findAll({ where: { destId } })
     .catch(err => err);
 
 Event.delete = destId => Event.destroy({ where: { destId } })
-    .then(affectedRows => affectedRows)
     .catch(err => err);
 
 Event.sync();

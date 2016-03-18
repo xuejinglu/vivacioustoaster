@@ -21,7 +21,6 @@ Tag.get = eventId => Event.findOne({ where: { id: eventId } })
     .catch(err => err);
 
 Tag.delete = tagId => Tag.destroy({ where: { id: tagId } })
-    .then(affectedRows => affectedRows)
     .catch(err => err);
 
 Tag.sync();
