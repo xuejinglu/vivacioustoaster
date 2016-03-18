@@ -11,7 +11,7 @@ module.exports = {
     const eventIds = Array(req.body.tags.length).fill({ eventId: req.params.eventId });
     const newTags = _.merge(req.body.tags, eventIds);
 
-    Tag.create(newTags)
+    Tag.createTags(newTags)
       .then(tags => {
         res.status(201).json(tags);
       })
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   getAll: (req, res, next) => {
-    Tag.get(req.params.eventId)
+    Tag.getTags(req.params.eventId)
       .then(tags => {
         res.json(tags);
       })

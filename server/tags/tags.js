@@ -15,7 +15,7 @@ Event.hasMany(Tag);
 Tag.sync();
 Event.sync();
 
-Tag.create = tags => Tag.bulkCreate(tags)
+Tag.createTags = tags => Tag.bulkCreate(tags)
     .catch(err => err);
 
 Tag.get = eventId => Event.findOne({ where: { id: eventId } })

@@ -15,10 +15,10 @@ Destination.hasMany(Event);
 Event.sync();
 Destination.sync();
 
-Event.create = events => Event.bulkCreate(events)
+Event.createEvents = events => Event.bulkCreate(events)
     .catch(err => err);
 
-Event.get = destId => Event.findAll({ where: { destId } })
+Event.getEvents = destId => Event.findAll({ where: { destId } })
     .catch(err => err);
 
 module.exports = Event;

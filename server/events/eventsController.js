@@ -11,7 +11,7 @@ module.exports = {
     const destIds = Array(req.body.events.length).fill({ destId: req.params.destId });
     const newEvents = _.merge(req.body.events, destIds);
 
-    Event.create(newEvents)
+    Event.createEvents(newEvents)
       .then(events => {
         res.status(201).json(events);
       })
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   getAll: (req, res, next) => {
-    Event.get(req.params.destId)
+    Event.getEvents(req.params.destId)
       .then(events => {
         res.json(events);
       })
