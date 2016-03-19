@@ -25,20 +25,6 @@ describe('User Controller', () => {
   beforeEach(() => clearDB().then(() =>
     Promise.all(testUsers.map(user => User.create(user)))));
 
-  xit('should retrieve a user from the database', () => {
-    const options = {
-      method: 'GET',
-      uri: 'api/me',
-      query: {
-        fbId: 'qw0-lm1-pt8',
-      },
-    };
-
-    rp(options).then(user => {
-      expect(user.name).to.equal('Jing Lu');
-    });
-  });
-
   xit('should retrieve a user\'s friends from the database', () => {
     const options = {
       method: 'GET',
