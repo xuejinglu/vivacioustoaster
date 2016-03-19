@@ -36,8 +36,6 @@ passport.use(new Strategy({
   profileFields: ['id', 'displayName', 'picture.height(150).width(150)', 'friends'],
 },
   (accessToken, refreshToken, profile, cb) => {
-    console.log('returned from passport!');
-    console.log('PROFILE IS ---', (profile));
     // call a function which checks if user is in db
     User.findOrCreate(profile);
     return cb(null, profile);
