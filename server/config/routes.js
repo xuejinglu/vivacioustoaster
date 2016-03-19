@@ -35,8 +35,8 @@ module.exports = function (app, express) {
     (req, res) => {
       user.getUserInfo(req.user.id)
       .then(response => {
+        // res.redirect('home');
         res.json(response);
-        res.redirect('/home');
       });
     });
 };
