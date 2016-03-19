@@ -35,7 +35,7 @@ User.getUserFriends = user => user.getFriends().catch(err => err);
 
 User.findOrCreate = profile => {
   const name = profile.displayName;
-  const picture = profile.photos[0].value;
+  const picUrl = profile.photos[0].value;
   const fbId = profile.id;
   return User.findOne({ fbId })
     .then(match => {
@@ -44,14 +44,14 @@ User.findOrCreate = profile => {
         const newUser = {
           name,
           fbId,
-          picture,
+          picUrl,
         };
         return User.create(newUser);
       }
       // if user already exists, update user entry in the database
       const updatedInfo = {
         name,
-        picture,
+        picUrl,
       };
       return match.update(updatedInfo);
     })
