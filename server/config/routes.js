@@ -5,7 +5,8 @@ const destinationsController = require('../destinations/destinationsController')
 const eventsController = require('../events/eventsController');
 const tagsController = require('../tags/tagsController');
 const tripsController = require('../trips/tripsController');
-const userController = require('../votes/votesController');
+const userController = require('../users/usersController');
+const user = require('../users/users');
 
 module.exports = function (app, express) {
   app.get('api/me', usersController.getUser);
@@ -32,8 +33,10 @@ module.exports = function (app, express) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
-      // send user info to client side via cookies
-      // example: res.cookie('name', req.user.displayName);
-      res.redirect('trips');
+      user.getUserInfo(req.user.id)
+      .then (response => {
+        res.json(response);
+        res.redirect('/home');
+      });
     });
 };

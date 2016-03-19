@@ -4,7 +4,7 @@ const helpers = require('../config/helpers');
 module.exports = {
 
   getUser: (req, res, next) => {
-    User.getUserInfo(req.query.fbId)
+    User.getUserInfo(req.user)
     .then(response => {
       res.json(response);
     })
