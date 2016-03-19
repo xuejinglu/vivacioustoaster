@@ -4,7 +4,7 @@ const initialState = {
   startDate: null,
   endDate: null,
   destination: null,
-  tripType: null,
+  tripType: 'Group',
 };
 
 export default (state = initialState, action) => {
