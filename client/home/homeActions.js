@@ -11,3 +11,10 @@ export const changeEndDate = (date) => ({
     date,
   },
 });
+
+export const changeTripType = (tripType) => ({
+  type: 'CHANGE_TRIPTYPE',
+  payload: {
+    tripType,
+  },
+});
