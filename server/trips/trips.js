@@ -35,6 +35,6 @@ Trip.createTripWithFriends = (name, user, friends) =>
 
 Trip.getAllTrips = user => user.getTrips().catch(err => err);
 
-Trip.deleteTrip = tripId => Trip.destroy({ where: { id:tripId } }).catch(err => err);
+Trip.deleteTrip = id => Trip.destroy({ where: { id } }).catch(err => err);
 
 module.exports = Trip;
