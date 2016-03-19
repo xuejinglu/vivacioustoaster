@@ -23,8 +23,10 @@ describe('User Model', () => {
   beforeEach(() => clearDB().then(() => 
     Promise.all(testUsers.map(user => User.create(user)))));
 
-  xit('should create a token', () => {
-    // TODO - may not be worth the time
+  it('should create a token', () => {
+    User.createToken('reg-9gf-sf2').then(response => {
+      expect(response.user.name).to.equal('Akshay Buddiga');
+    });
   });
 
   // clearDB to ensure we actually create a new user
