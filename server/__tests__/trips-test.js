@@ -48,7 +48,7 @@ describe('Trip Model', () => {
       .catch(err => done(err));
   });
 
-  it('creates relationship between trip and users', () => {
+  xit('creates relationship between trip and users', () => {
     // const me = testUsers[0];
     // Trip.create('HR39', me, testUsers.slice(1))
     //   .then(trip => trip.getUsers())
@@ -63,7 +63,7 @@ describe('Trip Model', () => {
     // TODO
   });
 
-  it('deletes a trip', () => {
+  xit('deletes a trip', () => {
     // TODO
   });
 });
