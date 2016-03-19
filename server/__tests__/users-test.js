@@ -68,7 +68,7 @@ describe('User Model', () => {
     };
 
     User.findOne({ where: { name: 'Akshay Buddiga' }}).then(user => {
-      Promise.all(friendIds.map(id => User.getUserInfo(id)))
+      Promise.all(friendIds.map(fbId => User.findOne({ where: { fbId }})))
         .then(friends => 
           user.addFriends(friends).then(() => 
             User.getUserFriends(user).then(returnedFriends => {
