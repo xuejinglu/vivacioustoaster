@@ -6,7 +6,7 @@ const eventsController = require('../events/eventsController');
 const tagsController = require('../tags/tagsController');
 const tripsController = require('../trips/tripsController');
 const userController = require('../users/usersController');
-const user = require('../users/users');
+const User = require('../users/users');
 
 module.exports = function (app, express) {
   app.get('api/me', usersController.getUser);
@@ -33,7 +33,7 @@ module.exports = function (app, express) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
-      user.getUserInfo(req.user.id)
+      User.getUserInfo(req.user.id)
       .then(response => {
         // res.redirect('home');
         res.json(response);

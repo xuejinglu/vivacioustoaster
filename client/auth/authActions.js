@@ -37,7 +37,7 @@ export const logout = () =>
   dispatch => {
     dispatch(requestLogout());
     window.sessionStorage.removeItem('com.tripsApp');
-    dispatch(routeActions.push('/home'));
+    dispatch(routeActions.push('/'));
   };
 
 export const login = () =>
@@ -47,7 +47,7 @@ export const login = () =>
     const userRequest = new Request('/api/users', {
       method: 'get',
       headers: {
-        user: window.sessionStorage,
+        token: window.sessionStorage.getItem('com.tripsApp'),
         'Content-Type': 'application/json',
       },
     });
@@ -55,6 +55,7 @@ export const login = () =>
     fetch(userRequest)
       .then(response => {
         console.log(response);
+        // set response.user to the state
         dispatch(routeActions.push('/home'));
       })
       .catch(err => {
