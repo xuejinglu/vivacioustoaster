@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 let TripTypeList = ({ dispatch }) => (
   <div>
-    <RadioButtonGroup defaultSelected="Group" onChange={(value, event) => {
-      dispatch(changeTripType(event));
+    <RadioButtonGroup defaultSelected="Group" onChange={(event, tripType) => {
+      dispatch(changeTripType(tripType));
     }}
     >
       <RadioButton label="Group" value="Group" />
