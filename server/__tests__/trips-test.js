@@ -31,16 +31,21 @@ describe('Trip Model', () => {
       .catch(err => console.error(err));
   });
 
-  it('creates a new trip with friends', () => {
-    console.log('hello');
-    // const me = testUsers[0];
-    // Trip.create('HR39', me, testUsers.slice(1))
-    //   .then(trip => Trip.findOne({ where { id: trip.id } }))
-    //   .then(trip => {
-    //     expect(trip.name).to.equal('HR39');
-    //     done();
-    //   })
-    //   .catch(err => done(err));
+  it('creates a new trip with friends', (done) => {
+    User.findAll({ where: { id: { $gt: 0 } } })
+      .then(users => {
+        console.log('users: ', users);
+        return Trip.createTripWithFriends('HR39', users[0], users.slice(1))
+      })
+      .then(trip => {
+        expect(trip.name).toEqual('HR39');
+        return trip.getUsers();
+      })
+      .then(users => {
+        expect(users.length).toEqual(testData.testUsers.length);
+        done();
+      })
+      .catch(err => done(err));
   });
 
   it('creates relationship between trip and users', () => {
