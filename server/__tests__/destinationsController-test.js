@@ -9,15 +9,15 @@ describe('Destination Controller', () => {
     // create destinations
   });
 
-  it('creates a new destination', () => {
+  xit('creates a new destination', () => {
     console.log('created destination');
   });
 
-  it('gets a destination', () => {
+  xit('gets a destination', () => {
     // TODO
   });
 
-  it('deletes a destination', () => {
+  xit('deletes a destination', () => {
     // TODO
   });
 });

@@ -12,15 +12,15 @@ describe('Trip Controller', () => {
     // create trip
   });
 
-  it('creates a new trip', () => {
+  xit('creates a new trip', () => {
     console.log('created trip');
   });
 
-  it('gets a trip', () => {
+  xit('gets a trip', () => {
     // TODO
   });
 
-  it('deletes a trip', () => {
+  xit('deletes a trip', () => {
     // TODO
   });
 });
