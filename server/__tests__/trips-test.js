@@ -59,8 +59,14 @@ describe('Trip Model', () => {
     //   .catch(err => done(err));
   });
 
-  it('gets a trip', () => {
-    // TODO
+  it('gets all trips given a user', (done) => {
+    User.findOne({ where: { name: 'Akshay Buddiga' } })
+    .then(user => Trip.getAllTrips(user))
+    .then(trips => {
+      expect(trips.length).toEqual(testData.testTrips.length);
+      done();
+    })
+    .catch(err => done(err));
   });
 
   xit('deletes a trip', () => {
