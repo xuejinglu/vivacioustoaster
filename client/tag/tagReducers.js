@@ -14,8 +14,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_TAG':
-      state[action.payload.tag] = !state[action.payload.tag];
-      return state;
+      const newState = Object.assign({}, state);
+      newState[action.payload.tag] = !state[action.payload.tag];
+      return newState;
     default:
       return state;
   }
