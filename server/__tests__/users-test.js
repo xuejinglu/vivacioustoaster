@@ -25,7 +25,7 @@ describe('User Model', () => {
 
   it('should create a token', () => {
     User.createToken('reg-9gf-sf2').then(response => {
-      expect(response.user.name).to.equal('Akshay Buddiga');
+      expect(typeof response.token).to.equal('string');
     });
   });
 
