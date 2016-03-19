@@ -19,7 +19,7 @@ User.belongsToMany(User, { as: 'Friends', through: UserFriend });
 UserFriend.sync();
 User.sync();
 
-User.getUserInfo = fbId =>
+User.createToken = fbId =>
   User.findOne({ where: { fbId } })
     .then(user => {
       const token = jwt.encode(user, 'secret');

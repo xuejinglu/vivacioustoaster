@@ -4,13 +4,7 @@ const helpers = require('../config/helpers');
 module.exports = {
 
   getUser: (req, res, next) => {
-    User.getUserInfo(req.user)
-    .then(response => {
-      res.json(response);
-    })
-    .catch(err => {
-      helpers.errorHandler(err, req, res, next);
-    });
+    res.json(req.user);
   },
 
   getFriends: (req, res, next) => {

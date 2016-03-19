@@ -33,7 +33,7 @@ module.exports = function (app, express) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
-      User.getUserInfo(req.user.id)
+      User.createToken(req.user.id)
       .then(response => {
         // res.redirect('home');
         res.json(response);
