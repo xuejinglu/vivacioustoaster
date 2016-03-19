@@ -59,7 +59,13 @@ describe('Trip Model', () => {
     .catch(err => done(err));
   });
 
-  xit('deletes a trip', () => {
-    // TODO
+  it('deletes a trip', () => {
+    Trip.deleteTrip(1)
+    .then(() => Trip.findAll({}))
+    .then(trips => {
+      expect(trips.length).toEqual(testData.testTrips.length - 1);
+      done()
+    })
+    .catch(err => done(err));
   });
 });
