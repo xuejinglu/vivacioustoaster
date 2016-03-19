@@ -6,8 +6,8 @@ const testData = require('./testData');
 
 const clearDB = () => {
   return Promise.all([
-    () => User.sync({ force: true }),
-    () => Trip.sync({ force: true }),
+    User.sync({ force: true }),
+    Trip.sync({ force: true }),
   ]);
 };
 
