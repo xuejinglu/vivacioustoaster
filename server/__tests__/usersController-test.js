@@ -25,15 +25,21 @@ describe('User Controller', () => {
   beforeEach(() => clearDB().then(() =>
     Promise.all(testUsers.map(user => User.create(user)))));
 
-  xit('should retrieve a user\'s friends from the database', () => {
-    const options = {
-      method: 'GET',
-      uri: 'api/me/friends',
-      user: testUsers[1],
-    };
-
-    rp(options).then(friends => {
-      expect(friends[0].name).to.deep.equal('Boya Jiang');
+  it('should retrieve a user\'s friends from the database', () => {
+    User.findAll({}).then(users => {
+      const user = users[0];
+      const friends = users.slice(1);
+      const options = {
+        method: 'GET',
+        uri: 'api/me/friends',
+        user: user,
+      };
+      
+      user.addFriends(friends).then(() => {
+        rp(options).then(userFriends => {
+          expect(userFriends).to.deep.equal(friends);
+        });
+      });
     });
   });
 
