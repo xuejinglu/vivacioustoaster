@@ -20,6 +20,7 @@ An intelligent, group-oriented decision-making travel app to help find places th
 
 ## Usage
 
+This repo uses the `dotenv` node module to manage env variables on your local machine. Create a .env file in your root with the appropriate environment variables for your third party client IDs and secrets. See .env.example for an example.
 Run `webpack` in the root to start the app in dev mode. Run `NODE_ENV=production webpack` to start the app in production mode.
 
 Run `npm test` to run tests.

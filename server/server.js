@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 1337;
+// dotenv sets up the process.env variables. Put env variables in a .env file in your root
+require('dotenv').config({ path: `${__dirname}/../.env` });
+const PORT = process.env.PORT;
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const db = require('./config/db.js');
 const User = require('./users/users');
-const auth = require('./config/auth.js');
 
 
 require('./config/middleware.js')(app, express);
@@ -24,9 +25,9 @@ console.log(`Listening on port ${app.get('port')}`);
 // authentication.
 
 passport.use(new Strategy({
-  clientID: process.env.FACEBOOK_APP_ID || auth.facebookAuth.clientID,
-  clientSecret: process.env.FACEBOOK_SECRET || auth.facebookAuth.clientSecret,
-  callbackURL: `http://localhost:${PORT}/auth/facebook/callback`,
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_SECRET,
+  callbackURL: process.env.FB_CALLBACK_URL,
   profileFields: ['id', 'displayName', 'picture.height(150).width(150)', 'friends'],
 },
   (accessToken, refreshToken, profile, cb) => {
