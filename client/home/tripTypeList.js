@@ -1,9 +1,14 @@
 import React from 'react';
 import { RadioButton, RadioButtonGroup } from 'material-ui';
+import { changeTripType } from './homeActions';
+import { connect } from 'react-redux';
 
-const TripTypeList = () => (
+let TripTypeList = ({ dispatch }) => (
   <div>
-    <RadioButtonGroup defaultSelected="Group" >
+    <RadioButtonGroup defaultSelected="Group" onChange={(event, tripType) => {
+      dispatch(changeTripType(tripType));
+    }}
+    >
       <RadioButton label="Group" value="Group" />
       <RadioButton label="Solo" value="Solo" />
       <RadioButton label="Couple" value="Couple" />
@@ -11,4 +16,9 @@ const TripTypeList = () => (
   </div>
 );
 
+TripTypeList.propTypes = {
+  dispatch: React.PropTypes.element,
+};
+
+TripTypeList = connect()(TripTypeList);
 export default TripTypeList;
