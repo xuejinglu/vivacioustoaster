@@ -30,27 +30,23 @@ describe('User Model', () => {
   });
 
 
-  it('should create a user in the database', () => {
-    const profile = {
-      displayName: testUsers[2].name,
-      photos: [{ value: testUsers[2].picUrl }],
-      id: testUsers[2].fbId,
-    };
+  it('should create a user in the database', () => clearDB()
+    .then(() => {
+      const profile = {
+        displayName: testUsers[2].name,
+        photos: [{ value: testUsers[2].picUrl }],
+        id: testUsers[2].fbId,
+      };
 
-    User.findOrCreate(profile).then(user => {
-      expect(user.name).to.equal(profile.displayName);
-    });
-  });
+      User.findOrCreate(profile).then(user => {
+        expect(user.name).to.equal(profile.displayName);
+      });
+    }
+  ));
 
   it('should update a user in the database', () => {
-    const profile = {
-      displayName: testUsers[1].name,
-      photos: [{ value: testUsers[1].picUrl }],
-      id: testUsers[1].fbId,
-    };
-
-    // checks that it creates a new user
-    User.findOrCreate(profile).then(user => {
+    User.findOne({ where: { name: 'Leran Firer' }}).then(user => {
+      const profile = {};
       profile.displayName = 'Firer Leran';
       User.findOrCreate(profile).then(updatedUser => {
         expect(updatedUser.name).to.equal('Firer Leran');
