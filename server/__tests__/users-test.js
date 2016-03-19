@@ -1,12 +1,11 @@
-'use strict';
 const expect = require('expect');
 const Promise = require('bluebird');
 const User = require('../users/users');
+const testData = require('./testData');
 // const Trip = require('../trips/trips');
 // const Destination = require('../destinations/destinations');
 // const Event = require('../events/events');
 // const Tag = require('../tags/tags');
-const testData = require('./testData');
 
 // The `clearDB` helper function, when invoked, will clear the database
 // by dropping the db - this is what the { force: true } is for
@@ -59,7 +58,7 @@ describe('User Model', () => {
     });
   });
 
-  it('should retrieve a user\s friends from the database', () => {
+  it('should retrieve a user\'s friends from the database', () => {
     const friendIds = ['ad7-lr0-fd8', 'of8-a6s-lf0', 'qw0-lm1-pt8'];
     const profile = {
       displayName: testUsers[0].name,
