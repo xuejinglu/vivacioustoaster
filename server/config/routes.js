@@ -34,7 +34,7 @@ module.exports = function (app, express) {
     passport.authenticate('facebook', { failureRedirect: '/' }),
     (req, res) => {
       user.getUserInfo(req.user.id)
-      .then (response => {
+      .then(response => {
         res.json(response);
         res.redirect('/home');
       });
