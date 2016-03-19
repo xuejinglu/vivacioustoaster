@@ -9,23 +9,35 @@ const userController = require('../users/usersController');
 const User = require('../users/users');
 
 module.exports = function (app, express) {
+  // Users
   app.get('api/me', usersController.getUser);
   app.get('/api/me/friends', usersController.getFriends);
-  app.post('/api/destination/:dest_id/tags', tagsController.createAll);
-  app.get('/api/destinations/:dest_id/tags', tagsController.getAll);
+
+  // Tags
+  app.post('/api/destination/:destId/tags', tagsController.createAll);
+  app.get('/api/destinations/:destId/tags', tagsController.getAll);
+
+  // Trips
   app.get('/api/trips', tripsController.getAll);
-  app.get('/api/trips/:trip_id', tripsController.get);
+  app.get('/api/trips/:tripId', tripsController.get);
+  app.delete('/api/trips/:tripId', tripsController.delete);
   app.post('/api/trips', tripsController.create);
-  app.get('/api/trips/:trip_id/users'/* , controller function here */);
-  app.post('/api/trips/:trip_id/users'/* , controller function here */);
-  app.post('/api/trips/:trip_id/destinations', destinationsController.createAll);
-  app.get('/api/trips/:trip_id/destinations', destinationsController.getAll);
-  app.delete('/api/destinations/:dest_id', destinationsController.getAll);
-  app.post('/api/destinations/:dest_id/events', eventsController.createAll);
-  app.get('/api/destinations/:dest_id/events', eventsController.getAll);
-  app.get('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
-  app.post('/api/destinations/:dest_id/events/:event_id/votes'/* , controller function here */);
-  app.delete('/api/votes/:vote_id'/* , controller function here */);
+  app.get('/api/trips/:tripId/users'/* , controller function here */);
+  app.post('/api/trips/:tripId/users'/* , controller function here */);
+
+  // Destinations
+  app.post('/api/trips/:tripId/destinations', destinationsController.createAll);
+  app.get('/api/trips/:tripId/destinations', destinationsController.getAll);
+  app.delete('/api/destinations/:destId', destinationsController.delete);
+
+  // Events
+  app.post('/api/destinations/:destId/events', eventsController.createAll);
+  app.get('/api/destinations/:destId/events', eventsController.getAll);
+
+  // Votes
+  app.get('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
+  app.post('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
+  app.delete('/api/votes/:voteId'/* , controller function here */);
 
 // FACEBOOK AUTH
   app.get('/auth/facebook',
