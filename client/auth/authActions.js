@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
->>>>>>> draft client side functions for login, logout, and fbLogin
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
