@@ -44,24 +44,36 @@ describe('User Model', () => {
   });
 
   it('should update a user in the database', () => {
-    let profile = testUsers[2];
+    const profile = {
+      displayName: testUsers[1].name,
+      photos: [{ value: testUsers[1].picUrl }],
+      id: testUsers[1].fbId,
+    };
 
     // checks that it creates a new user
     User.findOrCreate(profile).then(user => {
-      expect(user.name).to.equal(profile.name);
-    });
-
-    profile[name] = 'Firer Leran';
-
-    // checks that it updates a new user
-    User.findOrCreate(profile).then(user => {
-      expect(user.name).to.equal(profile.name);
+      profile.displayName = 'Firer Leran';
+      User.findOrCreate(profile).then(updatedUser => {
+        expect(updatedUser.name).to.equal('Firer Leran');
+      });
     });
   });
 
-  xit('should retrieve a user\s friends from the database', () => {
-    User.getUserFriends(testUsers[1]).then(user => {
-      expect(user.name).to.equal('Boya Jiang');
+  it('should retrieve a user\s friends from the database', () => {
+    const friendIds = ['ad7-lr0-fd8', 'of8-a6s-lf0', 'qw0-lm1-pt8'];
+    const profile = {
+      displayName: testUsers[0].name,
+      photos: [{ value: testUsers[0].picUrl }],
+      id: testUsers[0].fbId,
+    };
+
+    User.findOne({ where: { name: 'Akshay Buddiga' }}).then(user => {
+      Promise.all(friendIds.map(id => User.getUserInfo(id)))
+        .then(friends => 
+          user.addFriends(friends).then(() => 
+            User.getUserFriends(user).then(returnedFriends => {
+              expect(returnedFriends).to.deep.equal(friends);
+            })));
     });
   });
 
