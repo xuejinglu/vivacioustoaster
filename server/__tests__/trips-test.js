@@ -33,10 +33,7 @@ describe('Trip Model', () => {
 
   it('creates a new trip with friends', (done) => {
     User.findAll({ where: { id: { $gt: 0 } } })
-      .then(users => {
-        console.log('users: ', users);
-        return Trip.createTripWithFriends('HR39', users[0], users.slice(1))
-      })
+      .then(users => Trip.createTripWithFriends('HR39', users[0], users.slice(1)))
       .then(trip => {
         expect(trip.name).toEqual('HR39');
         return trip.getUsers();
