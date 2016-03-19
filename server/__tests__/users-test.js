@@ -29,7 +29,7 @@ describe('User Model', () => {
     });
   });
 
-
+  // clearDB to ensure we actually create a new user
   it('should create a user in the database', () => clearDB()
     .then(() => {
       const profile = {
