@@ -18,3 +18,10 @@ export const changeTripType = (tripType) => ({
     tripType,
   },
 });
+
+export const changeDestination = (value) => ({
+  type: 'CHANGE_DESTINATION',
+  payload: {
+    value,
+  },
+});

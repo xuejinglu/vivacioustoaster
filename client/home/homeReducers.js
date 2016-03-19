@@ -1,4 +1,4 @@
-import { CHANGE_STARTDATE, CHANGE_ENDDATE } from './homeActions';
+import { CHANGE_STARTDATE, CHANGE_ENDDATE, CHANGE_DESTINATION } from './homeActions';
 
 const initialState = {
   destination: {
@@ -23,9 +23,11 @@ export default (state = initialState, action) => {
           endDate: action.payload.date,
         }),
       });
-    case 'CHANGE_TRIPTYPE':
+    case 'CHANGE_DESTINATION':
       return Object.assign({}, state, {
-        tripType: action.payload.tripType,
+        destination: Object.assign({}, state.destination, {
+          name: action.payload.value,
+        }),
       });
     default:
       return state;
