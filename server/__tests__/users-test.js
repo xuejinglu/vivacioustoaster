@@ -23,9 +23,9 @@ describe('User Model', () => {
   beforeEach(() => clearDB().then(() => 
     Promise.all(testUsers.map(user => User.create(user)))));
 
-  it('should retrieve a user from the database', () => {
-    User.getUserInfo('reg-9gf-sf2').then(response => {
-      expect(response.user.name).to.equal('Akshay Buddiga');
+  it('should create a token', () => {
+    User.createToken('reg-9gf-sf2').then(response => {
+      expect(typeof response.token).to.equal('string');
     });
   });
 
