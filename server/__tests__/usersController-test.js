@@ -25,7 +25,7 @@ describe('User Controller', () => {
   beforeEach(() => clearDB().then(() =>
     Promise.all(testUsers.map(user => User.create(user)))));
 
-  it('should retrieve a user from the database', () => {
+  xit('should retrieve a user from the database', () => {
     const options = {
       method: 'GET',
       uri: 'api/me',
