@@ -36,10 +36,8 @@ User.getUserFriends = user => user.getFriends().catch(err => err);
 User.findOrCreate = profile => {
   const name = profile.displayName;
   const picture = profile.photos[0].value;
-  const fbId = {
-    fbId: profile.id,
-  };
-  return User.findOne(fbId)
+  const fbId = profile.id;
+  return User.findOne({ fbId })
     .then(match => {
       // create user if there's no match
       if (!match) {

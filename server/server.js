@@ -10,11 +10,16 @@ const User = require('./users/users');
 
 
 require('./config/middleware.js')(app, express);
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
+
 require('./config/routes.js')(app, express);
 
 app.set('port', PORT);
 app.listen(PORT);
-console.log(`Listening on port ${app.get('port')}`);
+console.log(`Listening on port ${PORT}`);
 
 // PASSPORT FACEBOOK STRATEGY configuration=================
 
@@ -31,6 +36,8 @@ passport.use(new Strategy({
   profileFields: ['id', 'displayName', 'picture.height(150).width(150)', 'friends'],
 },
   (accessToken, refreshToken, profile, cb) => {
+    console.log('returned from passport!');
+    console.log('PROFILE IS ---', (profile));
     // call a function which checks if user is in db
     User.findOrCreate(profile);
     return cb(null, profile);
@@ -52,10 +59,5 @@ passport.serializeUser((user, cb) => {
 passport.deserializeUser((obj, cb) => {
   cb(null, obj);
 });
-
-// Initialize Passport and restore authentication state, if any, from the
-// session.
-app.use(passport.initialize());
-app.use(passport.session());
 
 module.exports = app;
