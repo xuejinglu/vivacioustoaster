@@ -13,9 +13,6 @@ module.exports = function (app, express) {
   app.get('api/me', usersController.getUser);
   app.get('/api/me/friends', usersController.getFriends);
 
-  // Tags
-  app.post('/api/destination/:destId/tags', tagsController.createAll);
-  app.get('/api/destinations/:destId/tags', tagsController.getAll);
 
   // Trips
   app.get('/api/trips', tripsController.getAll);
@@ -33,6 +30,10 @@ module.exports = function (app, express) {
   // Events
   app.post('/api/destinations/:destId/events', eventsController.createAll);
   app.get('/api/destinations/:destId/events', eventsController.getAll);
+
+  // Tags
+  app.post('/api/events/:eventId/tags', tagsController.createAll);
+  app.get('/api/events/:eventId/tags', tagsController.getAll);
 
   // Votes
   app.get('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
