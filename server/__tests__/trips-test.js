@@ -16,18 +16,19 @@ describe('Trip Model', () => {
     // don't still need to connect to db...
   });
   beforeEach(() => {
-    // return clearDB()
-    //   .then(() => {
-    //     const createUsers = () => User.bulkCreate(testUsers);
-    //     const createTrips = () => Trip.bulkCreate(testTrips);
-    //     return Promise.all([createUsers, createTrips]);
-    //   })
-    //   .then(array => {
-    //     const [users, trips] = array;
-    //     return Promise.all(trips.map(trip => trip.addUsers(users)));
-    //   })
-    //   .then(() => done())
-    //   .catch(err => console.error(err));
+    return clearDB()
+      .then(() => {
+        return Promise.all([
+          User.bulkCreate(testData.testUsers, {returning: true}),
+          Trip.bulkCreate(testData.testTrips, {returning: true}),
+        ]);
+      })
+      .then(array => {
+        const users = array[0];
+        const trips = array[1];
+        return Promise.all(trips.map(trip => trip.addUsers(users)));
+      })
+      .catch(err => console.error(err));
   });
 
   it('creates a new trip with friends', () => {
