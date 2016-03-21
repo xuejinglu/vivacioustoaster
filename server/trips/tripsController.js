@@ -7,12 +7,12 @@ module.exports = {
   // Returns: created trip
   create: (req, res, next) => {
     Trip.createTripWithFriends(req.body.name, req.user, req.body.friends)
-    .then(trip => {
-      res.status(201).json(trip);
-    })
-    .catch(err => {
-      helpers.errorHandler(err, req, res, next);
-    });
+      .then(trip => {
+        res.status(201).json(trip);
+      })
+      .catch(err => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 
   get: (req, res, next) => {
@@ -22,12 +22,12 @@ module.exports = {
 
   getAll: (req, res, next) => {
     Trip.getAllTrips(req.user)
-    .then(trips => {
-      res.json(trips);
-    })
-    .catch(err => {
-      helpers.errorHandler(err, req, res, next);
-    });
+      .then(trips => {
+        res.json(trips);
+      })
+      .catch(err => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 
   update: (req, res, next) => {
@@ -36,6 +36,10 @@ module.exports = {
   },
 
   delete: (req, res, next) => {
-
+    Trip.deleteTrip(req.params.tripId)
+      .then(() => res.end())
+      .catch(err => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 };

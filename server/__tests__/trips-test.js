@@ -46,14 +46,7 @@ describe('Trip Model', () => {
   });
 
   xit('creates relationship between trip and users', () => {
-    // const me = testUsers[0];
-    // Trip.create('HR39', me, testUsers.slice(1))
-    //   .then(trip => trip.getUsers())
-    //   .then(users => {
-    //     expect(users).to.have.lengthOf(4);
-    //     done();
-    //   })
-    //   .catch(err => done(err));
+    // TODO, if we add functionality to add friends after trip is created
   });
 
   it('gets all trips given a user', (done) => {
@@ -66,7 +59,13 @@ describe('Trip Model', () => {
     .catch(err => done(err));
   });
 
-  xit('deletes a trip', () => {
-    // TODO
+  it('deletes a trip', () => {
+    Trip.deleteTrip(1)
+    .then(() => Trip.findAll({}))
+    .then(trips => {
+      expect(trips.length).toEqual(testData.testTrips.length - 1);
+      done()
+    })
+    .catch(err => done(err));
   });
 });
