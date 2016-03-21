@@ -17,6 +17,7 @@ export const receiveLogin = (user) => ({
   type: LOGIN_SUCCESS,
   payload: {
     isFetchingAuth: false,
+    isAuthenticated: true,
     user,
   },
 });
@@ -25,12 +26,18 @@ export const loginError = (message) => ({
   type: LOGIN_FAILURE,
   payload: {
     isFetchingAuth: false,
+    isAuthenticated: false,
     message,
   },
 });
 
 export const requestLogout = () => ({
   type: LOGOUT_REQUEST,
+  payload: {
+    isAuthenticated: false,
+    isFetchingAuth: false,
+    user: null,
+  },
 });
 // place your api calls HURRS
 export const logout = () =>

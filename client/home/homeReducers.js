@@ -13,16 +13,13 @@ const initialState = Map({
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_STARTDATE':
-      return state.set('destination',
-        state.destination.set('startDate', action.payload.date));
+      return state.setIn(['destination', 'startDate'], action.payload.date);
     case 'CHANGE_ENDDATE':
-      return state.set('destination',
-        state.destination.set('endDate', action.payload.date));
+      return state.setIn(['destination', 'endDate'], action.payload.date);
     case 'CHANGE_DESTINATION':
-      const newDest = state.home.destination.set('name', action.payload.value);
-      return state.set('destination', newDest);
+      return state.setIn(['destination', 'name'], action.payload.value);
     case 'CHANGE_TRIPTYPE':
-      return state.set('tripType', action.tripType);
+      return state.set('tripType', action.payload.tripType);
     default:
       return state;
   }

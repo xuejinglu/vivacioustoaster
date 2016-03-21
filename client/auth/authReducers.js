@@ -3,28 +3,24 @@ import { Map } from 'immutable';
 
 const initialState = Map({
   user: null,
+  isAuthenticated: false,
+  isFetchingAuth: false,
 });
 
 export default (state = initialState, action) => {
-  const newState = Object.assign({}, state);
-  // change const to let whenever we start changing states
   switch (action.type) {
     case LOGIN_REQUEST:
-      return Object.assign({}, state, {
-        isFetchingAuth: action.payload.isFetchingAuth,
-        isAuthenticated: false,
-      });
+      return state.set('isFetchingAuth', action.payload.isFetchingAuth);
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        isFetchingAuth: action.payload.isFetchingAuth,
-        user: action.user,
-        isAuthenticated: true,
-      });
+      state = state.set('user', action.payload.user);
+      state = state.set('isFetchingAuth', action.payload.isFetchingAuth);
+      state = state.set('isAuthenticated', action.payload.isAuthenticated);
+      return state;
     case LOGOUT_REQUEST:
-      return Object.assign({}, state, {
-        user: action.user,
-        isAuthenticated: false,
-      });
+      state = state.set('user', action.payload.user);
+      state = state.set('isFetchingAuth', action.payload.isFetchingAuth);
+      state = state.set('isAuthenticated', action.payload.isAuthenticated);
+      return state;
     default:
       return state;
   }
