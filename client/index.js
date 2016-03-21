@@ -6,8 +6,11 @@ import configureStore from './store/configureStore';
 import routes from './app/routes';
 import { syncHistoryWithStore } from 'react-router-redux';
 import DevTools from './containers/DevTools';
+import { Map } from 'immutable';
 
-const store = configureStore();
+const initialState = Map({});
+
+const store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(

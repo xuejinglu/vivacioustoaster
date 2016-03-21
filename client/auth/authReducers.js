@@ -1,8 +1,9 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_REQUEST } from './authActions';
+import { Map } from 'immutable';
 
-const initialState = {
-  user_id: null,
-};
+const initialState = Map({
+  user: null,
+});
 
 export default (state = initialState, action) => {
   const newState = Object.assign({}, state);
