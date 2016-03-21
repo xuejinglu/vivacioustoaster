@@ -1,6 +1,7 @@
 import { TOGGLE_TAG } from './tagActions';
+import { Map } from 'immutable';
 
-const initialState = {
+const initialState = Map({
   Romance: false,
   Thrill: false,
   Relaxation: false,
@@ -8,15 +9,13 @@ const initialState = {
   Family: false,
   Outdoor: false,
   Culture: false,
-  Landmark: false,
-};
+  Landmarks: false,
+});
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_TAG':
-      const newState = Object.assign({}, state);
-      newState[action.payload.tag] = !state[action.payload.tag];
-      return newState;
+      return state.set(action.payload.tag, !state[action.payload.tag]);
     default:
       return state;
   }

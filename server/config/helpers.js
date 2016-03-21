@@ -9,7 +9,7 @@ module.exports = {
   },
 
   decode: (req, res, next) => {
-    const token = req.headers['token'];
+    const token = req.headers.token;
 
     if (!token) {
       return res.send(403); // send forbidden if a token is not provided
