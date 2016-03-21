@@ -9,14 +9,13 @@ const initialState = Map({
   Family: false,
   Outdoor: false,
   Culture: false,
-  Landmark: false,
+  Landmarks: false,
 });
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_TAG':
-      state[action.payload.tag] = !state[action.payload.tag];
-      return state;
+      return state.set(action.payload.tag, !state[action.payload.tag]);
     default:
       return state;
   }
