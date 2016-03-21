@@ -3,10 +3,14 @@ import { RadioButton, RadioButtonGroup } from 'material-ui';
 import { changeTripType } from './homeActions';
 import { connect } from 'react-redux';
 
-let TripTypeList = ({ dispatch }) => (
+const mapDispatchToProps = dispatch => ({
+  onTripTypeChange: tripType => dispatch(changeTripType(tripType)),
+});
+
+let TripTypeList = ({ onTripTypeChange }) => (
   <div>
     <RadioButtonGroup defaultSelected="Group" onChange={(event, tripType) => {
-      dispatch(changeTripType(tripType));
+      onTripTypeChange(tripType);
     }}
     >
       <RadioButton label="Group" value="Group" />
@@ -17,8 +21,8 @@ let TripTypeList = ({ dispatch }) => (
 );
 
 TripTypeList.propTypes = {
-  dispatch: React.PropTypes.element,
+  onTripTypeChange: React.PropTypes.func.isRequired,
 };
 
-TripTypeList = connect()(TripTypeList);
+TripTypeList = connect(null, mapDispatchToProps)(TripTypeList);
 export default TripTypeList;
