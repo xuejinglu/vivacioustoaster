@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
-import { CHANGE_STARTDATE, CHANGE_ENDDATE, CHANGE_DESTINATION } from './homeActions';
+import { CHANGE_STARTDATE, CHANGE_ENDDATE, CHANGE_DESTINATION, CHANGE_TRIPTYPE }
+from './homeActions';
 
 const initialState = Map({
   destination: Map({
