@@ -18,6 +18,7 @@ Destination.sync();
 Trip.sync();
 
 Destination.createDestinations = (destinations) =>
+  // returning true to gain access to the destination ID from the db.
   Destination.bulkCreate(destinations, { returning: true }).catch(err => err);
 
 
