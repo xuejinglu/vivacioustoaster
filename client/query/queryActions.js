@@ -1,11 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export const save = (destination, tripType) => {
+export const save = (destinations, tripType, friends) => {
   fetch('/api/trips', {
     method: 'POST',
-    body: {
-      destination,
-      tripType,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify({
+      destinations,
+      tripType,
+      friends,
+    }),
   });
 };
