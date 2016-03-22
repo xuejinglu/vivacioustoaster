@@ -27,11 +27,11 @@ User.sync();
 
 // Model functions
 
-Trip.createTrip = (name, user, friends, destination, tripType) =>
+Trip.createTrip = (name, user, friends, destinations, tripType) =>
   Trip.create({ name, tripType })
     .then(trip =>
-      Destination.createDestinations(destination)
-        .then(destinations => Trip.addDestionations(destinations)
+      Destination.createDestinations(destinations)
+        .then(newDestinations => Trip.addDestinations(newDestinations)
           .then(() => trip.addUsers([...friends, user])
             .then(() => trip))))
     .catch(err => err);
