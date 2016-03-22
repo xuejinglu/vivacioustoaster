@@ -6,18 +6,24 @@ import { changeStartDate, changeEndDate, changeDestination } from './homeActions
 import DatePicker
 from '../../node_modules/material-ui/lib/date-picker/date-picker';
 
-let DestSearch = ({ dispatch }) => (
+const mapDispatchToProps = dispatch => ({
+  onChangeDestination: destination => dispatch(changeDestination(destination)),
+  onChangeStartDate: newStartDate => dispatch(changeStartDate(newStartDate)),
+  onChangeEndDate: newEndDate => dispatch(changeEndDate(newEndDate)),
+});
+
+let DestSearch = ({ onChangeDestination, onChangeStartDate, onChangeEndDate }) => (
   <div>
     <TextField hintText="Enter Destination" onBlur={(event) => {
-      dispatch(changeDestination(event.target.value));
+      onChangeDestination(event.target.value);
     }}
     />
     <DatePicker hintText="Departure Date" onChange={(event, newDate) => {
-      dispatch(changeStartDate(newDate));
+      onChangeStartDate(newDate);
     }}
     />
     <DatePicker hintText="End Date" onChange={(event, newDate) => {
-      dispatch(changeEndDate(newDate));
+      onChangeEndDate(newDate);
     }}
     />
     <RaisedButton label="Add another Destination" secondary href="#" />
@@ -25,8 +31,10 @@ let DestSearch = ({ dispatch }) => (
 );
 
 DestSearch.propTypes = {
-  dispatch: React.PropTypes.element,
+  onChangeDestination: React.PropTypes.func.isRequired,
+  onChangeStartDate: React.PropTypes.func.isRequired,
+  onChangeEndDate: React.PropTypes.func.isRequired,
 };
 
-DestSearch = connect()(DestSearch);
+DestSearch = connect(null, mapDispatchToProps)(DestSearch);
 export default DestSearch;
