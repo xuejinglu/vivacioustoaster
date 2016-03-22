@@ -9,7 +9,7 @@ import tag from '../tag/tagReducers';
 import trip from '../trip/tripReducers';
 import dest from '../tripPlan/dest/destReducers';
 import event from '../tripPlan/event/eventReducers';
-import tripOverview from '../tripPlan/tripOverview/travelFriendReducers';
+import tripPlan from '../tripPlan/tripPlanReducers';
 
 const rootReducer = combineReducers({
   auth,
@@ -18,9 +18,7 @@ const rootReducer = combineReducers({
   query,
   tag,
   trip,
-  dest,
-  event,
-  tripOverview,
+  tripPlan,
   routing: routerReducer,
 });
 
