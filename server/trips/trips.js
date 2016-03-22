@@ -1,9 +1,11 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const User = require('../users/users');
+const Destination = require('../destinations/destinations');
 
 const Trip = db.define('trips', {
   name: Sequelize.STRING,
+  tripType: Sequelize.STRING,
 });
 
 const UserTrip = db.define('userTrips', {
@@ -25,12 +27,13 @@ User.sync();
 
 // Model functions
 
-Trip.createTripWithFriends = (name, user, friends) =>
-  Trip.create({ name })
+Trip.createTrip = (name, user, friends, destinations, tripType) =>
+  Trip.create({ name, tripType })
     .then(trip =>
-      trip.addUsers([...friends, user])
-        .then(() => trip)
-    )
+      Destination.createDestinations(destinations)
+        .then(newDestinations => trip.addDestinations(newDestinations)
+          .then(() => trip.addUsers([...friends, user])
+            .then(() => trip))))
     .catch(err => err);
 
 Trip.getAllTrips = user => user.getTrips().catch(err => err);
