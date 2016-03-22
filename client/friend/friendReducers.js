@@ -51,10 +51,7 @@ const friends = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_ADD_FRIEND':
       const oldFriends = state.get('friends');
-      const updatedFriends = oldFriends
-        .toSeq()
-        .map(f => friend(f, action))
-        .toList();
+      const updatedFriends = oldFriends.map(f => friend(f, action));
       return state.set('friends', updatedFriends);
     default:
       return state;
