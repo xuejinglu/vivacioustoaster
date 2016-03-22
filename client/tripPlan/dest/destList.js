@@ -1,11 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import DestItem from './destItem';
+import List from 'material-ui/lib/lists/list';
 
-const DestList = () => (
+const mapStateToProps = state => ({
+  destinations: state.tripPlan.dest.get('destinations'),
+});
+
+let DestList = ({ destinations }) => (
   <div>
-  we are on destList page!
-  <DestItem />
+    <List>
+      {destinations.map(destination =>
+        <DestItem key={ destination.id } {...destination} />
+      )}
+    </List>
   </div>
 );
+
+DestList.propTypes = {
+  destinations: React.PropTypes.object.isRequired,
+};
+
+DestList = connect(mapStateToProps)(DestList);
+
 
 export default DestList;

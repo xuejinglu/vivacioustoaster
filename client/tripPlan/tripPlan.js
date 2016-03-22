@@ -5,7 +5,6 @@ import TripOverview from './tripOverview/travelFriendList';
 
 const TripPlan = () => (
   <div>
-  we are on TripPlan page!
   <TripOverview />
   <DestList />
   </div>
