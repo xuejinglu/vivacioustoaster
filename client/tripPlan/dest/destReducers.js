@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import { FETCH_DEST_REQUEST, FETCH_DEST_SUCCESS, FETCH_DEST_FAILURE } from './destActions';
+import { REQUEST_DESTINATIONS, RECEIVE_DESTINATIONS, FETCH_DEST_FAILURE } from './destActions';
 
 const initialState = Immutable.Map({
   destinations: Immutable.List(),
@@ -14,9 +14,9 @@ const destination = (state, action) => {
 
 const destinations = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_DEST_REQUEST:
+    case REQUEST_DESTINATIONS:
       // return state.set('')
-    case FETCH_DEST_SUCCESS:
+    case RECEIVE_DESTINATIONS:
       // return state.set('')
     case FETCH_DEST_FAILURE:
       // return state.set('')
