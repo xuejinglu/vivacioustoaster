@@ -1,26 +1,8 @@
 import Immutable from 'immutable';
+import { FETCH_DEST_REQUEST, FETCH_DEST_SUCCESS, FETCH_DEST_FAILURE } from './destActions';
 
 const initialState = Immutable.Map({
-  destinations: Immutable.List([
-    {
-      id: 1,
-      startDate: Date.now(),
-      endDate: Date.now(),
-      location: 'Las Vegas',
-    },
-    {
-      id: 2,
-      startDate: Date.now(),
-      endDate: Date.now(),
-      location: 'Paris',
-    },
-    {
-      id: 3,
-      startDate: Date.now(),
-      endDate: Date.now(),
-      location: 'New York City',
-    },
-  ]),
+  destinations: Immutable.List(),
 });
 
 const destination = (state, action) => {
@@ -32,6 +14,12 @@ const destination = (state, action) => {
 
 const destinations = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_DEST_REQUEST:
+      // return state.set('')
+    case FETCH_DEST_SUCCESS:
+      // return state.set('')
+    case FETCH_DEST_FAILURE:
+      // return state.set('')
     default:
       return state;
   }
