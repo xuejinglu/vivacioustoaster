@@ -4,7 +4,7 @@ from './homeActions';
 
 const initialState = Map({
   destination: Map({
-    name: null,
+    location: null,
     startDate: null,
     endDate: null,
   }),
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case 'CHANGE_ENDDATE':
       return state.setIn(['destination', 'endDate'], action.payload.date);
     case 'CHANGE_DESTINATION':
-      return state.setIn(['destination', 'name'], action.payload.value);
+      return state.setIn(['destination', 'location'], action.payload.value);
     case 'CHANGE_TRIPTYPE':
       return state.set('tripType', action.payload.tripType);
     default:

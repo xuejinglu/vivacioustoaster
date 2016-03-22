@@ -1,16 +1,19 @@
 const _ = require('lodash');
 const helpers = require('../config/helpers');
 const Trip = require('../trips/trips');
+const Destination = require('../destinations/destinations');
 
 module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
-    Trip.createTrip(req.body.name, req.user, req.body.friends,
-    req.body.destination, req.body.tripType)
+    Trip.createTrip(req.body.name, req.body.tripType)
       .then(trip => {
-        res.status(201).json(trip);
-      })
+        Destination.createDestinations(req.body.destinations)
+          .then(destinations => {
+            trip.addDestinations(destinations)
+              // .then(() => trip.addUsers([...req.body.friends], req.user))
+                .then(() => trip);});})
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });

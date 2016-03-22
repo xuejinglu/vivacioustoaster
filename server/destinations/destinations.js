@@ -18,7 +18,9 @@ Destination.sync();
 Trip.sync();
 
 Destination.createDestinations = (destinations) =>
-  Destination.bulkCreate(destinations).catch(err => err);
+  // returning true to gain access to the destination ID from the db.
+  Destination.bulkCreate(destinations, { returning: true }).catch(err => err);
+
 
 Destination.getDestinations = tripId =>
   Destination.findAll({ where: { tripId } }).catch(err => err);
