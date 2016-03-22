@@ -13,7 +13,11 @@ module.exports = {
           .then(destinations => {
             trip.addDestinations(destinations)
               // .then(() => trip.addUsers([...req.body.friends], req.user))
-                .then(() => trip);});})
+              .then(() => {
+                res.status(201).json(trip);
+              });
+          });
+      })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
