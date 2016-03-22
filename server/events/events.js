@@ -10,7 +10,7 @@ const Event = db.define('events', {
 Event.belongsTo(Destination, { foreignKey: 'destId', constraints: false });
 
 // will add methods to Destination (ex. Destination.getEvents())
-Destination.hasMany(Event, { constraints: false });
+Destination.hasMany(Event, { foreignKey: 'destId', constraints: false });
 
 Event.sync();
 Destination.sync();
