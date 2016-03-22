@@ -7,13 +7,13 @@ import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
 import { save } from './queryActions';
-import { Map, get } from 'immutable';
+import { Map } from 'immutable';
 
 const mapStateToProps = (state) => ({
   destination: [{
-    name: state.home.get('destination').get('name'),
-    startDate: state.home.get('destination').get('startDate'),
-    endDate: state.home.get('destination').get('endDate'),
+    name: state.home.getIn(['destination', 'name']),
+    startDate: state.home.getIn(['destination', 'startDate']),
+    endDate: state.home.getIn(['destination', 'endDate']),
   }],
   tripType: state.home.get('tripType'),
 });
