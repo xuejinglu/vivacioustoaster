@@ -31,7 +31,7 @@ Trip.createTrip = (name, user, friends, destinations, tripType) =>
   Trip.create({ name, tripType })
     .then(trip =>
       Destination.createDestinations(destinations)
-        .then(newDestinations => Trip.addDestinations(newDestinations)
+        .then(newDestinations => trip.addDestinations(newDestinations)
           .then(() => trip.addUsers([...friends, user])
             .then(() => trip))))
     .catch(err => err);
