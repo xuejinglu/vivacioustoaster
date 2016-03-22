@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import FriendItem from './friendItem';
 import { toggleAddFriend } from './friendActions';
+import List from 'material-ui/lib/lists/list';
 import NavigationArrowForward
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import { Link } from 'react-router';
@@ -16,11 +17,11 @@ const mapDispatchToProps = dispatch => ({
 let FriendList = ({ friends, onFriendClick }) => (
   <div>
     we are on FriendList page!
-    <ul>
+    <List>
       {friends.map(friend =>
         <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
       )}
-    </ul>
+    </List>
     <Link to="tag"><NavigationArrowForward /></Link>
   </div>
 );
