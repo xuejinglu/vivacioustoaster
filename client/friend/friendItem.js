@@ -4,14 +4,13 @@ import ListItem from 'material-ui/lib/lists/list-item';
 
 const FriendItem = ({ key, name, picUrl, addedToTrip, onClick }) => (
   <ListItem
+    primaryText={name}
     leftAvatar={<Avatar src={picUrl} />}
     onClick={onClick}
     style={{
       backgroundColor: addedToTrip ? 'lightgrey' : 'white',
     }}
-  >
-    {name}
-  </ListItem>
+  />
 );
 
 FriendItem.propTypes = {
