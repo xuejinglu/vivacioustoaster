@@ -16,7 +16,6 @@ const mapDispatchToProps = dispatch => ({
 
 let FriendList = ({ friends, onFriendClick }) => (
   <div>
-    we are on FriendList page!
     <List>
       {friends.map(friend =>
         <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
