@@ -19,8 +19,9 @@ const request = {
   query: 'Paris Museum',
 };
 
-export const startSearch = () =>
+export const startSearch = (goNext) =>
   dispatch =>
     service.textSearch(request, (results, status) => {
       dispatch(receiveEvents(results));
+      goNext('/query');
     });

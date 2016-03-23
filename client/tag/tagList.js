@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Checkbox } from 'material-ui';
 import { Link } from 'react-router';
 import { toggleTag, startSearch } from './tagActions';
+import { push } from 'react-router-redux';
 import NavigationArrowForward
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
@@ -10,10 +11,11 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
-  onStartSearch: (searchString) => dispatch(startSearch(searchString)),
+  onStartSearch: (goNext) => dispatch(startSearch(goNext)),
+  goNext: (name) => dispatch(push(name)),
 });
 
-let TagList = ({ onToggleTag, onStartSearch }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext }) => (
   <div>
   <Checkbox label="Romance" onCheck={() => {
     onToggleTag('Romance');
@@ -48,17 +50,18 @@ let TagList = ({ onToggleTag, onStartSearch }) => (
   }}
   />
   <Link to="friend"><NavigationArrowBack /></Link>
-  <Link to="query"><NavigationArrowForward onClick={() => {
-    onStartSearch();
+  <NavigationArrowForward onClick={() => {
+    onStartSearch(goNext);
   }}
   />
-  </Link>
   </div>
 );
 
 TagList.propTypes = {
   onToggleTag: React.PropTypes.func.isRequired,
   onStartSearch: React.PropTypes.func.isRequired,
+  routeChange: React.PropTypes.object.isRequired,
+  goNext: React.PropTypes.func.isRequired,
 };
 
 TagList = connect(null, mapDispatchToProps)(TagList);
