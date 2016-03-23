@@ -5,17 +5,13 @@ export const REQUEST_DESTINATIONS = 'REQUEST_DESTINATIONS';
 export const RECEIVE_DESTINATIONS = 'RECEIVE_DESTINATIONS';
 export const FETCH_DEST_FAILURE = 'FETCH_DEST_FAILURE';
 
-const requestDestinations = (trip) => ({
+const requestDestinations = () => ({
   type: REQUEST_DESTINATIONS,
-  payload: {
-    trip,
-  },
 });
 
-const receiveDestinations = (trip, destinations) => ({
+const receiveDestinations = (destinations) => ({
   type: RECEIVE_DESTINATIONS,
   payload: {
-    trip,
     destinations,
   },
 });
@@ -23,13 +19,14 @@ const receiveDestinations = (trip, destinations) => ({
 const fetchDestinationsError = (message) => ({
   type: FETCH_DEST_FAILURE,
   payload: {
+    // TODO
   },
 });
 
 export const fetchDestinations = trip =>
   dispatch => {
     // update 'isFetching' state
-    dispatch(requestDestinations(trip));
+    dispatch(requestDestinations());
 
     return fetch(`/api/trips/${trip.id}/destinations`, {
       method: 'GET',
@@ -39,7 +36,7 @@ export const fetchDestinations = trip =>
       },
     }).then(res => res.json())
       .then(destinations => {
-        dispatch(receiveDestinations(trip, destinations));
+        dispatch(receiveDestinations(destinations));
       })
       .catch(err => console.error(err)); // add proper error handling
   };
