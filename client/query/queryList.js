@@ -11,7 +11,7 @@ import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   destination: [{
     startDate: state.home.getIn(['destination', 'startDate']),
     endDate: state.home.getIn(['destination', 'endDate']),
@@ -23,9 +23,10 @@ const mapStateToProps = (state) => ({
   events: state.query.get('events'),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onClickSave: (destination, tripType, friends, events) =>
     dispatch(save(destination, tripType, friends, events)),
+
   onClickToggle: event => dispatch(toggleEvent(event)),
 });
 

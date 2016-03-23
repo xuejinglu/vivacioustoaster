@@ -33,7 +33,7 @@ export const save = (destinations, tripType, friends, events) => {
       .catch(err => console.error(err)); // add proper error handling
 };
 
-export const toggleEvent = (event) => ({
+export const toggleEvent = event => ({
   type: 'TOGGLE_EVENT',
   payload: {
     event,
