@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
 const map = new google.maps.Map(document.createElement('div')); // eslint-disable-line
 const service = new google.maps.places.PlacesService(map); // eslint-disable-line
 
