@@ -77,7 +77,6 @@ export const fbLogin = () =>
         .then(response => {
           console.log(response);
           window.sessionStorage.setItem('com.tripsApp', response.token);
-          dispatch(receiveLogin(response.user));
           dispatch(routeActions.push('/home'));
         })
         .catch(err => {
