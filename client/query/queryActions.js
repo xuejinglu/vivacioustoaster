@@ -21,5 +21,5 @@ export const save = (destinations, tripType, friends) =>
         friends,
       }),
     }).then(res => res.json())
-      .then(json => dispatch(setTripAndGetDestinations(json)))
+      .then(trip => dispatch(setTripAndGetDestinations(trip)))
       .catch(err => console.error(err)); // add proper error handling
