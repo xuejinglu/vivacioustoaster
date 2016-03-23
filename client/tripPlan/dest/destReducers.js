@@ -6,6 +6,7 @@ const initialState = Immutable.Map({
   destinations: Immutable.List(),
 });
 
+// not using this yet, but if we add sorting or filtering, we'll need it
 const destination = (state, action) => {
   switch (action.type) {
     default:

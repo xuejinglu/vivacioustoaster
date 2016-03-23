@@ -13,6 +13,7 @@ const selectedTrip = (state = {}, action) => {
   }
 };
 
+// combines subordinate reducers active on the 'tripPlan' page
 const tripPlanReducer = combineReducers({
   selectedTrip,
   dest,

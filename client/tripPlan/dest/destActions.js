@@ -23,6 +23,13 @@ const fetchDestinationsError = (message) => ({
   },
 });
 
+// Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
+// can dispatch other actions. In this case, we return a function that:
+// (1) dispatches an action that updates the isFetching boolean on the state
+//     with the fact that we are making an API call
+// (2) dispatches another action to GET destinations for the trip id
+// (3) dispatches another action upon success to update destinations on state
+
 export const fetchDestinations = trip =>
   dispatch => {
     // update 'isFetching' state
