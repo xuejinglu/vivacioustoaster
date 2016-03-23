@@ -28,7 +28,7 @@ const fetchDestinationsError = (message) => ({
 
 export const fetchDestinations = trip =>
   dispatch => {
-    // update state
+    // update 'isFetching' state
     dispatch(requestDestinations(trip));
 
     return fetch(`/api/trips/${trip.id}/destinations`, {
