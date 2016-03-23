@@ -9,10 +9,10 @@ const Destination = db.define('destinations', {
 });
 
 // creates tripId column in destinations table
-Destination.belongsTo(Trip);
+Destination.belongsTo(Trip, { constraints: false });
 
 // will add methods to Trip (ex. Trip.getDestinations())
-Trip.hasMany(Destination);
+Trip.hasMany(Destination, { constraints: false });
 
 Destination.sync();
 Trip.sync();

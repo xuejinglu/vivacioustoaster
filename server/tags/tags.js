@@ -7,10 +7,10 @@ const Tag = db.define('tags', {
 });
 
 // creates eventId column in tags table
-Tag.belongsTo(Event);
+Tag.belongsTo(Event, { constraints: false });
 
 // will add methods to Event (ex. Event.getTags())
-Event.hasMany(Tag);
+Event.hasMany(Tag, { constraints: false });
 
 Tag.sync();
 Event.sync();
