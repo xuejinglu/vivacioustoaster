@@ -2,55 +2,65 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Checkbox } from 'material-ui';
 import { Link } from 'react-router';
-import { toggleTag } from './tagActions';
+import { toggleTag, startSearch } from './tagActions';
 import NavigationArrowForward
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 
-let TagList = ({ dispatch }) => (
+const mapDispatchToProps = dispatch => ({
+  onToggleTag: (tag) => dispatch(toggleTag(tag)),
+  onStartSearch: (searchString) => dispatch(startSearch(searchString)),
+});
+
+let TagList = ({ onToggleTag, onStartSearch }) => (
   <div>
   <Checkbox label="Romance" onCheck={() => {
-    dispatch(toggleTag('Romance'));
+    onToggleTag('Romance');
   }}
   />
   <Checkbox label="Thrill" onCheck={() => {
-    dispatch(toggleTag('Thrill'));
+    onToggleTag('Thrill');
   }}
   />
   <Checkbox label="Relaxation" onCheck={() => {
-    dispatch(toggleTag('Relaxation'));
+    onToggleTag('Relaxation');
   }}
   />
   <Checkbox label="Food" onCheck={() => {
-    dispatch(toggleTag('Food'));
+    onToggleTag('Food');
   }}
   />
   <Checkbox label="Family" onCheck={() => {
-    dispatch(toggleTag('Family'));
+    onToggleTag('Family');
   }}
   />
   <Checkbox label="Outdoor" onCheck={() => {
-    dispatch(toggleTag('Outdoor'));
+    onToggleTag('Outdoor');
   }}
   />
   <Checkbox label="Culture" onCheck={() => {
-    dispatch(toggleTag('Culture'));
+    onToggleTag('Culture');
   }}
   />
   <Checkbox label="Landmarks" onCheck={() => {
-    dispatch(toggleTag('Landmarks'));
+    onToggleTag('Landmarks');
   }}
   />
   <Link to="friend"><NavigationArrowBack /></Link>
-  <Link to="query"><NavigationArrowForward /></Link>
+  <Link to="query"><NavigationArrowForward onClick={() => {
+    onStartSearch();
+  }}
+  />
+  </Link>
   </div>
 );
 
 TagList.propTypes = {
-  dispatch: React.PropTypes.element,
+  onToggleTag: React.PropTypes.func.isRequired,
+  onStartSearch: React.PropTypes.func.isRequired,
 };
 
-TagList = connect()(TagList);
+TagList = connect(null, mapDispatchToProps)(TagList);
 export default TagList;
 
