@@ -3,9 +3,10 @@ const Promise = require('bluebird');
 const _ = require('lodash');
 const helpers = require('../config/helpers');
 const tagClassifier = require('./tagClassifier');
-
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 
+
+// Returns an object with only the desired attributes from the original Google Places place object.
 const formatPlace = (place, options) => ({
   address: place.formatted_address,
   lat: place.geometry.location.lat,
@@ -15,9 +16,29 @@ const formatPlace = (place, options) => ({
   photo: place.photos ? place.photos[0] : null, // Object or null
   placeId: place.place_id,
   rating: place.rating,
-  tag: options.tripsAppTag,
+  tags: [options.tripsAppTag],
   addedToDest: false,
 });
+
+// Reduces the places list to a list of unique places, and combines tags for the places
+// that are duplicated.
+const getUniquePlacesAndConsolidateTags = (consolidatedPlaces) => {
+  const uniquePlaces = _.reduce(consolidatedPlaces, (uniques, group, tag) => {
+    group.forEach((place) => {
+      if (!uniques[place.placeId]) {
+        uniques[place.placeId] = place;
+      } else {
+        const oldPlace = uniques[place.placeId];
+        oldPlace.tags = oldPlace.tags.concat(place.tags);
+        uniques[place.placeId] = oldPlace;
+      }
+    });
+    return uniques;
+  }, {});
+
+  return Object.keys(uniquePlaces).map(placeId => uniquePlaces[placeId]);
+};
+
 
 module.exports = {
   search: (req, res, next) => {
@@ -49,16 +70,33 @@ module.exports = {
     Promise.all(optionsArray.map(options =>
       rp(options)
         .then(data => {
+          // We return an object that has all the places (formatted) as the value paired to
+          // a key of the tag name.
           const places = data.results;
-          return places.map(place => formatPlace(place, options));
+          const tagObj = {};
+          tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
+
+          return tagObj;
         })
-        .catch(err => console.error(err))
+        .catch(err => res.status(500).send(err))
     ))
-    .then(placesArray => {
-      const allPlaces = _.flatten(placesArray);
-      res.json(allPlaces);
+    .then(tagObjsArray => {
+      // Promise.all returns an array of objects, same length as the number of tags.
+      // We reduce this array into a single object that contains the key-value pairs
+      // of all the objects in the original array (essentially a merge).
+      const consolidated = tagObjsArray.reduce((consolidatedPlaces, tagObj) => {
+        for (const key in tagObj) {
+          if (tagObj.hasOwnProperty(key)) {
+            consolidatedPlaces[key] = tagObj[key];
+          }
+        }
+        return consolidatedPlaces;
+      }, {});
+
+      const uniquePlaces = getUniquePlacesAndConsolidateTags(consolidated);
+      res.json(uniquePlaces);
     })
-    .catch(err => res.status(500).end());
+    .catch(err => res.status(500).send(err));
 
     // const options = {
     //   uri: GOOGLE_PLACES_URL,
