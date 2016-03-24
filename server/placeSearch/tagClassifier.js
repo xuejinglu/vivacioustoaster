@@ -28,7 +28,6 @@ module.exports = {
     'bakery',
   ],
   FAMILY: [
-    'point_of_interest',
     'amusement_park',
     'zoo',
     'aquarium',
@@ -48,7 +47,6 @@ module.exports = {
     'stadium',
   ],
   CULTURE_LANDMARKS: [
-    'point_of_interest',
     'museum',
     'art_gallery',
     'aquarium',
