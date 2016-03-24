@@ -6,6 +6,19 @@ const tagClassifier = require('./tagClassifier');
 
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 
+const formatPlace = (place, options) => ({
+  address: place.formatted_address,
+  lat: place.geometry.location.lat,
+  lng: place.geometry.location.lng,
+  icon: place.icon,
+  name: place.name,
+  photo: place.photos ? place.photos[0] : null, // Object or null
+  placeId: place.place_id,
+  rating: place.rating,
+  tag: options.tripsAppTag,
+  addedToDest: false,
+});
+
 module.exports = {
   search: (req, res, next) => {
     const destinations = req.body.destinations;
@@ -37,18 +50,7 @@ module.exports = {
       rp(options)
         .then(data => {
           const places = data.results;
-          return places.map(place => ({
-            address: place.formatted_address,
-            lat: place.geometry.location.lat,
-            lng: place.geometry.location.lng,
-            icon: place.icon,
-            name: place.name,
-            photo: place.photos ? place.photos[0] : null, // Object or null
-            placeId: place.place_id,
-            rating: place.rating,
-            tag: options.tripsAppTag,
-            addedToDest: false,
-          }));
+          return places.map(place => formatPlace(place, options));
         })
         .then(places => {
           console.log('FORMATTED PLACESSSSSSS: ', places);
