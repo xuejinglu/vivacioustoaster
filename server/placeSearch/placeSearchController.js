@@ -5,6 +5,7 @@ const _ = require('lodash');
 const helpers = require('../config/helpers');
 const tagClassifier = require('./tagClassifier');
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
+const MAX_PLACES_RETURNED = 20;
 
 
 // Returns an object with only the desired attributes from the original Google Places place object.
@@ -16,7 +17,8 @@ const formatPlace = (place, options) => ({
   name: place.name,
   photo: place.photos ? place.photos[0] : null, // Object or null
   placeId: place.place_id,
-  rating: place.rating,
+  rating: place.rating ? place.rating : 2.5, // Set rating as mediocre if we don't have real rating
+  types: place.types,
   tags: [options.tripsAppTag],
   addedToDest: false,
 });
@@ -95,7 +97,13 @@ module.exports = {
       }, {});
 
       const uniquePlaces = getUniquePlacesAndConsolidateTags(consolidated);
-      res.json(uniquePlaces);
+
+      // Sort results and send back top 20
+      const curatedPlaces = _.chain(uniquePlaces)
+                             .orderBy(['rating'], ['desc'])
+                             .slice(0, MAX_PLACES_RETURNED)
+                             .value();
+      res.json(curatedPlaces);
     })
     .catch(err => helpers.errorHandler(err, req, res, next));
 
