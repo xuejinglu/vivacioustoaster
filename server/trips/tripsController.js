@@ -15,7 +15,7 @@ module.exports = {
           .then(destinations => {
             trip.addDestinations(destinations)
               // .then(() => {
-                // Event.createEvents(events)
+                // Event.createEvents(req.body.events)
                   // .then(events => {
                     // destinations.forEach(destination => {
                       // destination.addEvents(events)
