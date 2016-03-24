@@ -64,11 +64,11 @@ const tilesData = [
   },
   {
     img: '../assets/culture.jpg',
-    title: 'Culture & Landmarks',
+    title: 'Culture',
   },
   {
     img: '../assets/nightlife.jpg',
-    title: 'Night Life',
+    title: 'Nightlife',
   },
   {
     img: '../assets/shopping.jpg',

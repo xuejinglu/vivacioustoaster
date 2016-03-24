@@ -28,11 +28,11 @@ const initialState = Immutable.Map({
       addedToTrip: false,
     },
     {
-      name: 'Culture & Landmarks',
+      name: 'Culture',
       addedToTrip: false,
     },
     {
-      name: 'Night Life',
+      name: 'Nightlife',
       addedToTrip: false,
     },
     {
