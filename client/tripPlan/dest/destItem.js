@@ -24,6 +24,7 @@ const DestItem = ({ key, location, startDate, endDate }) => (
       Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
     </CardText>
+    <EventList />
   </Card>
 );
 
