@@ -78,14 +78,14 @@ module.exports = {
 
           return tagObj;
         })
-        .catch(err => res.status(500).send(err))
+        .catch(err => helpers.errorHandler(err, req, res, next))
     ))
     .then(tagObjsArray => {
       // Promise.all returns an array of objects, same length as the number of tags.
       // We reduce this array into a single object that contains the key-value pairs
       // of all the objects in the original array (essentially a merge).
       const consolidated = tagObjsArray.reduce((consolidatedPlaces, tagObj) => {
-        for (const key in tagObj) {
+        for (let key in tagObj) { // eslint-disable-line
           if (tagObj.hasOwnProperty(key)) {
             consolidatedPlaces[key] = tagObj[key];
           }
@@ -96,7 +96,7 @@ module.exports = {
       const uniquePlaces = getUniquePlacesAndConsolidateTags(consolidated);
       res.json(uniquePlaces);
     })
-    .catch(err => res.status(500).send(err));
+    .catch(err => helpers.errorHandler(err, req, res, next));
 
     // const options = {
     //   uri: GOOGLE_PLACES_URL,
