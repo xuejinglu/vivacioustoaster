@@ -26,7 +26,7 @@ const formatPlace = (place, options) => ({
 // Reduces the places list to a list of unique places, and combines tags for the places
 // that are duplicated.
 const getUniquePlacesAndConsolidateTags = (consolidatedPlaces) => {
-  const uniquePlaces = _.reduce(consolidatedPlaces, (uniques, group, tag) => {
+  const uniquePlaces = _.reduce(consolidatedPlaces, (uniques, group) => {
     group.forEach((place) => {
       if (!uniques[place.placeId]) {
         uniques[place.placeId] = place;
@@ -53,7 +53,7 @@ module.exports = {
     // and experiment with which tags we should choose for the top 3.
     const tagTypes = tags.map(tag => ({
       tag: tag.name,
-      types: tagClassifier[tag].slice(0, 3).join('|'),
+      types: tagClassifier[tag.name].slice(0, 3).join('|'),
     }));
 
     const optionsArray = tagTypes.map(tagType => ({
