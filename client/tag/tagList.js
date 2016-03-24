@@ -1,7 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Checkbox } from 'material-ui';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { IconButton } from 'material-ui';
+import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import { toggleTag } from './tagActions';
 import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
@@ -12,9 +13,14 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
+const mapStateToProps = state => ({
+  tags: state.tag.get('tags'),
+  destinations: state.home.get('destinations'),
+});
+
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
-  onStartSearch: (goNext) => dispatch(startSearch(goNext)),
+  onStartSearch: (goNext, tags, destinations) => dispatch(startSearch(goNext, tags, destinations)),
   goNext: (name) => dispatch(push(name)),
 });
 
@@ -32,64 +38,29 @@ const styles = {
   },
 };
 
-const tilesData = [
-  {
-    img: '../assets/romance.jpg',
-    title: 'Romance',
-  },
-  {
-    img: '../assets/thrill.jpg',
-    title: 'Thrill',
-  },
-  {
-    img: '../assets/relaxation.jpg',
-    title: 'Relaxation',
-  },
-  {
-    img: '../assets/food.jpg',
-    title: 'Food',
-  },
-  {
-    img: '../assets/family.jpg',
-    title: 'Family',
-  },
-  {
-    img: '../assets/outdoor.jpg',
-    title: 'Outdoor',
-  },
-  {
-    img: '../assets/culture.jpg',
-    title: 'Culture & Landmarks',
-  },
-  {
-    img: '../assets/nightlife.jpg',
-    title: 'Night Life',
-  },
-  {
-    img: '../assets/shopping.jpg',
-    title: 'Shopping',
-  },
-];
-
-let TagList = ({ onToggleTag, onStartSearch, goNext }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations }) => (
   <div style={styles.block}>
     <GridList
       cellHeight={200}
       style={styles.gridList}
     >
-      {tilesData.map(tile => (
+      {tags.map(tag => (
         <GridTile
-          key={tile.img}
-          title={tile.title}
-          actionIcon={<Checkbox onClick={() => onToggleTag(tile.title)} />}
+          key={tag.img}
+          title={tag.name}
+          actionIcon=
+            {<IconButton onClick={() => onToggleTag(tag.name)}>
+              <StarBorder color="white" />
+            </IconButton>}
+          actionPosition={tag.addedToTrip ? 'left' : 'right'}
         >
-          <img src={tile.img} />
+          <img src={tag.img} />
         </GridTile>
       ))}
     </GridList>
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
-    onStartSearch(goNext);
+    onStartSearch(goNext, tags, destinations);
   }}
   />
   </div>
@@ -100,8 +71,9 @@ TagList.propTypes = {
   onStartSearch: React.PropTypes.func.isRequired,
   routeChange: React.PropTypes.object.isRequired,
   goNext: React.PropTypes.func.isRequired,
+  tags: React.PropTypes.array.isRequired,
+  destinations: React.PropTypes.array.isRequired,
 };
 
-TagList = connect(null, mapDispatchToProps)(TagList);
+TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);
 export default TagList;
-

@@ -34,8 +34,8 @@ let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickT
   <div>
   <List>
   {events.map(event =>
-        <QueryItem key={ event.id } icon={ event.icon }
-          name={ event.name } address={ event.formatted_address }
+        <QueryItem key={ event.placeId } icon={ event.icon }
+          name={ event.name } address={ event.address }
           rating={ event.rating } eventToggle={ () =>
             onClickToggle(event) }
         />

@@ -2,23 +2,78 @@ import { TOGGLE_TAG } from './tagActions';
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
-  tags: Immutable.Map({
-    Romance: false,
-    Thrill: false,
-    Relaxation: false,
-    Food: false,
-    Family: false,
-    Outdoor: false,
-    Culture: false,
-    Landmarks: false,
-  }),
+  tags: Immutable.List([
+    {
+      name: 'Romance',
+      img: '../assets/romance.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Thrill',
+      img: '../assets/thrill.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Relaxation',
+      img: '../assets/relaxation.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Food',
+      img: '../assets/food.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Family',
+      img: '../assets/family.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Outdoor',
+      img: '../assets/outdoor.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Culture',
+      img: '../assets/culture.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Nightlife',
+      img: '../assets/nightlife.jpg',
+      addedToTrip: false,
+    },
+    {
+      name: 'Shopping',
+      img: '../assets/shopping.jpg',
+      addedToTrip: false,
+    },
+  ]),
 });
 
-export default (state = initialState, action) => {
+const tag = (state, action) => {
   switch (action.type) {
     case 'TOGGLE_TAG':
-      return state.setIn(['tags', action.payload.tag], !state.getIn(['tags', action.payload.tag]));
+      if (state.name !== action.payload.tagName) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        addedToTrip: !state.addedToTrip,
+      });
     default:
       return state;
   }
 };
+
+const tags = (state = initialState, action) => {
+  switch (action.type) {
+    case 'TOGGLE_TAG':
+      const oldTags = state.get('tags');
+      const updatedTags = oldTags.map(t => tag(t, action));
+      return state.set('tags', updatedTags);
+    default:
+      return state;
+  }
+};
+
+export default tags;

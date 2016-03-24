@@ -1,6 +1,6 @@
-export const toggleTag = (tag) => ({
+export const toggleTag = (tagName) => ({
   type: 'TOGGLE_TAG',
   payload: {
-    tag,
+    tagName,
   },
 });
