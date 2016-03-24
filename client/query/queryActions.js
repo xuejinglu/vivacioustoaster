@@ -57,7 +57,10 @@ export const startSearch = (goNext, tags, destinations) => {
         tags: addedTags,
       }),
     }).then(res => res.json())
-      .then(events => dispatch(receiveEvents(events)))
+      .then(events => {
+        dispatch(receiveEvents(events));
+        goNext('/query');
+      })
       .catch(err => console.error(err));
 };
 
