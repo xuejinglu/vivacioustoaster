@@ -52,15 +52,10 @@ module.exports = {
           const places = data.results;
           return places.map(place => formatPlace(place, options));
         })
-        .then(places => {
-          console.log('FORMATTED PLACESSSSSSS: ', places);
-          return places;
-        })
         .catch(err => console.error(err))
     ))
     .then(placesArray => {
       const allPlaces = _.flatten(placesArray);
-      console.log('final places array length is ', allPlaces.length);
       res.json(allPlaces);
     })
     .catch(err => res.status(500).end());
