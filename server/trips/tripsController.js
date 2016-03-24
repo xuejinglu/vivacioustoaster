@@ -18,6 +18,7 @@ module.exports = {
                 // Event.createEvents(req.body.events)
                   // .then(events => {
                     // destinations.forEach(destination => {
+                      // later add logic for adding events to a single destination
                       // destination.addEvents(events)
               .then(() => {
                 res.status(201).json(trip);
