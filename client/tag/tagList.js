@@ -8,6 +8,9 @@ import NavigationArrowForward
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
+import GridList from 'material-ui/lib/grid-list/grid-list';
+import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import IconButton from 'material-ui/lib/icon-button';
 
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
@@ -15,40 +18,75 @@ const mapDispatchToProps = dispatch => ({
   goNext: (name) => dispatch(push(name)),
 });
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 500,
+    height: 1000,
+    overflowY: 'auto',
+    marginBottom: 24,
+  },
+};
+
+const tilesData = [
+  {
+    img: '../assets/romance.jpg',
+    title: 'Romance',
+  },
+  {
+    img: '../assets/thrill.jpg',
+    title: 'Thrill',
+  },
+  {
+    img: '../assets/relaxation.jpg',
+    title: 'Relaxation',
+  },
+  {
+    img: '../assets/food.jpg',
+    title: 'Food',
+  },
+  {
+    img: '../assets/family.jpg',
+    title: 'Family',
+  },
+  {
+    img: '../assets/outdoor.jpg',
+    title: 'Outdoor',
+  },
+  {
+    img: '../assets/culture.jpg',
+    title: 'Culture & Landmarks',
+  },
+  {
+    img: '../assets/nightlife.jpg',
+    title: 'Night Life',
+  },
+  {
+    img: '../assets/shopping.jpg',
+    title: 'Shopping',
+  },
+];
+
 let TagList = ({ onToggleTag, onStartSearch, goNext }) => (
-  <div>
-  <Checkbox label="Romance" onCheck={() => {
-    onToggleTag('Romance');
-  }}
-  />
-  <Checkbox label="Thrill" onCheck={() => {
-    onToggleTag('Thrill');
-  }}
-  />
-  <Checkbox label="Relaxation" onCheck={() => {
-    onToggleTag('Relaxation');
-  }}
-  />
-  <Checkbox label="Food" onCheck={() => {
-    onToggleTag('Food');
-  }}
-  />
-  <Checkbox label="Family" onCheck={() => {
-    onToggleTag('Family');
-  }}
-  />
-  <Checkbox label="Outdoor" onCheck={() => {
-    onToggleTag('Outdoor');
-  }}
-  />
-  <Checkbox label="Culture" onCheck={() => {
-    onToggleTag('Culture');
-  }}
-  />
-  <Checkbox label="Landmarks" onCheck={() => {
-    onToggleTag('Landmarks');
-  }}
-  />
+  <div style={styles.block}>
+    <GridList
+      cellHeight={200}
+      style={styles.gridList}
+    >
+      {tilesData.map(tile => (
+        <GridTile
+          key={tile.img}
+          title={tile.title}
+          actionIcon={<Checkbox onClick={() => onToggleTag(tile.title)} />}
+        >
+          <img src={tile.img} />
+        </GridTile>
+      ))}
+    </GridList>
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
     onStartSearch(goNext);
