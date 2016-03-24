@@ -1,3 +1,4 @@
+'use strict'; // eslint-disable-line
 const rp = require('request-promise');
 const Promise = require('bluebird');
 const _ = require('lodash');
