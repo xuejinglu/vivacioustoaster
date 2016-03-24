@@ -5,38 +5,47 @@ const initialState = Immutable.Map({
   tags: Immutable.List([
     {
       name: 'Romance',
+      img: '../assets/romance.jpg',
       addedToTrip: false,
     },
     {
       name: 'Thrill',
+      img: '../assets/thrill.jpg',
       addedToTrip: false,
     },
     {
       name: 'Relaxation',
+      img: '../assets/relaxation.jpg',
       addedToTrip: false,
     },
     {
       name: 'Food',
+      img: '../assets/food.jpg',
       addedToTrip: false,
     },
     {
       name: 'Family',
+      img: '../assets/family.jpg',
       addedToTrip: false,
     },
     {
       name: 'Outdoor',
+      img: '../assets/outdoor.jpg',
       addedToTrip: false,
     },
     {
       name: 'Culture',
+      img: '../assets/culture.jpg',
       addedToTrip: false,
     },
     {
       name: 'Nightlife',
+      img: '../assets/nightlife.jpg',
       addedToTrip: false,
     },
     {
       name: 'Shopping',
+      img: '../assets/shopping.jpg',
       addedToTrip: false,
     },
   ]),

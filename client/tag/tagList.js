@@ -1,7 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Checkbox } from 'material-ui';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { IconButton } from 'material-ui';
+import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import { toggleTag } from './tagActions';
 import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
@@ -37,58 +38,23 @@ const styles = {
   },
 };
 
-const tilesData = [
-  {
-    img: '../assets/romance.jpg',
-    title: 'Romance',
-  },
-  {
-    img: '../assets/thrill.jpg',
-    title: 'Thrill',
-  },
-  {
-    img: '../assets/relaxation.jpg',
-    title: 'Relaxation',
-  },
-  {
-    img: '../assets/food.jpg',
-    title: 'Food',
-  },
-  {
-    img: '../assets/family.jpg',
-    title: 'Family',
-  },
-  {
-    img: '../assets/outdoor.jpg',
-    title: 'Outdoor',
-  },
-  {
-    img: '../assets/culture.jpg',
-    title: 'Culture',
-  },
-  {
-    img: '../assets/nightlife.jpg',
-    title: 'Nightlife',
-  },
-  {
-    img: '../assets/shopping.jpg',
-    title: 'Shopping',
-  },
-];
-
 let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations }) => (
   <div style={styles.block}>
     <GridList
       cellHeight={200}
       style={styles.gridList}
     >
-      {tilesData.map(tile => (
+      {tags.map(tag => (
         <GridTile
-          key={tile.img}
-          title={tile.title}
-          actionIcon={<Checkbox onClick={() => onToggleTag(tile.title)} />}
+          key={tag.img}
+          title={tag.name}
+          actionIcon=
+            {<IconButton onClick={() => onToggleTag(tag.name)}>
+              <StarBorder color="white" />
+            </IconButton>}
+          actionPosition={tag.addedToTrip ? 'left' : 'right'}
         >
-          <img src={tile.img} />
+          <img src={tag.img} />
         </GridTile>
       ))}
     </GridList>
