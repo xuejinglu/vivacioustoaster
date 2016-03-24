@@ -6,11 +6,15 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import EventList from '../event/eventList';
+import Moment from 'moment';
 
 const DestItem = ({ key, location, startDate, endDate }) => (
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
-      overlay={<CardTitle title={location} subtitle={`${startDate} - ${endDate}`} />}
+      overlay={<CardTitle title={location}
+        subtitle={`${Moment(startDate).format('MM/DD/YYYY')} -
+        ${Moment(endDate).format('MM/DD/YYYY')}`}
+      />}
     >
       <img src="http://lorempixel.com/500/300/nature/" />
     </CardMedia>
