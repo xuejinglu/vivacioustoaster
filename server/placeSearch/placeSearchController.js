@@ -52,7 +52,7 @@ module.exports = {
     // types associated with each tag. I left the full type list intact so we can discuss
     // and experiment with which tags we should choose for the top 3.
     const tagTypes = tags.map(tag => ({
-      tag,
+      tag: tag.name,
       types: tagClassifier[tag].slice(0, 3).join('|'),
     }));
 
