@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Checkbox } from 'material-ui';
 import { Link } from 'react-router';
-import { toggleTag, startSearch } from './tagActions';
+import { toggleTag } from './tagActions';
+import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
 import NavigationArrowForward
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';

@@ -6,7 +6,7 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save } from './queryActions';
+import { save, toggleEvent } from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
@@ -20,27 +20,29 @@ const mapStateToProps = (state) => ({
   tripType: state.home.get('tripType'),
   friends: state.friend.get('friends').filter((friend) =>
     friend.addedToTrip),
-  events: state.tag.get('events'),
+  events: state.query.get('events'),
 });
 
-const mapDispatchToProps = (dispatch) => ({ onClickSave: (destination, tripType, friends) => {
-  dispatch(save(destination, tripType, friends));
-},
+const mapDispatchToProps = (dispatch) => ({
+  onClickSave: (destination, tripType, friends, events) =>
+    dispatch(save(destination, tripType, friends, events)),
+  onClickToggle: event => dispatch(toggleEvent(event)),
 });
 
-let QueryList = ({ destination, tripType, onClickSave, friends, events }) => (
+let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickToggle }) => (
   <div>
   <List>
   {events.map(event =>
         <QueryItem key={ event.id } icon={ event.icon }
           name={ event.name } address={ event.formatted_address }
-          rating={ event.rating }
+          rating={ event.rating } eventToggle={ () =>
+            onClickToggle(event) }
         />
       )}
   </List>
   <Link to="tag"><NavigationArrowBack /></Link>
   <Link to="tripPlan"><NavigationArrowForward onClick={ () =>
-    onClickSave(destination, tripType, friends) }
+    onClickSave(destination, tripType, friends, events) }
   />
   </Link>
   </div>
@@ -51,6 +53,7 @@ QueryList.propTypes = {
   tripType: React.PropTypes.string,
   friends: React.PropTypes.array,
   onClickSave: React.PropTypes.func,
+  onClickToggle: React.PropTypes.func,
   events: React.PropTypes.array,
 };
 

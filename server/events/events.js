@@ -15,7 +15,7 @@ Destination.hasMany(Event, { foreignKey: 'destId', constraints: false });
 Event.sync();
 Destination.sync();
 
-Event.createEvents = events => Event.bulkCreate(events)
+Event.createEvents = events => Event.bulkCreate(events, { returning: true })
     .catch(err => err);
 
 Event.getEvents = destId => Event.findAll({ where: { destId } })
