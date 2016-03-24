@@ -3,7 +3,13 @@ const Sequelize = require('sequelize');
 const Destination = require('../destinations/destinations');
 
 const Event = db.define('events', {
-  // event: this will have many attrs
+  address: Sequelize.STRING,
+  lat: Sequelize.FLOAT,
+  lng: Sequelize.FLOAT,
+  icon: Sequelize.STRING,
+  name: Sequelize.STRING,
+  placeId: Sequelize.STRING,
+  rating: Sequelize.FLOAT,
 });
 
 // creates destId column in events table
