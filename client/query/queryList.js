@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   onClickToggle: event => dispatch(toggleEvent(event)),
 });
 
-let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickToggle }) => (
+let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickToggle, tags }) => (
   <div>
   <List>
   {events.map(event =>
@@ -56,6 +56,7 @@ QueryList.propTypes = {
   onClickSave: React.PropTypes.func,
   onClickToggle: React.PropTypes.func,
   events: React.PropTypes.array,
+  tags: React.PropTypes.array,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

@@ -12,9 +12,14 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
+const mapStateToProps = state => ({
+  tags: state.tag.get('tags'),
+  destinations: state.home.get('destinations'),
+});
+
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
-  onStartSearch: (goNext) => dispatch(startSearch(goNext)),
+  onStartSearch: (goNext, tags, destinations) => dispatch(startSearch(goNext, tags, destinations)),
   goNext: (name) => dispatch(push(name)),
 });
 
@@ -71,7 +76,7 @@ const tilesData = [
   },
 ];
 
-let TagList = ({ onToggleTag, onStartSearch, goNext }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations }) => (
   <div style={styles.block}>
     <GridList
       cellHeight={200}
@@ -89,7 +94,7 @@ let TagList = ({ onToggleTag, onStartSearch, goNext }) => (
     </GridList>
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
-    onStartSearch(goNext);
+    onStartSearch(goNext, tags, destinations);
   }}
   />
   </div>
@@ -100,8 +105,9 @@ TagList.propTypes = {
   onStartSearch: React.PropTypes.func.isRequired,
   routeChange: React.PropTypes.object.isRequired,
   goNext: React.PropTypes.func.isRequired,
+  tags: React.PropTypes.array.isRequired,
+  destinations: React.PropTypes.array.isRequired,
 };
 
-TagList = connect(null, mapDispatchToProps)(TagList);
+TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);
 export default TagList;
-

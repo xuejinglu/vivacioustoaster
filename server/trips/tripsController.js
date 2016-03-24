@@ -8,26 +8,25 @@ module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
-    console.log(req.body.events);
     Trip.createTrip(req.body.name, req.body.tripType)
       .then(trip => {
         Destination.createDestinations(req.body.destinations)
           .then(destinations => {
             trip.addDestinations(destinations)
-              // .then(() => {
-                // Event.createEvents(req.body.events)
-                  // .then(events => {
-                    // destinations.forEach(destination => {
-                      // later add logic for adding events to a single destination
-                      // destination.addEvents(events)
               .then(() => {
-                res.status(201).json(trip);
+                Event.createEvents(req.body.events)
+                  .then(events => {
+                    destinations.forEach(destination => {
+                      // later add logic for adding events to a single destination
+                      destination.addEvents(events)
+                        .then(() => {
+                          res.status(201).json(trip);
+                        });
+                    });
+                  });
               });
           });
       })
-              // });
-          // });
-      // })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
       });
@@ -61,3 +60,4 @@ module.exports = {
       });
   },
 };
+

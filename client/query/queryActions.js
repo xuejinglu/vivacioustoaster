@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { setTripAndGetDestinations } from '../tripPlan/tripPlanActions';
-const map = new google.maps.Map(document.createElement('div')); // eslint-disable-line
-const service = new google.maps.places.PlacesService(map); // eslint-disable-line
-
 
 // Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
 // can dispatch other actions. In this case, we return a function that:
@@ -12,9 +9,7 @@ const service = new google.maps.places.PlacesService(map); // eslint-disable-lin
 //     destinations for that trip id
 
 export const save = (destinations, tripType, friends, events) => {
-  console.log(events);
   const addedEvents = events.filter(event => event.addedToDest);
-  console.log(addedEvents);
   return dispatch =>
     fetch('/api/trips', {
       method: 'POST',
@@ -48,17 +43,21 @@ export const receiveEvents = (events) => ({
   },
 });
 
-const request = {
-  query: 'Paris Museum',
+export const startSearch = (goNext, tags, destinations) => {
+  const addedTags = tags.filter(tag => tag.addedToTrip);
+  return dispatch =>
+    fetch('/api/placeSearch', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        destinations,
+        tags: addedTags,
+      }),
+    }).then(res => res.json())
+      .then(events => dispatch(receiveEvents(events)))
+      .catch(err => console.error(err));
 };
 
-export const startSearch = (goNext) =>
-  dispatch =>
-    service.textSearch(request, (results, status) => {
-      results.map(result => {
-        result.addedToDest = false;
-        return result;
-      });
-      dispatch(receiveEvents(results));
-      goNext('/query');
-    });
