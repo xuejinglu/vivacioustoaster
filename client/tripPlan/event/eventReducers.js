@@ -5,14 +5,20 @@ const initialState = Immutable.Map({
     {
       id: 1,
       name: 'Empire State Building',
+      formattedAddress: '75001 Paris, France',
+      rating: 4.6,
     },
     {
       id: 2,
       name: 'Eiffel Tower',
+      formattedAddress: 'Jardin Tuileries, 75001 Paris, France',
+      rating: 4.4,
     },
     {
       id: 3,
       name: 'Caesar\'s Palace',
+      formattedAddress: '16 Rue des Francs Bourgeois, 75003 Paris, France',
+      rating: 4.1,
     },
   ]),
 });
