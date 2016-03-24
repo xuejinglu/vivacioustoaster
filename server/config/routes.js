@@ -6,6 +6,7 @@ const eventsController = require('../events/eventsController');
 const tagsController = require('../tags/tagsController');
 const tripsController = require('../trips/tripsController');
 const userController = require('../users/usersController');
+const placeSearchController = require('../placeSearch/placeSearchController');
 const User = require('../users/users');
 
 module.exports = function (app, express) {
@@ -39,6 +40,9 @@ module.exports = function (app, express) {
   app.get('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
   app.post('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
   app.delete('/api/votes/:voteId'/* , controller function here */);
+
+  // Google Places
+  app.post('/api/placeSearch', placeSearchController.search);
 
 // FACEBOOK AUTH
   app.get('/auth/facebook',
