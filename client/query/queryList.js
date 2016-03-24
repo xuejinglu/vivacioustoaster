@@ -20,11 +20,12 @@ const mapStateToProps = (state) => ({
   tripType: state.home.get('tripType'),
   friends: state.friend.get('friends').filter((friend) =>
     friend.addedToTrip),
-  events: state.tag.get('events'),
+  events: state.query.get('events'),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onClickSave: (destination, tripType, friends) => dispatch(save(destination, tripType, friends)),
+  onClickSave: (destination, tripType, friends, events) =>
+    dispatch(save(destination, tripType, friends, events)),
   onClickToggle: event => dispatch(toggleEvent(event)),
 });
 
@@ -41,7 +42,7 @@ let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickT
   </List>
   <Link to="tag"><NavigationArrowBack /></Link>
   <Link to="tripPlan"><NavigationArrowForward onClick={ () =>
-    onClickSave(destination, tripType, friends) }
+    onClickSave(destination, tripType, friends, events) }
   />
   </Link>
   </div>
