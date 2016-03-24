@@ -10,7 +10,6 @@ import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
-import IconButton from 'material-ui/lib/icon-button';
 
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
