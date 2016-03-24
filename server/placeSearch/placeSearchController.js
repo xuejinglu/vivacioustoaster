@@ -70,6 +70,7 @@ module.exports = {
       tripsAppTag: tagType.tag, // A hack so we have tag when constructing formatted place object
     }));
 
+    // Promise.all returns an array of objects, same length as the number of tags.
     Promise.all(optionsArray.map(options =>
       rp(options)
         .then(data => {
@@ -84,7 +85,6 @@ module.exports = {
         .catch(err => helpers.errorHandler(err, req, res, next))
     ))
     .then(tagObjsArray => {
-      // Promise.all returns an array of objects, same length as the number of tags.
       // We reduce this array into a single object that contains the key-value pairs
       // of all the objects in the original array (essentially a merge).
       const consolidated = tagObjsArray.reduce((consolidatedPlaces, tagObj) => {
@@ -106,6 +106,9 @@ module.exports = {
       res.json(curatedPlaces);
     })
     .catch(err => helpers.errorHandler(err, req, res, next));
+
+    // Leaving this in if we want to get Google Places data directly for dev purposes
+    // ------------------------------------------------------------------------------
 
     // const options = {
     //   uri: GOOGLE_PLACES_URL,
