@@ -1,5 +1,5 @@
 module.exports = {
-  ROMANCE: [
+  Romance: [
     'night_club',
     'restaurant',
     'jewelry_store',
@@ -9,11 +9,11 @@ module.exports = {
     'cafe',
     'aquarium',
   ],
-  THRILL: [
+  Thrill: [
     'amusement_park',
     'casino',
   ],
-  RELAXATION: [
+  Relaxation: [
     'spa',
     'beauty_salon',
     'hair_care',
@@ -22,12 +22,12 @@ module.exports = {
     'art_gallery',
     'museum',
   ],
-  FOODIE: [
+  Food: [
     'restaurant',
     'cafe',
     'bakery',
   ],
-  FAMILY: [
+  Family: [
     'amusement_park',
     'zoo',
     'aquarium',
@@ -39,31 +39,31 @@ module.exports = {
     'mosque',
     'synagogue',
   ],
-  OUTDOOR: [
+  Outdoor: [
     'park',
     'campground',
     'zoo',
     'amusement_park',
     'stadium',
   ],
-  CULTURE_LANDMARKS: [
+  Culture: [
     'museum',
     'art_gallery',
+    'church',
     'aquarium',
     'stadium',
     'university',
-    'church',
     'hindu_temple',
     'mosque',
     'synagogue',
   ],
-  NIGHTLIFE: [
+  Nightlife: [
     'bar',
     'night_club',
     'casino',
     'liquor_store',
   ],
-  SHOPPING: [
+  Shopping: [
     'shopping_mall',
     'department_store',
     'clothing_store',
