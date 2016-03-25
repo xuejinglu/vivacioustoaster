@@ -10,6 +10,7 @@ const Event = db.define('events', {
   name: Sequelize.STRING,
   placeId: Sequelize.STRING,
   rating: Sequelize.FLOAT,
+  tags: Sequelize.ARRAY(Sequelize.STRING),
 });
 
 // creates destId column in events table
