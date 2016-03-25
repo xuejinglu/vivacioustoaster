@@ -16,7 +16,8 @@ module.exports = function (app, express) {
   app.get('/api/me/friends', usersController.getFriends);
 
 
-  // Trips
+  // Trips`
+  app.use('/api/trips', helper.decode);
   app.get('/api/trips', tripsController.getAll);
   app.get('/api/trips/:tripId', tripsController.get);
   app.delete('/api/trips/:tripId', tripsController.delete);
@@ -55,7 +56,6 @@ module.exports = function (app, express) {
       .then(response => {
         res.cookie('token', response.token);
         res.redirect('/');
-        res.json(response);
       });
     });
 };
