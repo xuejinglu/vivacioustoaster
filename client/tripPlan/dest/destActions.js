@@ -11,14 +11,14 @@ const requestDestinations = () => ({
   type: REQUEST_DESTINATIONS,
 });
 
-const receiveDestinations = (destinations) => ({
+const receiveDestinations = destinations => ({
   type: RECEIVE_DESTINATIONS,
   payload: {
     destinations,
   },
 });
 
-const fetchDestinationsError = (message) => ({
+const fetchDestinationsError = message => ({
   type: FETCH_DEST_FAILURE,
   payload: {
     // TODO
