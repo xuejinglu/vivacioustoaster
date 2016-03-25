@@ -17,7 +17,6 @@ export const fetchEvents = destination =>
       },
     }).then(res => res.json())
       .then(events => {
-        console.log(events);
         dispatch(receiveEventsInDest(events));
       })
       .catch(err => console.error(err)); // add proper error handling
