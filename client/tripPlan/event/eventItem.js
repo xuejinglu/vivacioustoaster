@@ -6,7 +6,7 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 
-const EventItem = ({ key, name, address, rating }) => (
+const EventItem = ({ key, name, address, rating, tags }) => (
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
@@ -14,7 +14,9 @@ const EventItem = ({ key, name, address, rating }) => (
       <img src="http://lorempixel.com/500/300/nature/" />
     </CardMedia>
     <CardText>
-      Fill
+      {tags.map(tag =>
+        <p>{tag}</p>
+      )}
     </CardText>
   </Card>
 );
@@ -24,6 +26,7 @@ EventItem.propTypes = {
   name: React.PropTypes.string.isRequired,
   address: React.PropTypes.string.isRequired,
   rating: React.PropTypes.number.isRequired,
+  tags: React.PropTypes.arrayOf(React.PropTypes.string),
 };
 
 export default EventItem;
