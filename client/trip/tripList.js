@@ -7,10 +7,6 @@ import { selectTripToView } from './tripActions';
 
 const mapStateToProps = state => ({ trips: state.trip.get('trips') });
 
-// const mapDispatchToProps = dispatch => ({
-//   onTripClick: id => dispatch(selectTripToView(id)),
-// });
-
 let TripList = ({ trips }) => (
   <div>
     <List>
@@ -23,9 +19,8 @@ let TripList = ({ trips }) => (
 
 TripList.propTypes = {
   trips: React.PropTypes.object.isRequired,
-  // onTripClick: React.PropTypes.func.isRequired,
 };
 
-TripList = connect(mapStateToProps, null)(TripList);
+TripList = connect(mapStateToProps)(TripList);
 
 export default TripList;
