@@ -24,17 +24,18 @@ const fetchTripsError = message => ({
   },
 });
 
-export const fetchTrips = user =>
+export const fetchTrips = () =>
   dispatch => {
     // update 'isFetching' state
     dispatch(requestTrips());
+    const token = cookie.load('token');
     return fetch('/api/trips/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        token,
       },
-      user,
     })
     .then(res => res.json())
     .then(trips => {
