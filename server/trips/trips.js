@@ -39,10 +39,12 @@ const getTripInfo = trip =>
 Trip.createTrip = (name, tripType) =>
   Trip.create({ name, tripType }).catch(err => err);
 
-Trip.getAllTrips = user =>
-  user.getTrips()
-    .then(trips => Promise.all(trips.map(trip => getTripInfo(trip))))
-    .catch(err => err);
+Trip.getAllTrips = userObj =>
+  User.findOne({ where: { fbId: userObj.fbId } })
+    .then(user =>
+      user.getTrips()
+        .then(trips => Promise.all(trips.map(trip => getTripInfo(trip))))
+        .catch(err => err));
 
 Trip.deleteTrip = id => Trip.destroy({ where: { id } }).catch(err => err);
 
