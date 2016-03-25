@@ -4,3 +4,7 @@ export const toggleTag = (tagName) => ({
     tagName,
   },
 });
+
+export const clearTags = () => ({
+  type: 'CLEAR_TAGS',
+});

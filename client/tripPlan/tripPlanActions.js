@@ -1,8 +1,13 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
 import { fetchDestinations } from './dest/destActions';
+import { clearFriends } from '../friend/friendActions';
+import { clearTags } from '../tag/tagActions';
+import { clearDestination } from '../home/homeActions';
 
 export const SELECT_TRIP = 'SELECT_TRIP';
+export const CLEAR_STATES = 'SELECT_STATES';
+
 
 const selectTrip = (trip) => ({
   type: SELECT_TRIP,
@@ -20,4 +25,7 @@ export const setTripAndGetDestinations = (trip) =>
   dispatch => {
     dispatch(selectTrip(trip));
     dispatch(fetchDestinations(trip));
+    dispatch(clearFriends());
+    dispatch(clearTags());
+    dispatch(clearDestination());
   };

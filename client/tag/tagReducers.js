@@ -60,6 +60,10 @@ const tag = (state, action) => {
       return Object.assign({}, state, {
         addedToTrip: !state.addedToTrip,
       });
+    case 'CLEAR_TAGS':
+      return Object.assign({}, state, {
+        addedToTrip: false,
+      });
     default:
       return state;
   }
@@ -71,6 +75,10 @@ const tags = (state = initialState, action) => {
       const oldTags = state.get('tags');
       const updatedTags = oldTags.map(t => tag(t, action));
       return state.set('tags', updatedTags);
+    case 'CLEAR_TAGS':
+      const Tags = state.get('tags');
+      const clearedTags = Tags.map(t => tag(t, action));
+      return state.set('tags', clearedTags);
     default:
       return state;
   }

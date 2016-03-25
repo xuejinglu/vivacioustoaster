@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SELECT_TRIP } from './tripPlanActions';
+import { SELECT_TRIP, CLEAR_STATES } from './tripPlanActions';
 import dest from './dest/destReducers';
 import event from './event/eventReducers';
 import tripOverview from './tripOverview/travelFriendReducers';

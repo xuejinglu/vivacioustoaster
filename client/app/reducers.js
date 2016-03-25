@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
+import recycleState from 'redux-recycle';
 import auth from '../auth/authReducers';
 import friend from '../friend/friendReducers';
 import home from '../home/homeReducers';
