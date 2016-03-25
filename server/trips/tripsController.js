@@ -20,7 +20,10 @@ module.exports = {
                       // later add logic for adding events to a single destination
                       destination.addEvents(events)
                         .then(() => {
-                          res.status(201).json(trip);
+                          trip.addUsers([...req.body.friends, req.user])
+                            .then(() => {
+                              res.status(201).json(trip);
+                            });
                         });
                     });
                   });
@@ -59,5 +62,6 @@ module.exports = {
         helpers.errorHandler(err, req, res, next);
       });
   },
+
 };
 

@@ -1,5 +1,6 @@
 const User = require('./users');
 const helpers = require('../config/helpers');
+const Trip = require('../trips/trips');
 
 module.exports = {
 
@@ -15,6 +16,15 @@ module.exports = {
     .catch(err => {
       helpers.errorHandler(err, req, res, next);
     });
+  },
+
+  getTravelFriends: (req, res, next) => {
+    Trip.getTrip(req.params.tripId)
+      .then(trip => trip.getUsers())
+      .then(users => res.json(users))
+      .catch(err => {
+        helpers.errorHandler(err, req, res, next);
+      });
   },
 
 };
