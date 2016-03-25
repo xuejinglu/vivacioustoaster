@@ -7,7 +7,7 @@ const initialState = Immutable.Map({
 const event = (state, action) => {
   switch (action.type) {
     case 'TOGGLE_EVENT':
-      if (state.place_id !== action.payload.event.place_id) {
+      if (state.placeId !== action.payload.event.placeId) {
         return state;
       }
       return Object.assign({}, state, {
