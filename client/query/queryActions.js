@@ -44,6 +44,7 @@ export const receiveEvents = (events) => ({
 });
 
 export const startSearch = (goNext, tags, destinations) => {
+  // once we support multiple destinations, this will no longer be needed
   const newDestination = [destinations.toJS()];
   const addedTags = tags.filter(tag => tag.addedToTrip);
   return dispatch =>
@@ -59,7 +60,6 @@ export const startSearch = (goNext, tags, destinations) => {
       }),
     }).then(res => res.json())
       .then(events => {
-        console.log('EVENTS', events);
         dispatch(receiveEvents(events));
         goNext('/query');
       })
