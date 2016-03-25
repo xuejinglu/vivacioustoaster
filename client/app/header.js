@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let Header = ({ onLogout }) => (
-  <AppBar title="Name This">
+  <AppBar title="voyAger" showMenuIconButton={false}>
     <Link to="/trip"><Tab label="My Trips" /></Link>
     <Link to="/home"><Tab label="Home" /></Link>
     <Tab label="Logout" onClick={() => onLogout()} />
