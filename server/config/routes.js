@@ -2,7 +2,6 @@ const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const destinationsController = require('../destinations/destinationsController');
 const eventsController = require('../events/eventsController');
-// const tagsController = require('../tags/tagsController');
 const tripsController = require('../trips/tripsController');
 const placeSearchController = require('../placeSearch/placeSearchController');
 const usersController = require('../users/usersController');
@@ -32,10 +31,6 @@ module.exports = function (app, express) {
   // Events
   app.post('/api/destinations/:destId/events', eventsController.createAll);
   app.get('/api/destinations/:destId/events', eventsController.getAll);
-
-  // Tags
-  // app.post('/api/events/:eventId/tags', tagsController.createAll);
-  // app.get('/api/events/:eventId/tags', tagsController.getAll);
 
   // Votes
   app.get('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
