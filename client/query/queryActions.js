@@ -44,6 +44,7 @@ export const receiveEvents = (events) => ({
 });
 
 export const startSearch = (goNext, tags, destinations) => {
+  const newDestination = [destinations.toJS()];
   const addedTags = tags.filter(tag => tag.addedToTrip);
   return dispatch =>
     fetch('/api/placeSearch', {
@@ -53,11 +54,12 @@ export const startSearch = (goNext, tags, destinations) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        destinations,
+        destinations: newDestination,
         tags: addedTags,
       }),
     }).then(res => res.json())
       .then(events => {
+        console.log('EVENTS', events);
         dispatch(receiveEvents(events));
         goNext('/query');
       })
