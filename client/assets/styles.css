@@ -6,7 +6,8 @@ div.tooltip {
 div.tooltip span.tooltip-text {
   font-family: Helvetica;
   font-size: 0.75em;
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s;
   top:100%;
   left:0%;
   width: auto;
@@ -22,5 +23,5 @@ div.tooltip span.tooltip-text {
 }
 
 div.tooltip:hover span.tooltip-text {
-  visibility: visible;
+  opacity: 1;
 }
