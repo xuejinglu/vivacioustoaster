@@ -26,7 +26,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickSave: (destination, tripType, friends, events) =>
     dispatch(save(destination, tripType, friends, events)),
-
   onClickToggle: event => dispatch(toggleEvent(event)),
 });
 
