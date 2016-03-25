@@ -5,6 +5,7 @@ import CardHeader from 'material-ui/lib/card/card-header';
 import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
+import Avatar from 'material-ui/lib/avatar';
 
 const EventItem = ({ key, name, address, rating, tags }) => (
   <Card style={ { width: '50%', margin: '5%' } }>
@@ -15,7 +16,10 @@ const EventItem = ({ key, name, address, rating, tags }) => (
     </CardMedia>
     <CardText>
       {tags.map(tag =>
-        <p>{tag}</p>
+        <Avatar
+          src={`../assets/${tag.toLowerCase()}.jpg`}
+          style={{ margin: '0 2.5%' }}
+        />
       )}
     </CardText>
   </Card>
