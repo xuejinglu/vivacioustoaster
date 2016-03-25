@@ -24,33 +24,21 @@ const fetchTripsError = message => ({
   },
 });
 
-export const fetchTrips = () =>
+export const fetchTrips = user =>
   dispatch => {
     // update 'isFetching' state
     dispatch(requestTrips());
-
-    const currentCookie = cookie.load('token');
-    return fetch('/api/me', {
+    return fetch('/api/trips/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        token: currentCookie,
       },
+      user,
     })
-      .then(res => res.json())
-      .then(user =>
-        fetch('/api/trips/', {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          user,
-        }).then(res => res.json())
-          .then(trips => {
-            dispatch(receiveTrips(trips));
-          })
-      )
-      .catch(err => console.error(err)); // add proper error handling
+    .then(res => res.json())
+    .then(trips => {
+      dispatch(receiveTrips(trips));
+    })
+    .catch(err => console.error(err)); // add proper error handling
   };

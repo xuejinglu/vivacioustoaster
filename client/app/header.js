@@ -7,18 +7,18 @@ import { logout } from '../auth/authActions';
 import { fetchTrips } from '../trip/tripActions';
 
 const mapStateToProps = state => ({
-  user: state.query.get('events'),
+  user: state.auth.get('user'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onLogout: id => dispatch(logout()),
-  onClickTrips: () => dispatch(fetchTrips()),
+  onClickTrips: user => dispatch(fetchTrips(user)),
 });
 
-let Header = ({ onLogout, onClickTrips }) => (
+let Header = ({ onLogout, onClickTrips, user }) => (
   <AppBar title="voyAger" showMenuIconButton={false}>
     <Link to="/trip"><Tab label="My Trips" onClick={ () =>
-      onClickTrips() }
+      onClickTrips(user) }
     />
     </Link>
     <Link to="/home"><Tab label="Home" /></Link>
@@ -27,10 +27,11 @@ let Header = ({ onLogout, onClickTrips }) => (
 );
 
 Header.propTypes = {
+  user: React.PropTypes.object.isRequired,
   onLogout: React.PropTypes.func.isRequired,
   onClickTrips: React.PropTypes.func.isRequired,
 };
 
-Header = connect(null, mapDispatchToProps)(Header);
+Header = connect(mapStateToProps, mapDispatchToProps)(Header);
 
 export default Header;
