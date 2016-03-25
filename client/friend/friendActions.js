@@ -7,4 +7,9 @@ export const toggleAddFriend = id => ({
 
 export const clearFriends = () => ({
   type: 'CLEAR_FRIENDS',
+})
+
+export const addFriend = friend => ({
+  type: 'ADD_FRIEND',
+  payload: friend,
 });
