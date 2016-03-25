@@ -11,20 +11,6 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
-const styles = {
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  gridList: {
-    width: 500,
-    height: 1000,
-    overflowY: 'auto',
-    marginBottom: 24,
-  },
-};
-
 const TripItem = ({ key, name, tripType, destinations, users }) => (
   <Card style={{ width: '50%', margin: '5%' }}>
     <CardHeader>
