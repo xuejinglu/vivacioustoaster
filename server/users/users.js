@@ -31,7 +31,11 @@ User.createToken = fbId =>
     })
     .catch(err => err);
 
-User.getUserFriends = user => user.getFriends().catch(err => err);
+User.getUserFriends = user => User.findOne({ where: { fbId: user.fbId } })
+  .then(currentUser =>
+    currentUser.getFriends()
+  )
+  .catch(err => err);
 
 User.findOrCreate = profile => {
   const friends = profile._json.friends.data;
