@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
+import { fetchEvents } from '../event/eventActions';
 
 export const REQUEST_DESTINATIONS = 'REQUEST_DESTINATIONS';
 export const RECEIVE_DESTINATIONS = 'RECEIVE_DESTINATIONS';
@@ -44,6 +45,8 @@ export const fetchDestinations = trip =>
     }).then(res => res.json())
       .then(destinations => {
         dispatch(receiveDestinations(destinations));
+        destinations.map(destination =>
+          dispatch(fetchEvents(destination)));
       })
       .catch(err => console.error(err)); // add proper error handling
   };
