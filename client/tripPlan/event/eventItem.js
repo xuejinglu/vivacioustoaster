@@ -16,10 +16,13 @@ const EventItem = ({ key, name, address, rating, tags }) => (
     </CardMedia>
     <CardText>
       {tags.map(tag =>
-        <Avatar
-          src={`../assets/${tag.toLowerCase()}.jpg`}
-          style={{ margin: '0 2.5%' }}
-        />
+        <div className="tooltip">
+          <Avatar
+            src={`../assets/${tag.toLowerCase()}.jpg`}
+            style={{ margin: '0 2.5%' }}
+            children={<span className="tooltip-text">{tag}</span>}
+          />
+        </div>
       )}
     </CardText>
   </Card>

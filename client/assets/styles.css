@@ -1,0 +1,26 @@
+div.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+div.tooltip span.tooltip-text {
+  font-family: Helvetica;
+  font-size: 0.75em;
+  visibility: hidden;
+  top:100%;
+  left:0%;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 0.2em;
+  border-radius: 0.45em;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+}
+
+div.tooltip:hover span.tooltip-text {
+  visibility: visible;
+}
