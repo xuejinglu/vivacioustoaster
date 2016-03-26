@@ -21,6 +21,12 @@ export default (state = initialState, action) => {
       return state.setIn(['destination', 'location'], action.payload.value);
     case 'CHANGE_TRIPTYPE':
       return state.set('tripType', action.payload.tripType);
+    case 'CLEAR_DESTINATION':
+      state = state.setIn(['destination', 'location'], null);
+      state = state.setIn(['destination', 'startDate'], null);
+      state = state.setIn(['destination', 'endDate'], null);
+      state = state.set('tripType', 'Group');
+      return state;
     default:
       return state;
   }

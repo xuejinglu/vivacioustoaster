@@ -5,3 +5,6 @@ export const toggleAddFriend = id => ({
   },
 });
 
+export const clearFriends = () => ({
+  type: 'CLEAR_FRIENDS',
+});

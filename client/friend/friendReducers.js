@@ -42,6 +42,10 @@ const friend = (state, action) => {
       return Object.assign({}, state, {
         addedToTrip: !state.addedToTrip,
       });
+    case 'CLEAR_FRIENDS':
+      return Object.assign({}, state, {
+        addedToTrip: false,
+      });
     default:
       return state;
   }
@@ -53,6 +57,10 @@ const friends = (state = initialState, action) => {
       const oldFriends = state.get('friends');
       const updatedFriends = oldFriends.map(f => friend(f, action));
       return state.set('friends', updatedFriends);
+    case 'CLEAR_FRIENDS':
+      const Friends = state.get('friends');
+      const clearedFriends = Friends.map(f => friend(f, action));
+      return state.set('friends', clearedFriends);
     default:
       return state;
   }
