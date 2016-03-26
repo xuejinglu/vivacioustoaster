@@ -101,7 +101,7 @@ module.exports = {
 
     // Promise.all returns an array of objects, same length as the number of tags.
     Promise.all(optionsArray.map(options => {
-      const key = '' + options.qs.query + options.qs.types; // eslint-disable-line
+      const key = `${options.qs.query}:  ${options.qs.types}`;
       return isInRedis(key).then((events) => {
         if (!events) {
           return rp(options)
