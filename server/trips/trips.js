@@ -32,18 +32,18 @@ User.sync();
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
-      var fullTrip = {};
+      var fullTrip = {}; // eslint-disable-line
 
-      // sequelize returns model instances with many additional 
+      // sequelize returns model instances with many additional
       // properties, this extracts the data we are interested in
-      for (var tripKey in trip.dataValues) {
+      for (var tripKey in trip.dataValues) { // eslint-disable-line 
         fullTrip[tripKey] = trip.dataValues[tripKey];
       }
 
       // we have to apply the same logic to users
       fullTrip.users = users.map(user => {
-        var newUser = {};
-        for (var userKey in user.dataValues) {
+        var newUser = {}; // eslint-disable-line 
+        for (var userKey in user.dataValues) { // eslint-disable-line 
           newUser[userKey] = user.dataValues[userKey];
         }
         return newUser;
@@ -51,8 +51,8 @@ const getTripInfo = trip =>
 
       // we have to apply the same logic to destinations
       fullTrip.destinations = destinations.map(destination => {
-        var newDestination = {};
-        for (var destKey in destination.dataValues) {
+        var newDestination = {}; // eslint-disable-line 
+        for (var destKey in destination.dataValues) { // eslint-disable-line 
           newDestination[destKey] = destination.dataValues[destKey];
         }
         return newDestination;
