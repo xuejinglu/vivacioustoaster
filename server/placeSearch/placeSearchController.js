@@ -6,7 +6,36 @@ const helpers = require('../config/helpers');
 const tagClassifier = require('./tagClassifier');
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const MAX_PLACES_RETURNED = 20;
+const redis = require('redis');
 
+let client;
+
+
+const isInRedis = (options) => {
+  client = redis.createClient();
+  client.on('connect', () => {
+    console.log('connected');
+  });
+
+  const redisGetAsync = Promise.promisify(client.get, { context: client });
+
+  return redisGetAsync(options)
+    .then(value => {
+      client.quit();
+      return value;
+    });
+};
+
+const createInRedis = (options, events) => {
+  client = redis.createClient();
+  client.on('connect', () => {
+    console.log('connected');
+  });
+  const newEvents = JSON.stringify(events);
+  client.set(options, newEvents, () => {
+    client.quit();
+  });
+};
 
 // Returns an object with only the desired attributes from the original Google Places place object.
 const formatPlace = (place, options) => ({
@@ -71,19 +100,25 @@ module.exports = {
     }));
 
     // Promise.all returns an array of objects, same length as the number of tags.
-    Promise.all(optionsArray.map(options =>
-      rp(options)
-        .then(data => {
-          // We return an object that has all the places (formatted) as the value paired to
-          // a key of the tag name.
-          const places = data.results;
-          const tagObj = {};
-          tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
-
-          return tagObj;
-        })
-        .catch(err => helpers.errorHandler(err, req, res, next))
-    ))
+    Promise.all(optionsArray.map(options => {
+      const key = '' + options.qs.query + options.qs.types; // eslint-disable-line
+      return isInRedis(key).then((events) => {
+        if (!events) {
+          return rp(options)
+            .then(data => {
+              // We return an object that has all the places (formatted) as the value paired to
+              // a key of the tag name.
+              const places = data.results;
+              const tagObj = {};
+              tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
+              createInRedis(key, tagObj);
+              return tagObj;
+            })
+            .catch(err => helpers.errorHandler(err, req, res, next));
+        }
+        return JSON.parse(events);
+      });
+    }))
     .then(tagObjsArray => {
       // We reduce this array into a single object that contains the key-value pairs
       // of all the objects in the original array (essentially a merge).
