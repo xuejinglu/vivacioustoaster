@@ -30,11 +30,31 @@ User.sync();
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
-      trip.users = users;
-      trip.destinations = destinations;
-      return trip;
-    }))
-  .catch(err => err);
+      var fullTrip = {};
+
+      for (var tripKey in trip.dataValues) {
+        fullTrip[tripKey] = trip.dataValues[tripKey];
+      }
+
+      fullTrip.users = users.map(user => {
+        var newUser = {};
+        for (var userKey in user.dataValues) {
+          newUser[userKey] = user.dataValues[userKey];
+        }
+        return newUser;
+      });
+
+      fullTrip.destinations = destinations.map(destination => {
+        var newDestination = {};
+        for (var destKey in destination.dataValues) {
+          newDestination[destKey] = destination.dataValues[destKey];
+        }
+        return newDestination;
+      });
+
+      return fullTrip;
+    })
+  .catch(err => err));
 
 Trip.createTrip = (name, tripType) =>
   Trip.create({ name, tripType }).catch(err => err);
@@ -43,7 +63,8 @@ Trip.getAllTrips = userObj =>
   User.findOne({ where: { fbId: userObj.fbId } })
     .then(user =>
       user.getTrips()
-        .then(trips => Promise.all(trips.map(trip => getTripInfo(trip))))
+        .then(trips =>
+          Promise.all(trips.map(trip => getTripInfo(trip))))
         .catch(err => err));
 
 Trip.deleteTrip = id => Trip.destroy({ where: { id } }).catch(err => err);
