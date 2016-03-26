@@ -9,7 +9,7 @@ export const clearFriends = () => ({
   type: 'CLEAR_FRIENDS',
 });
 
-export const addFriend = friend => ({
-  type: 'ADD_FRIEND',
-  payload: friend,
+export const addFriends = friends => ({
+  type: 'ADD_FRIENDS',
+  payload: friends,
 });

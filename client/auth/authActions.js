@@ -3,7 +3,7 @@ import { polyfill } from 'es6-promise';
 polyfill();
 import { push } from 'react-router-redux';
 import cookie from 'react-cookie';
-import { addFriend } from '../friend/friendActions';
+import { addFriends } from '../friend/friendActions';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -70,8 +70,12 @@ export const login = () =>
         .then(res => res.json())
         .then(friendsList => {
           friendsList.forEach(friend => {
-            dispatch(addFriend(friend));
+            friend.addedToTrip = false;
+            delete friend.friends;
+            delete friend.createdAt;
+            delete friend.updatedAt;
           });
+          dispatch(addFriends(friendsList));
         })
         .catch(err => err);
         dispatch(push('/home'));
