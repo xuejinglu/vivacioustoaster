@@ -1,42 +1,33 @@
-module.exports = (config) => {
+var webpackCfg = require('./webpack.config');
+
+module.exports = function(config) {
   config.set({
-    browsers: ['Chrome'],
-    singleRun: true,
-    frameworks: ['mocha'],
+    basePath: '',
+    browsers: [ 'PhantomJS' ],
     files: [
-      'tests.webpack.js',
+      'test/loadtests.js'
     ],
+    port: 8080,
+    captureTimeout: 60000,
+    frameworks: [ 'mocha', 'chai' ],
+    client: {
+      mocha: {}
+    },
+    singleRun: true,
+    reporters: [ 'mocha', 'coverage' ],
     preprocessors: {
-      'tests.webpack.js': ['webpack'],
+      'test/loadtests.js': [ 'webpack', 'sourcemap' ]
     },
-    plugins: [
-      require('karma-webpack'),
-      require('karma-mocha'),
-      require('karma-chrome-launcher'),
-    ],
-    reporters: ['dots'],
-    webpack: {
-      module: {
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-              presets: ['es2015', 'react', 'stage-0'],
-              plugins: [
-                'react-html-attrs',
-                'transform-class-properties',
-                'transform-decorators-legacy',
-              ],
-            },
-          },
-        ],
-      },
-      watch: true,
-    },
+    webpack: webpackCfg,
     webpackServer: {
-      noInfo: true,
+      noInfo: true
     },
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html' },
+        { type: 'text' }
+      ]
+    }
   });
 };

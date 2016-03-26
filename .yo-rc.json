@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "vivacioustoaster",
+    "style": "css",
+    "postcss": true
+  }
+}
