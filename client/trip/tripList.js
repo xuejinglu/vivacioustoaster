@@ -3,13 +3,8 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import TripItem from './tripItem';
 import List from 'material-ui/lib/lists/list';
-import { selectTripToView } from './tripActions';
 
 const mapStateToProps = state => ({ trips: state.trip.get('trips') });
-
-// const mapDispatchToProps = dispatch => ({
-//   onTripClick: id => dispatch(selectTripToView(id)),
-// });
 
 let TripList = ({ trips }) => (
   <div>
@@ -23,9 +18,8 @@ let TripList = ({ trips }) => (
 
 TripList.propTypes = {
   trips: React.PropTypes.object.isRequired,
-  // onTripClick: React.PropTypes.func.isRequired,
 };
 
-TripList = connect(mapStateToProps, null)(TripList);
+TripList = connect(mapStateToProps)(TripList);
 
 export default TripList;

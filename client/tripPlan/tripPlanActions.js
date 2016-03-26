@@ -8,7 +8,7 @@ import { fetchFriends } from './tripOverview/travelFriendActions';
 
 export const SELECT_TRIP = 'SELECT_TRIP';
 
-const selectTrip = (trip) => ({
+const selectTrip = trip => ({
   type: SELECT_TRIP,
   payload: {
     trip,
@@ -20,7 +20,7 @@ const selectTrip = (trip) => ({
 // (1) dispatches an action that updates the selectedTrip variable
 // (2) dispatches another action to GET destinations for the selected trip
 
-export const setTripAndGetDestinations = (trip) =>
+export const setTripAndGetDestinations = trip =>
   dispatch => {
     dispatch(selectTrip(trip));
     dispatch(fetchDestinations(trip));

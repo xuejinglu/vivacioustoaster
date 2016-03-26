@@ -27,22 +27,52 @@ User.sync();
 
 // Model functions
 
+// returns a trip object with users and destinations
+// properties attached to display on my trips page
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
-      trip.users = users;
-      trip.destinations = destinations;
-      return trip;
-    }))
-  .catch(err => err);
+      var fullTrip = {};
+
+      // sequelize returns model instances with many additional 
+      // properties, this extracts the data we are interested in
+      for (var tripKey in trip.dataValues) {
+        fullTrip[tripKey] = trip.dataValues[tripKey];
+      }
+
+      // we have to apply the same logic to users
+      fullTrip.users = users.map(user => {
+        var newUser = {};
+        for (var userKey in user.dataValues) {
+          newUser[userKey] = user.dataValues[userKey];
+        }
+        return newUser;
+      });
+
+      // we have to apply the same logic to destinations
+      fullTrip.destinations = destinations.map(destination => {
+        var newDestination = {};
+        for (var destKey in destination.dataValues) {
+          newDestination[destKey] = destination.dataValues[destKey];
+        }
+        return newDestination;
+      });
+
+      // return our full trip object
+      return fullTrip;
+    })
+  .catch(err => err));
 
 Trip.createTrip = (name, tripType) =>
   Trip.create({ name, tripType }).catch(err => err);
 
-Trip.getAllTrips = user =>
-  user.getTrips()
-    .then(trips => Promise.all(trips.map(trip => getTripInfo(trip))))
-    .catch(err => err);
+Trip.getAllTrips = userObj =>
+  User.findOne({ where: { fbId: userObj.fbId } })
+    .then(user =>
+      user.getTrips()
+        .then(trips =>
+          Promise.all(trips.map(trip => getTripInfo(trip))))
+        .catch(err => err));
 
 Trip.deleteTrip = id => Trip.destroy({ where: { id } }).catch(err => err);
 
