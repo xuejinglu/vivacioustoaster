@@ -11,7 +11,7 @@ const redis = require('redis');
 let client;
 
 
-const isInRedis = (options) => {
+const isInRedis = key => {
   client = redis.createClient();
   client.on('connect', () => {
     console.log('connected');
@@ -19,20 +19,20 @@ const isInRedis = (options) => {
 
   const redisGetAsync = Promise.promisify(client.get, { context: client });
 
-  return redisGetAsync(options)
+  return redisGetAsync(key)
     .then(value => {
       client.quit();
       return value;
     });
 };
 
-const createInRedis = (options, events) => {
+const createInRedis = (key, events) => {
   client = redis.createClient();
   client.on('connect', () => {
     console.log('connected');
   });
   const newEvents = JSON.stringify(events);
-  client.set(options, newEvents, () => {
+  client.set(key, newEvents, () => {
     client.quit();
   });
 };
