@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getTravelFriends: (req, res, next) => {
-    Trip.getTrip(req.params.tripId)
+    Trip.findOne({ where: { id: req.params.tripId } })
       .then(trip => trip.getUsers())
       .then(users => res.json(users))
       .catch(err => {

@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import _ from 'lodash';
 import { setTripAndGetDestinations } from '../tripPlan/tripPlanActions';
+import cookie from 'react-cookie';
 
 // Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
 // can dispatch other actions. In this case, we return a function that:
@@ -10,17 +11,23 @@ import { setTripAndGetDestinations } from '../tripPlan/tripPlanActions';
 
 export const save = (destinations, tripType, friends, events) => {
   const addedEvents = events.filter(event => event.addedToDest);
+  const newFriends = friends.map(friend => {
+    delete friend.addedToTrip;
+    return friend;
+  });
+  const token = cookie.load('token');
   return dispatch =>
     fetch('/api/trips', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        token,
       },
       body: JSON.stringify({
         destinations,
         tripType,
-        friends,
+        friends: newFriends,
         events: addedEvents,
       }),
     }).then(res => res.json())

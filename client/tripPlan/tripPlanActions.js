@@ -25,7 +25,8 @@ export const setTripAndGetDestinations = (trip) =>
     dispatch(selectTrip(trip));
     dispatch(fetchDestinations(trip));
     dispatch(fetchFriends(trip));
-    // these dispatches clears the state after info is saved in db and user can now create a new trip
+    // these dispatches clears the state after info is saved
+    // in db and user can now create a new trip
     dispatch(clearFriends());
     dispatch(clearTags());
     dispatch(clearDestination());

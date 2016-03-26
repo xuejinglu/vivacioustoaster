@@ -17,6 +17,7 @@ module.exports = function (app, express) {
   app.get('/api/trips/:tripId/users', usersController.getTravelFriends);
 
   // Trips
+  app.use('/api/trips', helper.decode);
   app.get('/api/trips', tripsController.getAll);
   app.get('/api/trips/:tripId', tripsController.get);
   app.delete('/api/trips/:tripId', tripsController.delete);

@@ -3,6 +3,8 @@ const helpers = require('../config/helpers');
 const Trip = require('../trips/trips');
 const Destination = require('../destinations/destinations');
 const Event = require('../events/events');
+const User = require('../users/users');
+const Promise = require('bluebird');
 
 module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
@@ -20,10 +22,16 @@ module.exports = {
                       // later add logic for adding events to a single destination
                       destination.addEvents(events)
                         .then(() => {
-                          trip.addUsers([...req.body.friends, req.user])
-                            .then(() => {
-                              res.status(201).json(trip);
-                            });
+                          const addUsers = [...req.body.friends, req.user];
+                          Promise.all(addUsers.map(addUser =>
+                            User.findOne({ where: { fbId: addUser.fbId } })
+                          ))
+                          .then(users => {
+                            trip.addUsers(users)
+                              .then(() => {
+                                res.status(201).json(trip);
+                              });
+                          });
                         });
                     });
                   });
