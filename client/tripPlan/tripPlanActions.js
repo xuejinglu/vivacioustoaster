@@ -4,6 +4,7 @@ import { fetchDestinations } from './dest/destActions';
 import { clearFriends } from '../friend/friendActions';
 import { clearTags } from '../tag/tagActions';
 import { clearDestination } from '../home/homeActions';
+import { fetchFriends } from './tripOverview/travelFriendActions';
 
 export const SELECT_TRIP = 'SELECT_TRIP';
 
@@ -23,7 +24,9 @@ export const setTripAndGetDestinations = (trip) =>
   dispatch => {
     dispatch(selectTrip(trip));
     dispatch(fetchDestinations(trip));
-    // these dispatches clears the state after info is saved in db and user can now create a new trip
+    dispatch(fetchFriends(trip));
+    // these dispatches clears the state after info is saved
+    // in db and user can now create a new trip
     dispatch(clearFriends());
     dispatch(clearTags());
     dispatch(clearDestination());

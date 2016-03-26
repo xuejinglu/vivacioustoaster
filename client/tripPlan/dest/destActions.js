@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
 import { fetchEvents } from '../event/eventActions';
+import cookie from 'react-cookie';
 
 export const REQUEST_DESTINATIONS = 'REQUEST_DESTINATIONS';
 export const RECEIVE_DESTINATIONS = 'RECEIVE_DESTINATIONS';
@@ -34,13 +35,14 @@ const fetchDestinationsError = (message) => ({
 export const fetchDestinations = trip =>
   dispatch => {
     // update 'isFetching' state
+    const token = cookie.load('token');
     dispatch(requestDestinations());
-
     return fetch(`/api/trips/${trip.id}/destinations`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        token,
       },
     }).then(res => res.json())
       .then(destinations => {

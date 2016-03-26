@@ -14,13 +14,14 @@ module.exports = function (app, express) {
   app.use('/api/me', helper.decode);
   app.get('/api/me', usersController.getUser);
   app.get('/api/me/friends', usersController.getFriends);
+  app.get('/api/trips/:tripId/users', usersController.getTravelFriends);
 
   // Trips
+  app.use('/api/trips', helper.decode);
   app.get('/api/trips', tripsController.getAll);
   app.get('/api/trips/:tripId', tripsController.get);
   app.delete('/api/trips/:tripId', tripsController.delete);
   app.post('/api/trips', tripsController.create);
-  app.get('/api/trips/:tripId/users'/* , controller function here */);
   app.post('/api/trips/:tripId/users'/* , controller function here */);
 
   // Destinations
