@@ -41,9 +41,9 @@ const getTripInfo = trip =>
         fullTrip[tripKey] = trip.dataValues[tripKey];
       }
 
-      const newUser = {};
       // we have to apply the same logic to users
       fullTrip.users = users.map(user => {
+        const newUser = {};
         for (let userKey in user.dataValues) { // eslint-disable-line
           if (user.dataValues.hasOwnProperty(userKey)) {
             newUser[userKey] = user.dataValues[userKey];
@@ -52,9 +52,9 @@ const getTripInfo = trip =>
         return newUser;
       });
 
-      const newDestination = {};
       // we have to apply the same logic to destinations
       fullTrip.destinations = destinations.map(destination => {
+        const newDestination = {};
         for (let destKey in destination.dataValues) { // eslint-disable-line
           if (destination.dataValues.hasOwnProperty(destKey)) {
             newDestination[destKey] = destination.dataValues[destKey];
