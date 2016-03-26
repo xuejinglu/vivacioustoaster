@@ -4,6 +4,7 @@
   "description": "Group travel made easy",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "webpack && node server/server.js && redis-server",
     "test": "karma start && mocha server/__tests__/.",
     "lint": "eslint .",
     "validate": "npm ls"
