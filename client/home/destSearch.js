@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { changeStartDate, changeEndDate, changeDestination } from './homeActions';
 import DatePicker
 from '../../node_modules/material-ui/lib/date-picker/date-picker';
+import Geosuggest from 'react-geosuggest';
 
 const mapDispatchToProps = dispatch => ({
   onChangeDestination: destination => dispatch(changeDestination(destination)),
@@ -14,9 +15,12 @@ const mapDispatchToProps = dispatch => ({
 
 let DestSearch = ({ onChangeDestination, onChangeStartDate, onChangeEndDate }) => (
   <div>
-    <TextField hintText="Enter Destination" onBlur={(event) => {
-      onChangeDestination(event.target.value);
-    }}
+    <Geosuggest placeholder='ex: London' onBlur={(event) => {
+        onChangeDestination(event.target.value);
+      }}
+      onSuggestSelect= {(suggest) => {
+        onChangeDestination(suggest.label);
+      }}
     />
     <DatePicker hintText="Departure Date" onChange={(event, newDate) => {
       onChangeStartDate(newDate);
