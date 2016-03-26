@@ -61,7 +61,7 @@ const getUniquePlacesAndConsolidateTags = (consolidatedPlaces) => {
         uniques[place.placeId] = place;
       } else {
         const oldPlace = uniques[place.placeId];
-        oldPlace.tags = oldPlace.tags.concat(place.tags);
+        oldPlace.tags = _.chain(oldPlace.tags).concat(place.tags).uniq().value();
         uniques[place.placeId] = oldPlace;
       }
     });
