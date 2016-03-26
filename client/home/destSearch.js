@@ -15,10 +15,10 @@ const mapDispatchToProps = dispatch => ({
 
 let DestSearch = ({ onChangeDestination, onChangeStartDate, onChangeEndDate }) => (
   <div>
-    <Geosuggest placeholder='ex: London' onBlur={(event) => {
-        onChangeDestination(event.target.value);
-      }}
-      onSuggestSelect= {(suggest) => {
+    <Geosuggest placeholder="ex: London" onBlur={(event) =>
+      event ? onChangeDestination(event.value) : null
+    }
+      onSuggestSelect = {(suggest) => {
         onChangeDestination(suggest.label);
       }}
     />
