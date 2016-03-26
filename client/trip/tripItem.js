@@ -6,10 +6,7 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import GridList from 'material-ui/lib/grid-list/grid-list';
-import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import Moment from 'moment';
 
 const TripItem = ({ key, name, tripType, destinations, users }) => (
   <Card style={{ width: '50%', margin: '5%' }}>
@@ -27,7 +24,8 @@ const TripItem = ({ key, name, tripType, destinations, users }) => (
     <CardText>
       {destinations.map(destination =>
         <FlatButton label={`${destination.location}:
-          ${destination.startDate}-${destination.endDate}`}
+          ${Moment(destination.startDate).format('MM/DD/YYYY')} -
+          ${Moment(destination.endDate).format('MM/DD/YYYY')}`}
         />
       )}
     </CardText>
