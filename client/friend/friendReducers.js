@@ -1,40 +1,18 @@
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
-  friends: Immutable.List([
-    {
-      id: 1,
-      name: 'Akshay',
-      fbId: 'g4s-02a-bm2',
-      picUrl: 'http://i.imgur.com/WGI2Sllb.jpg',
-      addedToTrip: false,
-    },
-    {
-      id: 2,
-      name: 'Leran',
-      fbId: 'ps2-gh5-slw',
-      picUrl: 'http://i.imgur.com/PmpIJxHb.jpg',
-      addedToTrip: false,
-    },
-    {
-      id: 3,
-      name: 'Jing',
-      fbId: 'fba-2ps-bp2',
-      picUrl: 'http://i.imgur.com/hAX5K0Hb.jpg',
-      addedToTrip: false,
-    },
-    {
-      id: 4,
-      name: 'Boya',
-      fbId: 'fba-2ps-bp2',
-      picUrl: 'http://i.imgur.com/hAX5K0Hb.jpg',
-      addedToTrip: false,
-    },
-  ]),
+  friends: Immutable.List(),
 });
 
 const friend = (state, action) => {
   switch (action.type) {
+    case 'ADD_FRIEND':
+      return {
+        name: action.payload.name,
+        fbId: action.payload.fbId,
+        picUrl: action.payload.picUrl,
+        addedToTrip: false,
+      };
     case 'TOGGLE_ADD_FRIEND':
       if (state.id !== action.payload.id) {
         return state;
@@ -53,6 +31,10 @@ const friend = (state, action) => {
 
 const friends = (state = initialState, action) => {
   switch (action.type) {
+    case 'ADD_FRIEND':
+      const friendsToUpdate = state.get('friends');
+      const friendsList = [...friendsToUpdate, friend(null, action)];
+      return state.set('friends', friendsList);
     case 'TOGGLE_ADD_FRIEND':
       const oldFriends = state.get('friends');
       const updatedFriends = oldFriends.map(f => friend(f, action));

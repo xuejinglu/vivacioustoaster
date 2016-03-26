@@ -15,7 +15,6 @@ module.exports = function (app, express) {
   app.get('/api/me', usersController.getUser);
   app.get('/api/me/friends', usersController.getFriends);
 
-
   // Trips
   app.get('/api/trips', tripsController.getAll);
   app.get('/api/trips/:tripId', tripsController.get);
@@ -55,7 +54,6 @@ module.exports = function (app, express) {
       .then(response => {
         res.cookie('token', response.token);
         res.redirect('/');
-        res.json(response);
       });
     });
 };

@@ -12,9 +12,6 @@ class Auth extends React.Component {
   componentWillMount() {
     this.props.onCheckForLogin(this.props.isAuthenticated);
   }
-  componentDidMount() {
-    this.props.onCheckForLogin(this.props.isAuthenticated);
-  }
 
   render() {
     return (
