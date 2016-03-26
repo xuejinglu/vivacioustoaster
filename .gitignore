@@ -37,3 +37,6 @@ bower_components/
 
 # Gitspy
 gitSpy/*
+
+# Redis
+*/dump.rdb
