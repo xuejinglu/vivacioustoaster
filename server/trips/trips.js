@@ -1,3 +1,4 @@
+'use strict'; // eslint-disable-line
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const User = require('../users/users');
@@ -32,28 +33,32 @@ User.sync();
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
-      var fullTrip = {}; // eslint-disable-line
+      const fullTrip = {};
 
       // sequelize returns model instances with many additional
       // properties, this extracts the data we are interested in
-      for (var tripKey in trip.dataValues) { // eslint-disable-line 
+      for (let tripKey in trip.dataValues) { // eslint-disable-line
         fullTrip[tripKey] = trip.dataValues[tripKey];
       }
 
+      const newUser = {};
       // we have to apply the same logic to users
       fullTrip.users = users.map(user => {
-        var newUser = {}; // eslint-disable-line 
-        for (var userKey in user.dataValues) { // eslint-disable-line 
-          newUser[userKey] = user.dataValues[userKey];
+        for (let userKey in user.dataValues) { // eslint-disable-line
+          if (user.dataValues.hasOwnProperty(userKey)) {
+            newUser[userKey] = user.dataValues[userKey];
+          }
         }
         return newUser;
       });
 
+      const newDestination = {};
       // we have to apply the same logic to destinations
       fullTrip.destinations = destinations.map(destination => {
-        var newDestination = {}; // eslint-disable-line 
-        for (var destKey in destination.dataValues) { // eslint-disable-line 
-          newDestination[destKey] = destination.dataValues[destKey];
+        for (let destKey in destination.dataValues) { // eslint-disable-line
+          if (destination.dataValues.hasOwnProperty(destKey)) {
+            newDestination[destKey] = destination.dataValues[destKey];
+          }
         }
         return newDestination;
       });
