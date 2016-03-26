@@ -1,10 +1,16 @@
 const pg = require('pg');
 const Sequelize = require('sequelize');
-const db = new Sequelize('tripsapp', null, null, {
-  dialect: 'postgres',
-  define: {
-    underscored: false,
-  },
-});
+let db;
+
+if (process.NODE_ENV === 'production') {
+  db = new Sequelize(process.env.DATABASE_URL);
+} else {
+  db = new Sequelize('voyager', null, null, {
+    dialect: 'postgres',
+    define: {
+      underscored: false,
+    },
+  });
+}
 
 module.exports = db;
