@@ -39,4 +39,4 @@ bower_components/
 gitSpy/*
 
 # Redis
-*/dump.rdb
+dump.rdb
