@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
-  friends: [],
+  friends: Immutable.List(),
 });
 
 const friend = (state, action) => {
@@ -31,7 +31,8 @@ const friend = (state, action) => {
 
 const friends = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_FRIEND': const friendsToUpdate = state.get('friends');
+    case 'ADD_FRIEND':
+      const friendsToUpdate = state.get('friends');
       const friendsList = [...friendsToUpdate, friend(null, action)];
       return state.set('friends', friendsList);
     case 'TOGGLE_ADD_FRIEND':
