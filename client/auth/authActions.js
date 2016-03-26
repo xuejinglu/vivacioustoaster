@@ -3,7 +3,7 @@ import { polyfill } from 'es6-promise';
 polyfill();
 import { push } from 'react-router-redux';
 import cookie from 'react-cookie';
-import { addFriend } from '../friend/friendActions';
+import { addFriends } from '../friend/friendActions';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -75,7 +75,7 @@ export const login = () =>
             delete friend.createdAt;
             delete friend.updatedAt;
           });
-          dispatch(addFriend(friendsList));
+          dispatch(addFriends(friendsList));
         })
         .catch(err => err);
         dispatch(push('/home'));
