@@ -52,4 +52,7 @@ module.exports = function (app, express) {
         res.redirect('/');
       });
     });
+
+  // Wildcard
+  app.get('*', (req, res, next) => res.redirect('/'));
 };
