@@ -67,6 +67,7 @@ User.findOrCreate = profile => {
           // use the Sequelize method provided by the belongsToMany
           // association to add a friend for this user
           friend.addFriend(user);
+          user.addFriend(friend);
         })
         .catch(err => {
           console.error(err);
