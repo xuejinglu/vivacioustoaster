@@ -34,9 +34,9 @@ module.exports = {
     path: `${__dirname}/client/`,
     filename: 'index.min.js',
   },
-  plugins: [
+  plugins: process.env.NODE_ENV === 'production' ? [
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
+  ] : [],
 };
