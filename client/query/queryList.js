@@ -6,10 +6,11 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save, toggleEvent, updateEvents } from './queryActions';
+import { save, toggleEvent, nextQuery, nextEvents, updateEvents } from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
+import { push } from 'react-router-redux';
 
 const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),
@@ -19,16 +20,21 @@ const mapStateToProps = state => ({
   events: state.query.get('events'),
   trip: state.tripPlan.selectedTrip,
   dest: state.tripPlan.dest.get('destinations'),
+  events: state.query.get('currEvents'),
+  currPage: state.query.get('currPage'),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickSave: (destinations, tripType, friends, events) =>
-    dispatch(save(destinations, tripType, friends, events)),
+  onClickSave: (destinations, tripType, friends, events, goNext) =>
+    dispatch(save(destinations, tripType, friends, events, goNext)),
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip) => dispatch(updateEvents(events, trip)),
+  onNextQuery: () => dispatch(nextQuery()),
+  onNextEvents: (currPage) => dispatch(nextEvents(currPage)),
+  goNext: (name) => dispatch(push(name)),
 });
 
-let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickToggle, trip, onClickUpdate, dest }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest }) => ( // eslint-disable-line
   <div>
     Choose the places you want to go!
   <List>
@@ -39,15 +45,18 @@ let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickT
       )}
   </List>
   <Link to="tag"><NavigationArrowBack /></Link>
-  <Link to="tripPlan"><NavigationArrowForward onClick={ () => {
+  <NavigationArrowForward onClick={ () => {
     if (trip.id === undefined) {
-      onClickSave(destination, tripType, friends, events);
+      onNextQuery();
+      if (currPage === destinations.length) {
+        onClickSave(destinations, tripType, friends, events, goNext);
+      } else {
+        onNextEvents(currPage);
+      }  
     } else {
       onClickUpdate(events, dest);
-    }
-  }}
+  }}}
   />
-  </Link>
   </div>
 );
 
@@ -61,6 +70,10 @@ QueryList.propTypes = {
   trip: React.PropTypes.object,
   onClickUpdate: React.PropTypes.func,
   dest: React.PropTypes.array,
+  currPage: React.PropTypes.number,
+  onNextQuery: React.PropTypes.func,
+  onNextEvents: React.PropTypes.func,
+  goNext: React.PropTypes.func,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

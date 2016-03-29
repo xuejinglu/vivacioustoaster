@@ -30,6 +30,10 @@ export const clearDestination = () => ({
   type: 'CLEAR_DESTINATION',
 });
 
+export const clearDestinations = () => ({
+  type: 'CLEAR_DESTINATIONS',
+});
+
 export const addDestination = () => ({
   type: 'ADD_DESTINATION',
 });

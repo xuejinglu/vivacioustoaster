@@ -32,6 +32,9 @@ export default (state = initialState, action) => {
       state = state.setIn(['destination', 'endDate'], null);
       state = state.set('tripType', 'Group');
       return state;
+    case 'CLEAR_DESTINATIONS':
+      const newDests = Immutable.List();
+      return state.set('destinations', newDests);
     default:
       return state;
   }

@@ -17,11 +17,13 @@ const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
   chosen: state.tripPlan.dest.get('destinations'),
   destinations: state.home.get('destinations'),
+  currPage: state.query.get('currPage'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
-  onStartSearch: (goNext, tags, destinations) => dispatch(startSearch(goNext, tags, destinations)),
+  onStartSearch: (goNext, tags, destinations, currPage) =>
+    dispatch(startSearch(goNext, tags, destinations, currPage)),
   goNext: (name) => dispatch(push(name)),
 });
 
@@ -39,7 +41,7 @@ const styles = {
   },
 };
 
-let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage }) => (
   <div style={styles.block}>
     <GridList
       cellHeight={200}
@@ -64,7 +66,7 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen 
     if (chosen.size === 0) {
       const newDestination = [destinations.toJS()];
       console.log(newDestination);
-      onStartSearch(goNext, tags, newDestination);
+      onStartSearch(goNext, tags, newDestination, currPage);
     } else {
       onStartSearch(goNext, tags, chosen);
     }
@@ -81,6 +83,7 @@ TagList.propTypes = {
   tags: React.PropTypes.array.isRequired,
   destinations: React.PropTypes.array.isRequired,
   chosen: React.PropTypes.array.isRequired,
+  currPage: React.PropTypes.number.isRequired,
 };
 
 TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);

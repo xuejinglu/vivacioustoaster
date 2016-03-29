@@ -3,7 +3,7 @@ import { routeActions } from 'react-router-redux';
 import { fetchDestinations } from './dest/destActions';
 import { clearFriends } from '../friend/friendActions';
 import { clearTags } from '../tag/tagActions';
-import { clearDestination } from '../home/homeActions';
+import { clearDestination, clearDestinations } from '../home/homeActions';
 import { fetchFriends } from './tripOverview/travelFriendActions';
 import cookie from 'react-cookie';
 import { push } from 'react-router-redux';
@@ -33,6 +33,7 @@ export const setTripAndGetDestinations = trip =>
     dispatch(clearFriends());
     dispatch(clearTags());
     dispatch(clearDestination());
+    dispatch(clearDestinations());
   };
 
 export const getAllTripInfo = tripId =>

@@ -9,7 +9,7 @@ import cookie from 'react-cookie';
 // (2) dispatches an action to update the state with the selected trip and GET
 //     destinations for that trip id
 
-export const save = (destinations, tripType, friends, events) => {
+export const save = (destinations, tripType, friends, events, goNext) => {
   const addedEvents = events.filter(event => event.addedToDest);
   const token = cookie.load('token');
   return dispatch =>
@@ -27,7 +27,10 @@ export const save = (destinations, tripType, friends, events) => {
         events: addedEvents,
       }),
     }).then(res => res.json())
-      .then(trip => dispatch(setTripAndGetDestinations(trip)))
+      .then(trip => {
+        dispatch(setTripAndGetDestinations(trip));
+        goNext('/tripPlan');
+      })
       .catch(err => console.error(err)); // add proper error handling
 };
 
@@ -66,7 +69,18 @@ export const updateEvents = (events, dest) => {
       .catch(err => console.error(err)); // add proper error handling
 };
 
-export const startSearch = (goNext, tags, destinations) => {
+export const nextQuery = () => ({
+  type: 'NEXT_QUERY',
+});
+
+export const nextEvents = (currPage) => ({
+  type: 'NEXT_EVENTS',
+  payload: {
+    currPage,
+  },
+});
+
+export const startSearch = (goNext, tags, destinations, currPage) => {
   // once we support multiple destinations, this will no longer be needed
   const addedTags = tags.filter(tag => tag.addedToTrip);
   return dispatch =>
@@ -83,6 +97,7 @@ export const startSearch = (goNext, tags, destinations) => {
     }).then(res => res.json())
       .then(events => {
         dispatch(receiveEvents(events));
+        dispatch(nextEvents(currPage));
         goNext('/query');
       })
       .catch(err => console.error(err));
