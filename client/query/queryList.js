@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
     location: state.home.getIn(['destination', 'location']),
   }],
   tripType: state.home.get('tripType'),
-  friends: state.friend.get('friends').filter((friend) =>
+  friends: state.friend.get('friends').filter(friend =>
     friend.addedToTrip),
   events: state.query.get('events'),
   trip: state.tripPlan.selectedTrip,
@@ -37,10 +37,8 @@ let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickT
     Choose the places you want to go!
   <List>
   {events.map(event =>
-        <QueryItem key={ event.placeId } icon={ event.icon }
-          name={ event.name } address={ event.address }
-          rating={ event.rating } eventToggle={ () =>
-            onClickToggle(event) }
+        <QueryItem key={ event.id } { ...event }
+          eventToggle={ () => onClickToggle(event) }
         />
       )}
   </List>
