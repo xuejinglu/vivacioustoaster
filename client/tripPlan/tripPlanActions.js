@@ -38,7 +38,7 @@ export const setTripAndGetDestinations = trip =>
 export const getAllTripInfo = tripId =>
   dispatch => {
     const token = cookie.load('token');
-    return fetch('/api/trips', {
+    return fetch(`/api/trips/${tripId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -46,6 +46,7 @@ export const getAllTripInfo = tripId =>
         token,
       },
     })
+    .then(res => res.json())
     .then(trip => {
       dispatch(selectTrip(trip));
       dispatch(fetchDestinations(trip));
@@ -57,16 +58,4 @@ export const getAllTripInfo = tripId =>
       dispatch(clearDestination());
       dispatch(push('/tripPlan'));
     });
-  };
-
-export const getSingleTrip = trip =>
-  dispatch => {
-    dispatch(selectTrip(trip));
-    dispatch(fetchDestinations(trip));
-    dispatch(fetchFriends(trip));
-    // these dispatches clears the state after info is saved
-    // in db and user can now create a new trip
-    dispatch(clearFriends());
-    dispatch(clearTags());
-    dispatch(clearDestination());
   };
