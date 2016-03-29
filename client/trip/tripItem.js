@@ -12,9 +12,7 @@ import Moment from 'moment';
 
 const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) => (
   <Card style={{ width: '50%', margin: '5%' }}>
-    <CardHeader
-      style={ { marginTop: '-15px', marginBottom: '-10px' }}
-    >
+    <CardHeader>
       {users.map(user =>
         <FlatButton label={user.name} />
       )}
