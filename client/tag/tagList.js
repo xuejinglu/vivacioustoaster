@@ -16,6 +16,7 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile';
 const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
   destinations: state.home.get('destination'),
+  chosen: state.tripPlan.dest.get('destinations'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,7 +39,7 @@ const styles = {
   },
 };
 
-let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen }) => (
   <div style={styles.block}>
     <GridList
       cellHeight={200}
@@ -60,7 +61,13 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations }) => (
     </GridList>
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
-    onStartSearch(goNext, tags, destinations);
+    if (chosen.size === 0) {
+      const newDestination = [destinations.toJS()];
+      console.log(newDestination);
+      onStartSearch(goNext, tags, newDestination);
+    } else {
+      onStartSearch(goNext, tags, chosen);
+    }
   }}
   />
   </div>
@@ -73,6 +80,7 @@ TagList.propTypes = {
   goNext: React.PropTypes.func.isRequired,
   tags: React.PropTypes.array.isRequired,
   destinations: React.PropTypes.array.isRequired,
+  chosen: React.PropTypes.array.isRequired,
 };
 
 TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);

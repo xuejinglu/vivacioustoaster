@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const helpers = require('../config/helpers');
 const Event = require('./events');
+const Destination = require('../destinations/destinations');
 
 module.exports = {
 
@@ -13,7 +14,13 @@ module.exports = {
 
     Event.createEvents(newEvents)
       .then(events => {
-        res.status(201).json(events);
+        Destination.findOne({ where: { id: req.params.destId } })
+          .then(destination => {
+            destination.getTrip()
+              .then((trip) => {
+                res.status(201).json(trip);
+              });
+          });
       })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
