@@ -46,9 +46,28 @@ export const receiveEvents = (events) => ({
   },
 });
 
+export const updateEvents = (events, dest) => {
+  const addedEvents = events.filter(event => event.addedToDest);
+  const token = cookie.load('token');
+  const destId = dest[0].id;
+  return dispatch =>
+    fetch(`/api/destinations/${destId}/events`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token,
+      },
+      body: JSON.stringify({
+        events: addedEvents,
+      }),
+    }).then(res => res.json())
+      .then(trip => dispatch(setTripAndGetDestinations(trip)))
+      .catch(err => console.error(err)); // add proper error handling
+};
+
 export const startSearch = (goNext, tags, destinations) => {
   // once we support multiple destinations, this will no longer be needed
-  const newDestination = [destinations.toJS()];
   const addedTags = tags.filter(tag => tag.addedToTrip);
   return dispatch =>
     fetch('/api/placeSearch', {
@@ -58,7 +77,7 @@ export const startSearch = (goNext, tags, destinations) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        destinations: newDestination,
+        destinations,
         tags: addedTags,
       }),
     }).then(res => res.json())
