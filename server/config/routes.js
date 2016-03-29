@@ -5,6 +5,7 @@ const eventsController = require('../events/eventsController');
 const tripsController = require('../trips/tripsController');
 const placeSearchController = require('../placeSearch/placeSearchController');
 const usersController = require('../users/usersController');
+const votesController = require('../votes/votesController');
 const User = require('../users/users');
 const helper = require('./helpers');
 
@@ -33,9 +34,9 @@ module.exports = function (app, express) {
   app.get('/api/destinations/:destId/events', eventsController.getAll);
 
   // Votes
-  app.get('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
-  app.post('/api/destinations/:destId/events/:eventId/votes'/* , controller function here */);
-  app.delete('/api/votes/:voteId'/* , controller function here */);
+  app.get('/api/events/:eventId/votes', votesController.getAll);
+  app.post('/api/events/:eventId/votes', votesController.create);
+  app.delete('/api/votes/:voteId', votesController.delete);
 
   // Google Places
   app.post('/api/placeSearch', placeSearchController.search);
