@@ -12,13 +12,6 @@ import Moment from 'moment';
 
 const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) => (
   <Card style={{ width: '50%', margin: '5%' }}>
-    <ListItem primaryText="Add more friends" className="addFriendsButton"
-      leftAvatar={<Avatar src={'../../assets/add.png'}
-        style={{ width: '1em', height: '1em', marginTop: '7px' }}
-      />}
-      style={{ marginBottom: '-10px' }}
-      onClick={ goGetTripInfo }
-    />
     <CardHeader
       style={ { marginTop: '-15px', marginBottom: '-10px' }}
     >
@@ -27,6 +20,7 @@ const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) =
       )}
     </CardHeader>
     <CardMedia
+      onClick={ goGetTripInfo }
       overlay={<CardTitle title={name} />}
     >
       <img src="http://lorempixel.com/600/337/nature/" />
