@@ -1,14 +1,13 @@
 const _ = require('lodash');
 const helpers = require('../config/helpers');
 const Vote = require('./votes');
-const Event = require('../events/events');
 const Promise = require('bluebird');
 
 module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
-    Event.createVotes(req.params.eventId, req.body.votes)
+    Vote.createVotes(req.params.eventId, req.body.votes)
       .then(votes => {
         res.json(votes);
       })
@@ -18,7 +17,7 @@ module.exports = {
   },
 
   getAll: (req, res, next) => {
-    Event.getAllVotes(req.params.eventId)
+    Vote.getAllVotes(req.params.eventId)
       .then(votes => {
         res.json(votes);
       })
