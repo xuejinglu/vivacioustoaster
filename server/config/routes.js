@@ -1,5 +1,6 @@
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
+const path = require('path');
 const destinationsController = require('../destinations/destinationsController');
 const eventsController = require('../events/eventsController');
 const tripsController = require('../trips/tripsController');
@@ -52,4 +53,7 @@ module.exports = function (app, express) {
         res.redirect('/');
       });
     });
+
+  // Wildcard
+  app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../..', 'client', 'index.html')));
 };
