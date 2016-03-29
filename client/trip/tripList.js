@@ -6,6 +6,7 @@ import List from 'material-ui/lib/lists/list';
 import { getAllTripInfo } from '../tripPlan/tripPlanActions';
 
 const mapStateToProps = state => ({ trips: state.trip.get('trips') });
+
 const mapDispatchToProps = dispatch => ({
   getTripInfo: trip => dispatch(getAllTripInfo(trip.id)),
 });
