@@ -30,7 +30,6 @@ User.sync();
 
 // returns a trip object with users and destinations
 // properties attached to display on my trips page
-
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
