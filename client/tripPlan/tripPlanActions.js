@@ -22,11 +22,10 @@ const selectTrip = trip => ({
 // (1) dispatches an action that updates the selectedTrip variable
 // (2) dispatches another action to GET destinations for the selected trip
 
-
-export const setTripAndGetDestinations = trip =>
+export const setTripAndGetDestinations = (trip, goNext) =>
   dispatch => {
     dispatch(selectTrip(trip));
-    dispatch(fetchDestinations(trip));
+    dispatch(fetchDestinations(trip, goNext));
     dispatch(fetchFriends(trip));
     // these dispatches clears the state after info is saved
     // in db and user can now create a new trip

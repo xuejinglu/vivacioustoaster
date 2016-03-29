@@ -10,10 +10,8 @@ import cookie from 'react-cookie';
 //     destinations for that trip id
 
 export const save = (destinations, tripType, friends, eventList, goNext) => {
-  const addedEvents = eventList.map(events => {
-    return events.filter(event => {
-      return event.addedToDest
-    })});
+  const addedEvents = eventList.map(events =>
+    events.filter(event => event.addedToDest));
   const token = cookie.load('token');
   return dispatch =>
     fetch('/api/trips', {
@@ -31,8 +29,7 @@ export const save = (destinations, tripType, friends, eventList, goNext) => {
       }),
     }).then(res => res.json())
       .then(trip => {
-        dispatch(setTripAndGetDestinations(trip));
-        goNext('/tripPlan');
+        dispatch(setTripAndGetDestinations(trip, goNext));
       })
       .catch(err => console.error(err)); // add proper error handling
 };

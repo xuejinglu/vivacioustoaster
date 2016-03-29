@@ -5,10 +5,6 @@ import List from 'material-ui/lib/lists/list';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 
-const mapStateToProps = state => ({
-  events: state.tripPlan.event.get('events'),
-});
-
 let EventList = ({ events }) => (
   <div>
     <Link to="tag"><RaisedButton label="Add Events" /></Link>
@@ -21,10 +17,10 @@ let EventList = ({ events }) => (
 );
 
 EventList.propTypes = {
-  events: React.PropTypes.object.isRequired,
+  events: React.PropTypes.array.isRequired,
 };
 
-EventList = connect(mapStateToProps)(EventList);
+EventList = connect()(EventList);
 
 
 export default EventList;

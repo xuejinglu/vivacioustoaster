@@ -8,7 +8,7 @@ import CardText from 'material-ui/lib/card/card-text';
 import EventList from '../event/eventList';
 import Moment from 'moment';
 
-const DestItem = ({ key, location, startDate, endDate }) => (
+const DestItem = ({ events, key, location, startDate, endDate }) => (
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
@@ -24,7 +24,7 @@ const DestItem = ({ key, location, startDate, endDate }) => (
       Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
     </CardText>
-    <EventList />
+    <EventList events={events} />
   </Card>
 );
 
@@ -33,6 +33,7 @@ DestItem.propTypes = {
   location: React.PropTypes.string.isRequired,
   startDate: React.PropTypes.any.isRequired,
   endDate: React.PropTypes.any.isRequired,
+  events: React.PropTypes.any.isRequired,
 };
 
 export default DestItem;

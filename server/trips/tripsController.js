@@ -19,10 +19,10 @@ module.exports = {
           .then(destinations => {
             trip.addDestinations(destinations)
               .then(() => {
-                Promise.all(eventList.map((events, eventIdx) => {
+                Promise.all(eventList.map((events, eventIdx) => { // eslint-disable-line
                   Event.createEvents(events)
-                    .then(events => {
-                      destinations.map((destination, destIdx) => {
+                    .then(eventInDests => {
+                      destinations.map((destination, destIdx) => { // eslint-disable-line
                       // later add logic for adding events to a single destination
                         if(destIdx === eventIdx){
                           destination.addEvents(events)
