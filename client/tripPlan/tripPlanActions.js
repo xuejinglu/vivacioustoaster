@@ -48,14 +48,7 @@ export const getAllTripInfo = tripId =>
     })
     .then(res => res.json())
     .then(trip => {
-      dispatch(selectTrip(trip));
-      dispatch(fetchDestinations(trip));
-      dispatch(fetchFriends(trip));
-      // these dispatches clears the state after info is saved
-      // in db and user can now create a new trip
-      dispatch(clearFriends());
-      dispatch(clearTags());
-      dispatch(clearDestination());
+      dispatch(setTripAndGetDestinations(trip));
       dispatch(push('/tripPlan'));
     });
   };
