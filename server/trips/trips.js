@@ -68,6 +68,26 @@ const getTripInfo = trip =>
     })
   .catch(err => err));
 
+Trip.addFriendsToTrip = (id, friends) =>
+  Trip.findOne({ where: { id } })
+  .then( trip =>
+    Promise.all(friends.map(addUser =>
+      User.findOne({ where: { fbId: addUser.fbId } })
+    ))
+    .then(users => {
+      Promise.all(users.forEach( user => {
+        trip.getUsers({ where: { userId: user.id }})
+          .then (existingUser =>
+            if (!existingUser) {
+              trip.addUser(user);
+            }
+          )
+        })
+      )
+    return trip;
+    }))
+  .catch(err => err)
+
 Trip.getTrip = id =>
   Trip.findOne({ where: { id } });
 

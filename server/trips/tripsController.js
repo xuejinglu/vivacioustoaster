@@ -10,6 +10,14 @@ const Promise = require('bluebird');
 module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
+
+  addFriends: (req, res, next) =>
+    Trip.addFriendsToTrip(req.params.tripId, req.body.friends)
+    .then(trip => res.status(201).json(trip))
+    .catch(err => {
+      helpers.errorHandler(err, req, res, next);
+    })
+
   create: (req, res, next) => {
     const eventList = req.body.events;
     Trip.createTrip(req.body.name, req.body.tripType)
