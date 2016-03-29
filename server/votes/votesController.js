@@ -4,12 +4,12 @@ const Vote = require('./votes');
 const Promise = require('bluebird');
 
 module.exports = {
-  // Params: req.body has a trip name and friends. Req.user injected via jwt
-  // Returns: created trip
+  // Params: req.body has votes, req.params has the eventId
+  // Returns: created votes
   create: (req, res, next) => {
     Vote.createVotes(req.params.eventId, req.body.votes)
       .then(votes => {
-        res.json(votes);
+        res.status(201).json(votes);
       })
       .catch(err => {
         helpers.errorHandler(err, req, res, next);
