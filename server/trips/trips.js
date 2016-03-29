@@ -68,6 +68,9 @@ const getTripInfo = trip =>
     })
   .catch(err => err));
 
+Trip.getTrip = id =>
+  Trip.findOne({ where: { id } });
+
 Trip.createTrip = (name, tripType) =>
   Trip.create({ name, tripType }).catch(err => err);
 

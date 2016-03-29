@@ -5,6 +5,8 @@ import { clearFriends } from '../friend/friendActions';
 import { clearTags } from '../tag/tagActions';
 import { clearDestination } from '../home/homeActions';
 import { fetchFriends } from './tripOverview/travelFriendActions';
+import cookie from 'react-cookie';
+import { push } from 'react-router-redux';
 
 export const SELECT_TRIP = 'SELECT_TRIP';
 
@@ -20,6 +22,7 @@ const selectTrip = trip => ({
 // (1) dispatches an action that updates the selectedTrip variable
 // (2) dispatches another action to GET destinations for the selected trip
 
+
 export const setTripAndGetDestinations = trip =>
   dispatch => {
     dispatch(selectTrip(trip));
@@ -30,4 +33,22 @@ export const setTripAndGetDestinations = trip =>
     dispatch(clearFriends());
     dispatch(clearTags());
     dispatch(clearDestination());
+  };
+
+export const getAllTripInfo = tripId =>
+  dispatch => {
+    const token = cookie.load('token');
+    return fetch(`/api/trips/${tripId}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token,
+      },
+    })
+    .then(res => res.json())
+    .then(trip => {
+      dispatch(setTripAndGetDestinations(trip));
+      dispatch(push('/tripPlan'));
+    });
   };

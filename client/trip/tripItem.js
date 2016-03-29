@@ -6,9 +6,11 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import FlatButton from 'material-ui/lib/flat-button';
 import CardText from 'material-ui/lib/card/card-text';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Avatar from 'material-ui/lib/avatar';
 import Moment from 'moment';
 
-const TripItem = ({ key, name, tripType, destinations, users }) => (
+const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) => (
   <Card style={{ width: '50%', margin: '5%' }}>
     <CardHeader>
       {users.map(user =>
@@ -16,6 +18,7 @@ const TripItem = ({ key, name, tripType, destinations, users }) => (
       )}
     </CardHeader>
     <CardMedia
+      onClick={ goGetTripInfo }
       overlay={<CardTitle title={name} />}
     >
       <img src="http://lorempixel.com/600/337/nature/" />
@@ -38,6 +41,7 @@ TripItem.propTypes = {
   tripType: React.PropTypes.string.isRequired,
   destinations: React.PropTypes.array.isRequired,
   users: React.PropTypes.array.isRequired,
+  goGetTripInfo: React.PropTypes.func.isRequired,
 };
 
 export default TripItem;
