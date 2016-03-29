@@ -18,6 +18,9 @@ Vote.sync();
 User.sync();
 Event.sync();
 
+Vote.createVotes = votes => Vote.bulkCreate(votes, { returning: true })
+  .catch(err => err);
+
 Vote.deleteVote = id => Vote.destroy({ where: { id } })
   .catch(err => err);
 
