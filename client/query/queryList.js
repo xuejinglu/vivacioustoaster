@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
   events: state.query.get('events'),
   trip: state.tripPlan.selectedTrip,
   dest: state.tripPlan.dest.get('destinations'),
-  events: state.query.get('currEvents'),
+  currEvents: state.query.get('currEvents'),
   currPage: state.query.get('currPage'),
 });
 
@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => ({
   goNext: (name) => dispatch(push(name)),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents }) => ( // eslint-disable-line
   <div>
     Choose the places you want to go!
   <List>
@@ -74,6 +74,7 @@ QueryList.propTypes = {
   onNextQuery: React.PropTypes.func,
   onNextEvents: React.PropTypes.func,
   goNext: React.PropTypes.func,
+  currEvents: React.PropTypes.array,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

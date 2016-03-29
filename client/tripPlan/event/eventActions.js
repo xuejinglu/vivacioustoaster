@@ -8,6 +8,10 @@ const receiveEventsInDest = events => ({
   },
 });
 
+const loadEventsInDest = events => ({
+  
+});
+
 export const fetchEvents = destination => {
   const token = cookie.load('token');
   return dispatch =>

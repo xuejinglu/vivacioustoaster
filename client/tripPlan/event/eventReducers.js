@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
-  events: Immutable.List([]),
+  events: Immutable.List(),
+  eventsInDest: null,
 });
 
 const event = (state, action) => {
@@ -14,7 +15,9 @@ const event = (state, action) => {
 const events = (state = initialState, action) => {
   switch (action.type) {
     case 'RECEIVE_EVENTS_IN_DEST':
-      return state.set('events', action.payload.events);
+      const oldEvents = state.get('events');
+      const newEvents = oldEvents.push(action.payload.events);
+      return state.set('events', newEvents);
     default:
       return state;
   }

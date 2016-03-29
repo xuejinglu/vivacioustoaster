@@ -23,8 +23,8 @@ const event = (state, action) => {
 const events = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_EVENT':
-      const oldEvents = state.get('events');
-      const updatedEvents = oldEvents.map(e => event(e, action));
+      const eventList = state.get('events');
+      const updatedEvents = eventList.map(e => e.map(item => event(item, action)));
       return state.set('events', updatedEvents);
     case 'RECEIVE_EVENTS':
       return state.set('events', action.payload.events);

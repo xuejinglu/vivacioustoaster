@@ -9,8 +9,11 @@ import cookie from 'react-cookie';
 // (2) dispatches an action to update the state with the selected trip and GET
 //     destinations for that trip id
 
-export const save = (destinations, tripType, friends, events, goNext) => {
-  const addedEvents = events.filter(event => event.addedToDest);
+export const save = (destinations, tripType, friends, eventList, goNext) => {
+  const addedEvents = eventList.map(events => {
+    return events.filter(event => {
+      return event.addedToDest
+    })});
   const token = cookie.load('token');
   return dispatch =>
     fetch('/api/trips', {

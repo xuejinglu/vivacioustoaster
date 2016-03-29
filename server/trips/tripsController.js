@@ -11,34 +11,38 @@ module.exports = {
   // Params: req.body has a trip name and friends. Req.user injected via jwt
   // Returns: created trip
   create: (req, res, next) => {
+    const eventList = req.body.events;
+    console.log(eventList);
     Trip.createTrip(req.body.name, req.body.tripType)
       .then(trip => {
         Destination.createDestinations(req.body.destinations)
           .then(destinations => {
             trip.addDestinations(destinations)
               .then(() => {
-                Event.createEvents(req.body.events)
-                  .then(events => {
-                    destinations.forEach(destination => {
+                Promise.all(eventList.map((events, eventIdx) => {
+                  Event.createEvents(events)
+                    .then(events => {
+                      destinations.map((destination, destIdx) => {
                       // later add logic for adding events to a single destination
-                      destination.addEvents(events)
-                        .then(() =>
-                          Promise.all(events.map(event =>
-                            Vote.createVote(req.user.id, event.dataValues.id)))
-                        .then(() => {
-                          const addUsers = [...req.body.friends, req.user];
-                          Promise.all(addUsers.map(addUser =>
-                            User.findOne({ where: { fbId: addUser.fbId } })
-                          ))
-                          .then(users => {
-                            trip.addUsers(users)
-                              .then(() => {
-                                res.status(201).json(trip);
-                              });
-                          });
-                        }));
-                    });
-                  });
+                        if(destIdx === eventIdx){
+                          destination.addEvents(events)
+                            .then(() => 
+                              Promise.all(events.map(event =>
+                                Vote.createVote(req.user.id, event.dataValues.id))))
+                        }
+                      })
+                    })
+                }))
+                .then(() => {
+                  const addUsers = [...req.body.friends, req.user];
+                  Promise.all(addUsers.map(addUser =>
+                    User.findOne({ where: { fbId: addUser.fbId } })
+                  ))
+                  .then(users =>
+                    trip.addUsers(users)
+                      .then(() => res.status(201).json(trip))
+                  )
+                });
               });
           });
       })
