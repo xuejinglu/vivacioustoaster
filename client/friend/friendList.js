@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 let FriendList = ({ friends, onFriendClick }) => (
   <div>
     {
-      friends.length ? <p>Choose the places you want to go!</p> :
+      friends.length ? <p>Choose the friends you want to travel with!</p> :
       <p>You have no friends using Voyager :( Invite them to join, or travel solo!</p>
     }
     <List>
