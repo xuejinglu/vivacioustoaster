@@ -30,6 +30,7 @@ User.sync();
 
 // returns a trip object with users and destinations
 // properties attached to display on my trips page
+
 const getTripInfo = trip =>
   trip.getUsers().then(users =>
     trip.getDestinations().then(destinations => {
@@ -67,6 +68,9 @@ const getTripInfo = trip =>
       return fullTrip;
     })
   .catch(err => err));
+
+Trip.getTrip = tripId =>
+  Trip.findOne({ where: { id: tripId } });
 
 Trip.createTrip = (name, tripType) =>
   Trip.create({ name, tripType }).catch(err => err);

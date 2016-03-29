@@ -44,8 +44,11 @@ module.exports = {
   },
 
   get: (req, res, next) => {
-    // TODO
-    res.end();
+    Trip.getTrip(req.params.tripId)
+    .then(trip => res.json(trip))
+    .catch(err => {
+      helpers.errorHandler(err, req, res, next);
+    });
   },
 
   getAll: (req, res, next) => {
