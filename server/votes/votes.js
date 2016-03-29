@@ -1,7 +1,6 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const User = require('../users/users');
-const Event = require('../events/events');
 
 const Vote = db.define('votes', {});
 
@@ -18,5 +17,8 @@ Event.hasMany(Vote, { constraints: false });
 Vote.sync();
 User.sync();
 Event.sync();
+
+Vote.deleteVote = id => Vote.destroy({ where: { id } })
+  .catch(err => err);
 
 module.exports = Vote;
