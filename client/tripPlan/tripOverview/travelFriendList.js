@@ -7,54 +7,60 @@ import Avatar from 'material-ui/lib/avatar';
 import DropDownMenu from 'material-ui/lib/DropDownMenu/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import FriendItem from '../../friend/friendItem';
+import Select from 'react-select';
+import { toggleList } from './travelFriendActions';
+import { toggleAddFriend } from '../../friend/friendActions';
 
 const mapStateToProps = state => ({
   travelFriends: state.tripPlan.tripOverview.get('travelFriends'),
   friends: state.friend.get('friends'),
-  showFriends: true,
-  listStyle: {visibility: 'visibile'},
+  listToggle: state.tripPlan.tripOverview.get('showList'),
 });
 
-let TravelFriendList = ({ travelFriends, friends, showFriends, listStyle }) => (
+const mapDispatchToProps = dispatch => ({
+  onClickToggleList: () => dispatch(toggleList()),
+  onFriendClick: id => dispatch(toggleAddFriend(id)),
+});
+
+let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList, onFriendClick }) => (
   <div>
-    <List>
+     <List>
       {travelFriends.map(friend =>
         <TravelFriendItem key={ friend.id } {...friend} />
       )}
-      <Avatar src={'../../assets/add.png'}
-        onClick={ () => (()=> {
-          console.log('LIST STYLE IS STARTING AT ', listStyle);
-          if (showFriends) {
-            listStyle = {visibility: 'hidden'};
-            showFriends = false;
-            console.log('LIST STYLE IS NOW ', listStyle);
-          } else {
-            listStyle = {visibility: 'visibile'};
-            showFriends = true;
-            console.log('LIST STYLE IS NOW ', listStyle);
-          };
-        })()}
-      />
-      <List id="moreFriendsList" style={listStyle}
-      >
-        {friends.map(friend =>
-          <FriendItem className="friendsItems" key={ friend.id } {...friend}
-            style={listStyle}
-            onClick={() =>{ console.log('clicked!');}} />
-        )}
       </List>
+     <ListItem primaryText={listToggle ? "Hide list" : "Add more friends!"} className="addFriendsButton"
+      leftAvatar={<Avatar src={listToggle ? 'http://www.aisletracker.com/afc/images/icons/red_minus.png' : '../../assets/add.png'}
+        style={{ width: '1em', height: '1em', marginTop: '7px', left: '5px' }}
+      />}
+      style={{ marginBottom: '-10px' }}
+      onClick={() => onClickToggleList() }
+    />
+    <List id="moreFriendsList"
+      style={{
+        visibility: listToggle ? 'visible' : 'hidden',
+      }}
+    >
+      {friends.map(friend =>
+        <FriendItem className="friendsItems"
+          key={ friend.id } {...friend}
+          onClick={ () => onFriendClick(friend.id) } />)}
+      <ListItem primaryText="Add these friends!"
+      onClick={ () => {console.log('TODO: add additional friends')} }
+      />
     </List>
   </div>
 );
 
 TravelFriendList.propTypes = {
-  listStyle: React.PropTypes.object.isRequired,
   travelFriends: React.PropTypes.object.isRequired,
   friends: React.PropTypes.object.isRequired,
-  showFriends: React.PropTypes.bool.isRequired,
+  listToggle: React.PropTypes.bool.isRequired,
+  onClickToggleList: React.PropTypes.func.isRequired,
+  onFriendClick: React.PropTypes.func.isRequired,
 };
 
-TravelFriendList = connect(mapStateToProps)(TravelFriendList);
+TravelFriendList = connect(mapStateToProps, mapDispatchToProps)(TravelFriendList);
 
 
 export default TravelFriendList;

@@ -20,3 +20,7 @@ export const fetchFriends = trip =>
         dispatch(receiveFriendsInTrip(friends));
       })
       .catch(err => console.error(err));
+
+export const toggleList = () => ({
+  type: 'TOGGLE_LIST',
+});
