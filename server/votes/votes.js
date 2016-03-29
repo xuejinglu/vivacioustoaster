@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const User = require('../users/users');
-
+const Event = require('../events/events');
 const Vote = db.define('votes', {});
 
 // creates userId column in votes table
@@ -18,7 +18,13 @@ Vote.sync();
 User.sync();
 Event.sync();
 
-Vote.createVotes = votes => Vote.bulkCreate(votes, { returning: true })
+Vote.createVotes = (eventId, votes) => Vote.bulkCreate(votes, { returning: true })
+  .then(createdVotes => Event.findOne({ where: { id: eventId } })
+  .then(event => event.addVotes(createdVotes)))
+  .catch(err => err);
+
+Vote.getAllVotes = eventId => Event.findOne({ where: { id: eventId } })
+  .then(event => event.getVotes())
   .catch(err => err);
 
 Vote.deleteVote = id => Vote.destroy({ where: { id } })
