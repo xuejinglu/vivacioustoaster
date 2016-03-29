@@ -15,8 +15,8 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
 const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
-  destinations: state.home.get('destination'),
   chosen: state.tripPlan.dest.get('destinations'),
+  destinations: state.home.get('destinations'),
 });
 
 const mapDispatchToProps = dispatch => ({

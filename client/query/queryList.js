@@ -12,11 +12,7 @@ import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
 
 const mapStateToProps = state => ({
-  destination: [{
-    startDate: state.home.getIn(['destination', 'startDate']),
-    endDate: state.home.getIn(['destination', 'endDate']),
-    location: state.home.getIn(['destination', 'location']),
-  }],
+  destinations: state.home.get('destinations'),
   tripType: state.home.get('tripType'),
   friends: state.friend.get('friends').filter(friend =>
     friend.addedToTrip),
@@ -26,8 +22,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickSave: (destination, tripType, friends, events) =>
-    dispatch(save(destination, tripType, friends, events)),
+  onClickSave: (destinations, tripType, friends, events) =>
+    dispatch(save(destinations, tripType, friends, events)),
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip) => dispatch(updateEvents(events, trip)),
 });
@@ -56,7 +52,7 @@ let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickT
 );
 
 QueryList.propTypes = {
-  destination: React.PropTypes.object,
+  destinations: React.PropTypes.array,
   tripType: React.PropTypes.string,
   friends: React.PropTypes.array,
   onClickSave: React.PropTypes.func,

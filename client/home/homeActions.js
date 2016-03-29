@@ -29,3 +29,7 @@ export const changeDestination = value => ({
 export const clearDestination = () => ({
   type: 'CLEAR_DESTINATION',
 });
+
+export const addDestination = () => ({
+  type: 'ADD_DESTINATION',
+});
