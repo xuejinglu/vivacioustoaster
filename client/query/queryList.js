@@ -31,20 +31,24 @@ const mapDispatchToProps = dispatch => ({
 
 let QueryList = ({ destination, tripType, onClickSave, friends, events, onClickToggle }) => (
   <div>
-  <List>
-  {events.map(event =>
-        <QueryItem key={ event.placeId } icon={ event.icon }
-          name={ event.name } address={ event.address }
-          rating={ event.rating } eventToggle={ () =>
-            onClickToggle(event) }
-        />
-      )}
-  </List>
-  <Link to="tag"><NavigationArrowBack /></Link>
-  <Link to="tripPlan"><NavigationArrowForward onClick={ () =>
-    onClickSave(destination, tripType, friends, events) }
-  />
-  </Link>
+    Choose the places you want to go!
+    <List>
+    {events.map(event =>
+          <QueryItem key={ event.placeId } icon={ event.icon }
+            name={ event.name } address={ event.address }
+            rating={ event.rating } eventToggle={ () =>
+              onClickToggle(event) }
+          />
+        )}
+    </List>
+    <div>
+      <img src="../assets/powered_by_google_on_white.png" />
+    </div>
+    <Link to="tag"><NavigationArrowBack /></Link>
+    <Link to="tripPlan"><NavigationArrowForward onClick={ () =>
+      onClickSave(destination, tripType, friends, events) }
+    />
+    </Link>
   </div>
 );
 
