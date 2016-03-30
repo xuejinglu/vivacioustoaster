@@ -7,7 +7,7 @@ module.exports = {
   // Params: req.body has votes, req.params has the eventId
   // Returns: created votes
   create: (req, res, next) => {
-    Vote.createVotes(req.params.eventId, req.user)
+    Vote.createVotes(req.user.id, req.params.eventId)
       .then(votes => {
         res.status(201).json(votes);
       })
