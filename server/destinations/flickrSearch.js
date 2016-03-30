@@ -19,12 +19,13 @@ const getDestinationPhotos = destinations => {
     uri: FLICKR_PHOTOSEARCH_URL,
     qs: {
       method: 'flickr.photos.search',
-      key: process.env.FLICKR_PHOTOS_KEY,
+      api_key: process.env.FLICKR_PHOTOS_KEY,
       format: 'json',
       text: destination.location,
       sort: 'interestingness-desc',
       is_getty: true,
       media: 'photos',
+      per_page: '1',
     },
     headers: {
       'User-Agent': 'Request-Promise',
@@ -35,7 +36,10 @@ const getDestinationPhotos = destinations => {
   return Promise.all(optionsArray.map((options, index) =>
     rp(options)
       .then(data => {
-        const photo = data.results.photos.photo[0];
+        data = JSON.parse(data.match(/^jsonFlickrApi\((.*)\)$/)[1]);
+        console.log('DATA TYPE: ', typeof data);
+        console.log('DAATA RESULTS: ', data);
+        const photo = data.photos.photo[0];
         const destination = destinations[index];
 
         destination.photoUrl = constructPhotoUrl(photo);
@@ -44,3 +48,5 @@ const getDestinationPhotos = destinations => {
       .catch(err => err)
   ));
 };
+
+module.exports = getDestinationPhotos;
