@@ -1,4 +1,5 @@
 import cookie from 'react-cookie';
+import { fetchVotes } from '../vote/voteActions';
 
 export const RECEIVE_EVENTS_IN_DEST = 'RECEIVE_EVENTS_IN_DEST';
 
@@ -26,6 +27,8 @@ export const fetchEvents = (destination) => {
     }).then(res => res.json())
       .then(events => {
         dispatch(receiveEventsInDest(events));
+        events.map(event =>
+          dispatch(fetchVotes(event)));
       })
       .catch(err => console.error(err)); // add proper error handling
 };
