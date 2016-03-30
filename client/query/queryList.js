@@ -11,6 +11,7 @@ import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
 import { push } from 'react-router-redux';
+import { clearDest } from '../tripPlan/dest/destActions';
 
 const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),

@@ -8,15 +8,16 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import EventList from '../event/eventList';
 import Moment from 'moment';
-import { chooseDest } from './destActions';
+import { chooseDest, clearDest } from './destActions';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 
 const mapDispatchToProps = dispatch => ({
   onChooseDest: (key) => dispatch(chooseDest(key)),
+  onClearDest: () => dispatch(clearDest()),
 });
 
-let DestItem = ({ destIdx, events, key, location, startDate, endDate, onChooseDest }) => (
+let DestItem = ({ destIdx, events, key, location, startDate, endDate, onChooseDest, onClearDest }) => (// eslint-disable-line
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
@@ -33,7 +34,11 @@ let DestItem = ({ destIdx, events, key, location, startDate, endDate, onChooseDe
       Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
     </CardText>
     <Link to="tag">
-      <RaisedButton label="Add Events" onMouseDown={ () => onChooseDest(destIdx) } />
+      <RaisedButton
+        label="Add Events"
+        onMouseDown={ () => onChooseDest(destIdx) }
+        onMouseUp={ () => onClearDest() }
+      />
     </Link>
     <EventList events={events} />
   </Card>
@@ -46,6 +51,7 @@ DestItem.propTypes = {
   endDate: React.PropTypes.any.isRequired,
   events: React.PropTypes.any.isRequired,
   onChooseDest: React.PropTypes.func.isRequired,
+  onClearDest: React.PropTypes.func.isRequired,
   destIdx: React.PropTypes.any,
 };
 

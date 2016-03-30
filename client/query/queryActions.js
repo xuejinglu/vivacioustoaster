@@ -65,7 +65,9 @@ export const updateEvents = (events, dest, goNext, destIdx) => {
         events: addedEvents,
       }),
     }).then(res => res.json())
-      .then(trip => dispatch(setTripAndGetDestinations(trip, goNext)))
+      .then(trip => {
+        dispatch(setTripAndGetDestinations(trip, goNext));
+      })
       .catch(err => console.error(err)); // add proper error handling
 };
 

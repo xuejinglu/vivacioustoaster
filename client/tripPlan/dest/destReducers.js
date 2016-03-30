@@ -21,9 +21,7 @@ const destinations = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_EVENTS_IN_DEST:
       const oldEvents = state.get('events');
-      console.log(oldEvents, action.payload.events);
       const newEvents = oldEvents.push(action.payload.events);
-      console.log(newEvents);
       return state.set('events', newEvents);
     case REQUEST_DESTINATIONS:
       return state.set('isFetching', true);
@@ -31,8 +29,9 @@ const destinations = (state = initialState, action) => {
       state = state.set('isFetching', false);
       return state.set('destinations', action.payload.destinations);
     case 'CHOOSE_DEST':
-      console.log(action.payload.key);
       return state.set('key', action.payload.key);
+    case 'CLEAR_DEST':
+      return state.set('events', Immutable.List());
     case FETCH_DEST_FAILURE:
       // return state.set('')
     default:

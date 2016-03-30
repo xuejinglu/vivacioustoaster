@@ -40,6 +40,10 @@ export const chooseDest = key => ({
   },
 });
 
+export const clearDest = () => ({
+  type: 'CLEAR_DEST',
+});
+
 const fetchEvents = (destination) => {
   const token = cookie.load('token');
   return dispatch =>
