@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import cookie from 'react-cookie';
 
 const receiveFriendsInTrip = friends => ({
   type: 'RECEIVE_FRIENDS_IN_TRIP',
@@ -6,6 +7,27 @@ const receiveFriendsInTrip = friends => ({
     friends,
   },
 });
+
+export const addFriends = (friends, tripId) =>
+  dispatch =>{
+    console.log('inside addFriends function, about to fetch POST');
+    const token = cookie.load('token');
+    return fetch(`api/trips/${tripId}/users`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token,
+      },
+      body: JSON.stringify({
+        friends,
+      })
+    })
+      .then(res => res.json())
+      .then(trip => {console.log('returned trip from addFriends is ', trip); return dispatch(fetchFriends(trip));
+      })
+      .catch(err => console.error(err));
+  }
 
 export const fetchFriends = trip =>
   dispatch =>

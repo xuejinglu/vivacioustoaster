@@ -9,20 +9,24 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import FriendItem from '../../friend/friendItem';
 import Select from 'react-select';
 import { toggleList } from './travelFriendActions';
+import { addFriends } from './travelFriendActions';
 import { toggleAddFriend } from '../../friend/friendActions';
 
 const mapStateToProps = state => ({
   travelFriends: state.tripPlan.tripOverview.get('travelFriends'),
+  trip: state.tripPlan.selectedTrip,
   friends: state.friend.get('friends'),
+  addedFriends: state.friend.get('friends').filter(friend => friend.addedToTrip),
   listToggle: state.tripPlan.tripOverview.get('showList'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onClickToggleList: () => dispatch(toggleList()),
   onFriendClick: id => dispatch(toggleAddFriend(id)),
+  onClickAddFriends: (friends, trip) => dispatch(addFriends(friends, trip)),
 });
 
-let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList, onFriendClick }) => (
+let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList, onFriendClick, addedFriends, trip, onClickAddFriends }) => (
   <div>
      <List>
       {travelFriends.map(friend =>
@@ -46,7 +50,7 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
           key={ friend.id } {...friend}
           onClick={ () => onFriendClick(friend.id) } />)}
       <ListItem primaryText="Add these friends!"
-      onClick={ () => {console.log('TODO: add additional friends')} }
+      onClick={ () => { console.log('should add friends NOW'); return onClickAddFriends(addedFriends, trip.id)} }
       />
     </List>
   </div>
@@ -55,9 +59,12 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
 TravelFriendList.propTypes = {
   travelFriends: React.PropTypes.object.isRequired,
   friends: React.PropTypes.object.isRequired,
+  addedFriends: React.PropTypes.object.isRequired,
+  trip: React.PropTypes.number.isRequired,
   listToggle: React.PropTypes.bool.isRequired,
   onClickToggleList: React.PropTypes.func.isRequired,
   onFriendClick: React.PropTypes.func.isRequired,
+  onClickAddFriends: React.PropTypes.func.isRequired,
 };
 
 TravelFriendList = connect(mapStateToProps, mapDispatchToProps)(TravelFriendList);
