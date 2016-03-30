@@ -7,8 +7,12 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import Avatar from 'material-ui/lib/avatar';
 
-const EventItem = ({ key, name, address, rating, tags, photoUrl }) => (
+const EventItem = ({ key, name, address, rating, tags, votes, photoUrl }) => (
   <Card style={ { width: '75%', margin: '5% 12.5%' } }>
+    <CardHeader
+      title={votes.size()}
+      avatar="http://emojipedia.org/apple/ios-9.3/thumbs-up-sign/"
+    />
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
@@ -36,6 +40,7 @@ EventItem.propTypes = {
   address: React.PropTypes.string.isRequired,
   rating: React.PropTypes.number.isRequired,
   tags: React.PropTypes.arrayOf(React.PropTypes.string),
+  votes: React.PropTypes.array.isRequired,
   photoUrl: React.PropTypes.string.isRequired,
 };
 
