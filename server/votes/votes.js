@@ -18,10 +18,9 @@ Vote.sync();
 User.sync();
 Event.sync();
 
-Vote.createVotes = (eventId, votes) => Vote.bulkCreate(votes, { returning: true })
-  .then(createdVotes => Event.findOne({ where: { id: eventId } })
-  .then(event => event.addVotes(createdVotes)))
-  .catch(err => err);
+Vote.createVote = (userId, eventId) =>
+    Vote.create({ userId, eventId }, { returning: true })
+    .catch(err => err);
 
 Vote.getAllVotes = eventId => Event.findOne({ where: { id: eventId } })
   .then(event => event.getVotes())
