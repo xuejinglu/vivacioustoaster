@@ -4,6 +4,7 @@ const Trip = require('../trips/trips');
 const Destination = require('../destinations/destinations');
 const Event = require('../events/events');
 const User = require('../users/users');
+const Vote = require('../votes/votes');
 const Promise = require('bluebird');
 
 module.exports = {
@@ -21,6 +22,9 @@ module.exports = {
                     destinations.forEach(destination => {
                       // later add logic for adding events to a single destination
                       destination.addEvents(events)
+                        .then(() =>
+                          Promise.all(events.map(event =>
+                            Vote.createVote(req.user, event.dataValues.id)))
                         .then(() => {
                           const addUsers = [...req.body.friends, req.user];
                           Promise.all(addUsers.map(addUser =>
@@ -32,7 +36,7 @@ module.exports = {
                                 res.status(201).json(trip);
                               });
                           });
-                        });
+                        }));
                     });
                   });
               });
