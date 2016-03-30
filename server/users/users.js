@@ -14,7 +14,7 @@ const UserFriend = db.define('friends', {});
 // creates userId column in friends join table
 // creates friendId column in friends join table
 // will add methods to User (ex. User.getFriends())
-User.belongsToMany(User, { as: 'Friends', through: UserFriend });
+User.belongsToMany(User, { as: 'Friends', through: UserFriend, constraints: false });
 
 UserFriend.sync();
 User.sync();
