@@ -40,7 +40,7 @@ export const chooseDest = key => ({
   },
 });
 
-const clearDest = () => ({
+export const clearDest = () => ({
   type: 'CLEAR_DEST',
 });
 

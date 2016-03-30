@@ -52,8 +52,8 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
     if (trip.id === undefined) {
       onNextQuery();
       if (currPage === destinations.length) {
-        onClickReset();
         onClickSave(destinations, tripType, friends, events, goNext);
+        onClickReset();
       } else {
         onNextEvents(currPage);
       }
