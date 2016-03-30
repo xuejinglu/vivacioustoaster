@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { SELECT_TRIP } from './tripPlanActions';
 import dest from './dest/destReducers';
 import event from './event/eventReducers';
+import vote from './vote/voteReducers';
 import tripOverview from './tripOverview/travelFriendReducers';
 
 const selectedTrip = (state = {}, action) => {
@@ -20,6 +21,7 @@ const tripPlanReducer = combineReducers({
   selectedTrip,
   dest,
   event,
+  vote,
   tripOverview,
 });
 
