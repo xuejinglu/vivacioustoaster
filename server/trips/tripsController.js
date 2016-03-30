@@ -24,15 +24,15 @@ module.exports = {
                     .then(eventsInDest =>
                       Promise.all(eventsInDest.map(event =>
                         Vote.createVote(req.user.id, event.dataValues.id)))
-                      .then(() => 
+                      .then(() =>
                         destinations.map((destination, destIdx) => { // eslint-disable-line
                         // later add logic for adding events to a single destination
-                          if(destIdx === eventIdx){
-                            destination.addEvents(eventsInDest)
+                          if (destIdx === eventIdx) {
+                            destination.addEvents(eventsInDest);
                           }
                         })
                       )
-                    )
+                    );
                 }))
                 .then(() => {
                   const addUsers = [...req.body.friends, req.user];
@@ -42,7 +42,7 @@ module.exports = {
                   .then(users =>
                     trip.addUsers(users)
                       .then(() => res.status(201).json(trip))
-                  )
+                  );
                 });
               });
           });

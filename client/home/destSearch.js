@@ -2,7 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import { TextField, RaisedButton } from 'material-ui';
 import { connect } from 'react-redux';
-import { changeStartDate, changeEndDate, changeDestination, addDestination } from './homeActions';
+import { changeStartDate, changeEndDate,
+changeDestination, addDestination, clearDestination } from './homeActions';
 import DatePicker
 from '../../node_modules/material-ui/lib/date-picker/date-picker';
 import Geosuggest from 'react-geosuggest';
@@ -17,9 +18,10 @@ const mapDispatchToProps = dispatch => ({
   onChangeStartDate: newStartDate => dispatch(changeStartDate(newStartDate)),
   onChangeEndDate: newEndDate => dispatch(changeEndDate(newEndDate)),
   onAddDest: () => dispatch(addDestination()),
+  onResetDest: () => dispatch(clearDestination()),
 });
 
-let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, onChangeEndDate, onAddDest }) => ( // eslint-disable-line
+let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, onChangeEndDate, onAddDest, onResetDest }) => ( // eslint-disable-line
   <div>
     <Geosuggest placeholder="ex: London" onBlur={event =>
       event ? onChangeDestination(event.value) : null
@@ -35,7 +37,10 @@ let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, 
     />
     <RaisedButton
       label="Add Destination"
-      onClick={onAddDest}
+      onClick={ () => {
+        onAddDest();
+        onResetDest();
+      }}
     />
   </div>
 );
@@ -47,6 +52,7 @@ DestSearch.propTypes = {
   startDate: React.PropTypes.object.isRequired,
   endDate: React.PropTypes.object.isRequired,
   onAddDest: React.PropTypes.func.isRequired,
+  onResetDest: React.PropTypes.func.isRequired,
 };
 
 DestSearch = connect(mapStateToProps, mapDispatchToProps)(DestSearch);
