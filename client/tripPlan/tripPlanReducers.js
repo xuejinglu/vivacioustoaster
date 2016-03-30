@@ -8,6 +8,8 @@ const selectedTrip = (state = {}, action) => {
   switch (action.type) {
     case SELECT_TRIP:
       return action.payload.trip;
+    case 'DESELECT_TRIP':
+      return {};
     default:
       return state;
   }

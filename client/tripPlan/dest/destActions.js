@@ -40,8 +40,12 @@ export const chooseDest = key => ({
   },
 });
 
-export const clearDest = () => ({
+const clearDest = () => ({
   type: 'CLEAR_DEST',
+});
+
+export const clearAll = () => ({
+  type: 'CLEAR_ALL',
 });
 
 const fetchEvents = (destination) => {
@@ -56,7 +60,6 @@ const fetchEvents = (destination) => {
       },
     }).then(res => res.json())
       .then(events => {
-        console.log(events);
         dispatch(receiveEventsInDest(events));
       })
       .catch(err => console.error(err)); // add proper error handling

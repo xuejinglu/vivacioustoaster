@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
       state = state.setIn(['destination', 'location'], null);
       state = state.setIn(['destination', 'startDate'], null);
       state = state.setIn(['destination', 'endDate'], null);
+      state = state.set('destinations', Immutable.List());
       state = state.set('tripType', 'Group');
       return state;
     case 'CLEAR_DESTINATIONS':

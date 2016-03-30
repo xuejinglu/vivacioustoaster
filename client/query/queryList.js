@@ -6,7 +6,7 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save, toggleEvent, nextQuery, nextEvents, updateEvents } from './queryActions';
+import { save, toggleEvent, nextQuery, nextEvents, updateEvents, reset } from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
@@ -34,9 +34,10 @@ const mapDispatchToProps = dispatch => ({
   onNextQuery: () => dispatch(nextQuery()),
   onNextEvents: (currPage) => dispatch(nextEvents(currPage)),
   goNext: (name) => dispatch(push(name)),
+  onClickReset: () => dispatch(reset()),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset }) => ( // eslint-disable-line
   <div>
     Choose the places you want to go!
   <List>
@@ -51,6 +52,7 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
     if (trip.id === undefined) {
       onNextQuery();
       if (currPage === destinations.length) {
+        onClickReset();
         onClickSave(destinations, tripType, friends, events, goNext);
       } else {
         onNextEvents(currPage);
@@ -78,6 +80,7 @@ QueryList.propTypes = {
   goNext: React.PropTypes.func,
   currEvents: React.PropTypes.array,
   destId: React.PropTypes.number,
+  onClickReset: React.PropTypes.func,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

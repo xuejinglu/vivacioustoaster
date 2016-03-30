@@ -17,6 +17,10 @@ const selectTrip = trip => ({
   },
 });
 
+export const deselectTrip = () => ({
+  type: 'DESELECT_TRIP',
+});
+
 // Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
 // can dispatch other actions. In this case, we return a function that:
 // (1) dispatches an action that updates the selectedTrip variable

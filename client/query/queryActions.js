@@ -49,6 +49,10 @@ export const receiveEvents = (events) => ({
   },
 });
 
+export const reset = () => ({
+  type: 'RESET',
+});
+
 export const updateEvents = (events, dest, goNext, destIdx) => {
   const addedEvents = events[0].filter(event => event.addedToDest);
   const token = cookie.load('token');

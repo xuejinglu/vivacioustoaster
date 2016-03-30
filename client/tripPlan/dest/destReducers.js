@@ -32,6 +32,11 @@ const destinations = (state = initialState, action) => {
       return state.set('key', action.payload.key);
     case 'CLEAR_DEST':
       return state.set('events', Immutable.List());
+    case 'CLEAR_ALL':
+      state = state.set('destinations', Immutable.List());
+      state = state.set('events', Immutable.List());
+      state = state.set('key', null);
+      return state;
     case FETCH_DEST_FAILURE:
       // return state.set('')
     default:

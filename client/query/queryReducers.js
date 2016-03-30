@@ -36,6 +36,8 @@ const events = (state = initialState, action) => {
       const eventsQueue = state.get('events');
       const newEvents = eventsQueue[action.payload.currPage];
       return state.set('currEvents', newEvents);
+    case 'RESET':
+      return state.set('currPage', 0);
     default:
       return state;
   }
