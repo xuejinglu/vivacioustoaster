@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const Promise = require('bluebird');
 const FLICKR_PHOTOSEARCH_URL = 'http://flickr.com/services/rest';
-
+const PHOTOS_TO_RETURN = '10';
 const FARM_ID = '{FARM_ID}';
 const SERVER_ID = '{SERVER_ID}';
 const PHOTO_ID = '{PHOTO_ID}';
@@ -14,18 +14,22 @@ const constructPhotoUrl = photo =>
                      .replace(PHOTO_ID, photo.id)
                      .replace(PHOTO_SECRET, photo.secret);
 
-const getDestinationPhotos = destinations => {
-  const optionsArray = destinations.map(destination => ({
+// Fetches photos from Flickr for a given array of resources (destinations or events);
+// Params: destinations/events array
+// Returns: Destinations/events array, each object modified with additional property of
+// photoUrl
+
+const getResourcePhotos = resources => {
+  const optionsArray = resources.map(resource => ({
     uri: FLICKR_PHOTOSEARCH_URL,
     qs: {
       method: 'flickr.photos.search',
       api_key: process.env.FLICKR_PHOTOS_KEY,
       format: 'json',
-      text: destination.location,
+      text: resource.location || resource.name,
       sort: 'interestingness-desc',
-      is_getty: true,
       media: 'photos',
-      per_page: '1',
+      per_page: PHOTOS_TO_RETURN,
     },
     headers: {
       'User-Agent': 'Request-Promise',
@@ -37,16 +41,14 @@ const getDestinationPhotos = destinations => {
     rp(options)
       .then(data => {
         data = JSON.parse(data.match(/^jsonFlickrApi\((.*)\)$/)[1]);
-        console.log('DATA TYPE: ', typeof data);
-        console.log('DAATA RESULTS: ', data);
-        const photo = data.photos.photo[0];
-        const destination = destinations[index];
+        const photo = data.photos.photo[Math.floor(Math.random() * PHOTOS_TO_RETURN)];
+        const resource = resources[index];
 
-        destination.photoUrl = constructPhotoUrl(photo);
-        return destination;
+        resource.photoUrl = constructPhotoUrl(photo);
+        return resource;
       })
       .catch(err => err)
   ));
 };
 
-module.exports = getDestinationPhotos;
+module.exports = getResourcePhotos;
