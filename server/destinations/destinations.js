@@ -23,7 +23,7 @@ Destination.createDestinations = (destinations) =>
   extendResourceWithPhotos(destinations)
     .then(destinationsWithPhotos =>
       // returning true to gain access to the destination ID from the db.
-      Destination.bulkCreate(destinationsWithPhotos, { returning: true }).catch(err => err)
+      Destination.bulkCreate(destinationsWithPhotos, { returning: true })
     )
     .catch(err => err);
 
