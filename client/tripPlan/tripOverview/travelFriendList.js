@@ -55,10 +55,7 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
             needsInvite = false;
           }
         });
-        if (needsInvite) {
-          return true;
-        }
-        return false;
+       return needsInvite;
       })
       .map(friend =>
         <FriendItem className="friendsItems"
