@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const Destination = require('../destinations/destinations');
-const extendResourceWithPhotos = require('../destinations/flickrSearch');
+const extendResourceWithPhotos = require('../utils/flickrSearch');
 
 const Event = db.define('events', {
   address: Sequelize.STRING,

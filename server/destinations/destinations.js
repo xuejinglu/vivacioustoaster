@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const Trip = require('../trips/trips');
-const extendResourceWithPhotos = require('./flickrSearch');
+const extendResourceWithPhotos = require('../utils/flickrSearch');
 
 const Destination = db.define('destinations', {
   startDate: Sequelize.DATE,
