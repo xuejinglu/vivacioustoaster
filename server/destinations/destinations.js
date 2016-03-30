@@ -19,7 +19,7 @@ Trip.hasMany(Destination, { constraints: false });
 Destination.sync();
 Trip.sync();
 
-Destination.createDestinations = (destinations) =>
+Destination.createDestinations = destinations =>
   extendResourceWithPhotos(destinations)
     .then(destinationsWithPhotos =>
       // returning true to gain access to the destination ID from the db.
