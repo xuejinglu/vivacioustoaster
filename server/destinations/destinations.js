@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const Trip = require('../trips/trips');
-const getDestinationPhotos = require('./flickrSearch');
+const getResourcePhotos = require('./flickrSearch');
 
 const Destination = db.define('destinations', {
   startDate: Sequelize.DATE,
@@ -20,7 +20,7 @@ Destination.sync();
 Trip.sync();
 
 Destination.createDestinations = (destinations) =>
-  getDestinationPhotos(destinations)
+  getResourcePhotos(destinations)
     .then(destinationsWithPhotos =>
       // returning true to gain access to the destination ID from the db.
       Destination.bulkCreate(destinationsWithPhotos, { returning: true }).catch(err => err)
