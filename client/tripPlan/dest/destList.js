@@ -5,15 +5,14 @@ import List from 'material-ui/lib/lists/list';
 
 const mapStateToProps = state => ({
   destinations: state.tripPlan.dest.get('destinations'),
-  events: state.tripPlan.dest.get('events'),
 });
 
-let DestList = ({ destinations, events }) => (
+let DestList = ({ destinations }) => (
   <div>
     <List>
       {destinations.map((destination, destIdx) =>
         <DestItem
-          destIdx={destIdx} events={events.get(destIdx)}
+          destIdx={destIdx}
           key={ destination.id } {...destination}
         />
       )}
@@ -23,7 +22,6 @@ let DestList = ({ destinations, events }) => (
 
 DestList.propTypes = {
   destinations: React.PropTypes.object.isRequired,
-  events: React.PropTypes.array.isRequired,
 };
 
 DestList = connect(mapStateToProps)(DestList);

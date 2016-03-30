@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import EventItem from './eventItem';
 import List from 'material-ui/lib/lists/list';
 
-let EventList = ({ events }) => (
+const mapStateToProps = state => ({
+  events: state.tripPlan.event.get('events'),
+});
+
+let EventList = ({ destIdx, events }) => (
   <div>
     <List>
-      {events.map(event =>
+      {events.get(destIdx).map(event =>
         <EventItem key={ event.id } {...event} />
       )}
     </List>
@@ -15,8 +19,9 @@ let EventList = ({ events }) => (
 
 EventList.propTypes = {
   events: React.PropTypes.array.isRequired,
+  destIdx: React.PropTypes.number.isRequired,
 };
 
-EventList = connect()(EventList);
+EventList = connect(mapStateToProps)(EventList);
 
 export default EventList;

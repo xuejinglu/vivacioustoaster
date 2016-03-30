@@ -8,7 +8,8 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import EventList from '../event/eventList';
 import Moment from 'moment';
-import { chooseDest, clearDest } from './destActions';
+import { chooseDest } from './destActions';
+import { clearDest } from '../event/eventActions';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 
@@ -17,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   onClearDest: () => dispatch(clearDest()),
 });
 
-let DestItem = ({ destIdx, events, key, location, startDate, endDate, onChooseDest, onClearDest }) => (// eslint-disable-line
+let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onClearDest }) => (// eslint-disable-line
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
@@ -40,7 +41,7 @@ let DestItem = ({ destIdx, events, key, location, startDate, endDate, onChooseDe
         onMouseUp={ () => onClearDest() }
       />
     </Link>
-    <EventList events={events} />
+    <EventList destIdx={destIdx} />
   </Card>
 );
 

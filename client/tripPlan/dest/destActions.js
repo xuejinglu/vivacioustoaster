@@ -2,11 +2,11 @@ import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
 import cookie from 'react-cookie';
 import Promise from 'bluebird';
+import { fetchEvents } from '../event/eventActions';
 
 export const REQUEST_DESTINATIONS = 'REQUEST_DESTINATIONS';
 export const RECEIVE_DESTINATIONS = 'RECEIVE_DESTINATIONS';
 export const FETCH_DEST_FAILURE = 'FETCH_DEST_FAILURE';
-export const RECEIVE_EVENTS_IN_DEST = 'RECEIVE_EVENTS_IN_DEST';
 
 const requestDestinations = () => ({
   type: REQUEST_DESTINATIONS,
@@ -26,13 +26,6 @@ const fetchDestinationsError = message => ({
   },
 });
 
-const receiveEventsInDest = events => ({
-  type: RECEIVE_EVENTS_IN_DEST,
-  payload: {
-    events,
-  },
-});
-
 export const chooseDest = key => ({
   type: 'CHOOSE_DEST',
   payload: {
@@ -40,30 +33,10 @@ export const chooseDest = key => ({
   },
 });
 
-export const clearDest = () => ({
-  type: 'CLEAR_DEST',
-});
-
 export const clearAll = () => ({
   type: 'CLEAR_ALL',
 });
 
-const fetchEvents = (destination) => {
-  const token = cookie.load('token');
-  return dispatch =>
-    fetch(`/api/destinations/${destination.id}/events`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token,
-      },
-    }).then(res => res.json())
-      .then(events => {
-        dispatch(receiveEventsInDest(events));
-      })
-      .catch(err => console.error(err)); // add proper error handling
-};
 
 // Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
 // can dispatch other actions. In this case, we return a function that:
@@ -74,6 +47,7 @@ const fetchEvents = (destination) => {
 
 export const fetchDestinations = (trip, goNext) =>
   dispatch => {
+    console.log('FETCHEventsFUNC: ', fetchEvents);
     // update 'isFetching' state
     const token = cookie.load('token');
     dispatch(requestDestinations());
@@ -86,6 +60,7 @@ export const fetchDestinations = (trip, goNext) =>
       },
     }).then(res => res.json())
       .then(destinations => {
+        console.log('FETCHEventsinDEST: ', fetchEvents);
         dispatch(receiveDestinations(destinations));
         Promise.all(destinations.map(destination =>
           dispatch(fetchEvents(destination, goNext))))
