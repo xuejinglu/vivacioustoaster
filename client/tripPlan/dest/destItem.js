@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
   onClearDest: () => dispatch(clearDest()),
 });
 
-let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onClearDest }) => (// eslint-disable-line
+let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onClearDest, photoUrl }) => (// eslint-disable-line
   <Card style={ { width: '50%', margin: '5%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
@@ -26,7 +26,7 @@ let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onCl
         ${Moment(endDate).format('MM/DD/YYYY')}`}
       />}
     >
-      <img src="http://lorempixel.com/500/300/nature/" />
+      <img src={photoUrl} />
     </CardMedia>
     <CardText>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -54,6 +54,7 @@ DestItem.propTypes = {
   onChooseDest: React.PropTypes.func.isRequired,
   onClearDest: React.PropTypes.func.isRequired,
   destIdx: React.PropTypes.any,
+  photoUrl: React.PropTypes.string.isRequired,
 };
 
 DestItem = connect(null, mapDispatchToProps)(DestItem);
