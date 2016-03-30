@@ -1,26 +1,28 @@
 import fetch from 'isomorphic-fetch';
 import cookie from 'react-cookie';
+import Promise from 'bluebird';
 
-const receiveVotesForEvent = votes => ({
-  type: 'RECEIVE_VOTES_FOR_EVENT',
+const receiveVotesForEvents = votes => ({
+  type: 'RECEIVE_VOTES_FOR_EVENTS',
   payload: {
     votes,
   },
 });
 
-export const fetchVotes = event => {
+export const fetchVotes = events => {
   const token = cookie.load('token');
   return dispatch =>
-    fetch(`/api/event/${event.id}/votes`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token,
-      },
-    }).then(res => res.json())
-      .then(votes => {
-        dispatch(receiveVotesForEvent(votes));
-      })
-      .catch(err => console.error(err)); // add proper error handling
+    Promise.all(events.map(event =>
+      fetch(`/api/event/${event.id}/votes`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          token,
+        },
+      }).then(res => res.json())
+    )).then(votes => {
+      dispatch(receiveVotesForEvents(votes));
+    })
+    .catch(err => console.error(err)); // add proper error handling
 };
