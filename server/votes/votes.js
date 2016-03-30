@@ -19,9 +19,9 @@ User.sync();
 Event.sync();
 
 Vote.createVote = (voter, eventId) =>
-  User.findOne({ where: { id: voter.id } }).then(user =>
-  Vote.create({ userId: user.id, eventId }, { returning: true })
-  .catch(err => err));
+  User.findOne({ where: { fbId: voter.fbId } }).then(user =>
+    Vote.create({ userId: user.dataValues.id, eventId }, { returning: true })
+    .catch(err => err));
 
 Vote.getAllVotes = eventId => Event.findOne({ where: { id: eventId } })
   .then(event => event.getVotes())
