@@ -19,14 +19,13 @@ Trip.hasMany(Destination, { constraints: false });
 Destination.sync();
 Trip.sync();
 
-Destination.createDestinations = (destinations) => {
+Destination.createDestinations = (destinations) =>
   getDestinationPhotos(destinations)
     .then(destinationsWithPhotos =>
       // returning true to gain access to the destination ID from the db.
       Destination.bulkCreate(destinationsWithPhotos, { returning: true }).catch(err => err)
     )
     .catch(err => err);
-};
 
 Destination.getDestinations = tripId =>
   Destination.findAll({ where: { tripId } }).catch(err => err);
