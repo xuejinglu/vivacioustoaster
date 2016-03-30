@@ -8,27 +8,6 @@ const receiveFriendsInTrip = friends => ({
   },
 });
 
-export const addFriends = (friends, tripId) =>
-  dispatch =>{
-    console.log('inside addFriends function, about to fetch POST');
-    const token = cookie.load('token');
-    return fetch(`api/trips/${tripId}/users`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token,
-      },
-      body: JSON.stringify({
-        friends,
-      })
-    })
-      .then(res => res.json())
-      .then(trip => {console.log('returned trip from addFriends is ', trip); return dispatch(fetchFriends(trip));
-      })
-      .catch(err => console.error(err));
-  }
-
 export const fetchFriends = trip =>
   dispatch =>
     fetch(`/api/trips/${trip.id}/users`, {
@@ -46,3 +25,22 @@ export const fetchFriends = trip =>
 export const toggleList = () => ({
   type: 'TOGGLE_LIST',
 });
+
+export const addFriends = (friends, tripId) =>
+  dispatch => {
+    const token = cookie.load('token');
+    return fetch(`api/trips/${tripId}/users`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token,
+      },
+      body: JSON.stringify({
+        friends,
+      }),
+    })
+      .then(res => res.json())
+      .then(trip => dispatch(fetchFriends(trip)))
+      .catch(err => console.error(err));
+  };
