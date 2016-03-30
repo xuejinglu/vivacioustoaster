@@ -24,7 +24,7 @@ module.exports = {
                       destination.addEvents(events)
                         .then(() =>
                           Promise.all(events.map(event =>
-                            Vote.createVote(req.user, event.dataValues.id)))
+                            Vote.createVote(req.user.id, event.dataValues.id)))
                         .then(() => {
                           const addUsers = [...req.body.friends, req.user];
                           Promise.all(addUsers.map(addUser =>
