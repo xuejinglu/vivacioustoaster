@@ -13,7 +13,7 @@ const vote = (state, action) => {
 
 const votes = (state = initialState, action) => {
   switch (action.type) {
-    case 'RECEIVE_EVENTS_IN_DEST':
+    case 'RECEIVE_VOTES_IN_EVENTS':
       return state.set('votes', action.payload.votes);
     default:
       return state;
