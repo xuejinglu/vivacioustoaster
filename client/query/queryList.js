@@ -22,23 +22,24 @@ const mapStateToProps = state => ({
   dest: state.tripPlan.dest.get('destinations'),
   currEvents: state.query.get('currEvents'),
   currPage: state.query.get('currPage'),
+  destId: state.tripPlan.dest.get('key'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onClickSave: (destinations, tripType, friends, events, goNext) =>
     dispatch(save(destinations, tripType, friends, events, goNext)),
   onClickToggle: event => dispatch(toggleEvent(event)),
-  onClickUpdate: (events, trip) => dispatch(updateEvents(events, trip)),
+  onClickUpdate: (events, trip, goNext, destId) => dispatch(updateEvents(events, trip, goNext, destId)),// eslint-disable-line
   onNextQuery: () => dispatch(nextQuery()),
   onNextEvents: (currPage) => dispatch(nextEvents(currPage)),
   goNext: (name) => dispatch(push(name)),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId }) => ( // eslint-disable-line
   <div>
     Choose the places you want to go!
   <List>
-  {events.map(event =>
+  {currEvents.map(event =>
         <QueryItem key={ event.id } { ...event }
           eventToggle={ () => onClickToggle(event) }
         />
@@ -52,10 +53,10 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         onClickSave(destinations, tripType, friends, events, goNext);
       } else {
         onNextEvents(currPage);
-      }  
+      }
     } else {
-      onClickUpdate(events, dest);
-  }}}
+      onClickUpdate(events, dest, goNext, destId);
+    }}}
   />
   </div>
 );
@@ -75,6 +76,7 @@ QueryList.propTypes = {
   onNextEvents: React.PropTypes.func,
   goNext: React.PropTypes.func,
   currEvents: React.PropTypes.array,
+  destId: React.PropTypes.number,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

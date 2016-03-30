@@ -49,10 +49,10 @@ export const receiveEvents = (events) => ({
   },
 });
 
-export const updateEvents = (events, dest) => {
-  const addedEvents = events.filter(event => event.addedToDest);
+export const updateEvents = (events, dest, goNext, destIdx) => {
+  const addedEvents = events[0].filter(event => event.addedToDest);
   const token = cookie.load('token');
-  const destId = dest[0].id;
+  const destId = dest[destIdx].id;
   return dispatch =>
     fetch(`/api/destinations/${destId}/events`, {
       method: 'POST',
@@ -65,7 +65,7 @@ export const updateEvents = (events, dest) => {
         events: addedEvents,
       }),
     }).then(res => res.json())
-      .then(trip => dispatch(setTripAndGetDestinations(trip)))
+      .then(trip => dispatch(setTripAndGetDestinations(trip, goNext)))
       .catch(err => console.error(err)); // add proper error handling
 };
 

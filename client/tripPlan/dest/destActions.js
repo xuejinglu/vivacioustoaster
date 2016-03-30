@@ -33,6 +33,13 @@ const receiveEventsInDest = events => ({
   },
 });
 
+export const chooseDest = key => ({
+  type: 'CHOOSE_DEST',
+  payload: {
+    key,
+  },
+});
+
 const fetchEvents = (destination) => {
   const token = cookie.load('token');
   return dispatch =>
@@ -45,6 +52,7 @@ const fetchEvents = (destination) => {
       },
     }).then(res => res.json())
       .then(events => {
+        console.log(events);
         dispatch(receiveEventsInDest(events));
       })
       .catch(err => console.error(err)); // add proper error handling

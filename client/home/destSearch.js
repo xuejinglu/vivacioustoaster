@@ -44,9 +44,9 @@ DestSearch.propTypes = {
   onChangeDestination: React.PropTypes.func.isRequired,
   onChangeStartDate: React.PropTypes.func.isRequired,
   onChangeEndDate: React.PropTypes.func.isRequired,
-  onAddDest: React.PropTypes.func.isRequired,
   startDate: React.PropTypes.object.isRequired,
   endDate: React.PropTypes.object.isRequired,
+  onAddDest: React.PropTypes.func.isRequired,
 };
 
 DestSearch = connect(mapStateToProps, mapDispatchToProps)(DestSearch);

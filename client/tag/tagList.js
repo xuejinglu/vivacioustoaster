@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
   chosen: state.tripPlan.dest.get('destinations'),
   destinations: state.home.get('destinations'),
   currPage: state.query.get('currPage'),
+  destId: state.tripPlan.dest.get('key'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -41,7 +42,7 @@ const styles = {
   },
 };
 
-let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage, destId }) => ( // eslint-disable-line
   <div style={styles.block}>
     <GridList
       cellHeight={200}
@@ -64,11 +65,9 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
     if (chosen.size === 0) {
-      const newDestination = [destinations.toJS()];
-      console.log(newDestination);
-      onStartSearch(goNext, tags, newDestination, currPage);
+      onStartSearch(goNext, tags, destinations, currPage);
     } else {
-      onStartSearch(goNext, tags, chosen);
+      onStartSearch(goNext, tags, [chosen[destId]], 0, destId);
     }
   }}
   />
@@ -84,6 +83,7 @@ TagList.propTypes = {
   destinations: React.PropTypes.array.isRequired,
   chosen: React.PropTypes.array.isRequired,
   currPage: React.PropTypes.number.isRequired,
+  destId: React.PropTypes.any.isRequired,
 };
 
 TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);

@@ -6,6 +6,7 @@ const initialState = Immutable.Map({
   isFetching: false,
   destinations: Immutable.List(),
   events: Immutable.List(),
+  key: null,
 });
 
 // not using this yet, but if we add sorting or filtering, we'll need it
@@ -29,6 +30,9 @@ const destinations = (state = initialState, action) => {
     case RECEIVE_DESTINATIONS:
       state = state.set('isFetching', false);
       return state.set('destinations', action.payload.destinations);
+    case 'CHOOSE_DEST':
+      console.log(action.payload.key);
+      return state.set('key', action.payload.key);
     case FETCH_DEST_FAILURE:
       // return state.set('')
     default:

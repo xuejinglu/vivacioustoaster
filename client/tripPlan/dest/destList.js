@@ -12,7 +12,10 @@ let DestList = ({ destinations, events }) => (
   <div>
     <List>
       {destinations.map((destination, destIdx) =>
-        <DestItem events={events.get(destIdx)} key={ destination.id } {...destination} />
+        <DestItem
+          destIdx={destIdx} events={events.get(destIdx)}
+          key={ destination.id } {...destination}
+        />
       )}
     </List>
   </div>
