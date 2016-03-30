@@ -25,7 +25,8 @@ let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, 
     }
       onSuggestSelect={suggest => onChangeDestination(suggest.label)}
     />
-    <DatePicker hintText="Departure Date" minDate={new Date()} maxDate={endDate}
+    <DatePicker hintText="Departure Date" minDate={new Date()}
+      maxDate={endDate ? endDate : new Date(Date.now() * 60)} // eslint-disable-line
       onChange={(event, newDate) => onChangeStartDate(newDate)}
     />
     <DatePicker hintText="End Date" minDate={startDate || new Date()}
