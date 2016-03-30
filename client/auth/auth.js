@@ -9,7 +9,7 @@ import cookie from 'react-cookie';
 
 
 class Auth extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.onCheckForLogin(this.props.isAuthenticated);
   }
 
