@@ -19,7 +19,7 @@ const constructPhotoUrl = photo =>
 // Returns: Destinations/events array, each object modified with additional property of
 // photoUrl
 
-const getResourcePhotos = resources => {
+const extendResourceWithPhotos = resources => {
   const optionsArray = resources.map(resource => ({
     uri: FLICKR_PHOTOSEARCH_URL,
     qs: {
@@ -51,4 +51,4 @@ const getResourcePhotos = resources => {
   ));
 };
 
-module.exports = getResourcePhotos;
+module.exports = extendResourceWithPhotos;
