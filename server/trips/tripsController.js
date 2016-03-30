@@ -88,7 +88,7 @@ module.exports = {
     .then(trip => res.status(201).json(trip))
     .catch(err => {
       helpers.errorHandler(err, req, res, next);
-    })
+    });
   },
 
 };
