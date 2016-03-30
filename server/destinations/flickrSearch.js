@@ -41,7 +41,9 @@ const extendResourceWithPhotos = resources => {
     rp(options)
       .then(data => {
         data = JSON.parse(data.match(/^jsonFlickrApi\((.*)\)$/)[1]);
-        const photo = data.photos.photo[Math.floor(Math.random() * PHOTOS_TO_RETURN)];
+        const photos = data.photos.photo;
+        const maxIndex = Math.min(photos.length, PHOTOS_TO_RETURN);
+        const photo = photos[Math.floor(Math.random() * maxIndex)];
         const resource = resources[index];
 
         resource.photoUrl = constructPhotoUrl(photo);
