@@ -6,6 +6,10 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Avatar from 'material-ui/lib/avatar';
 import DropDownMenu from 'material-ui/lib/DropDownMenu/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import ContentAddCircle
+from 'material-ui/lib/svg-icons/content/add-circle';
+import ContentRemoveCircle
+from 'material-ui/lib/svg-icons/content/remove-circle';
 import FriendItem from '../../friend/friendItem';
 import { toggleList } from './travelFriendActions';
 import { addFriends } from './travelFriendActions';
@@ -33,13 +37,16 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
         <TravelFriendItem key={ friend.id } {...friend} />
       )}
     </List>
-
     <ListItem primaryText={listToggle ? 'Hide list' : 'Add more friends!'}
       leftAvatar={
-        <Avatar src={listToggle ?
-          'http://www.aisletracker.com/afc/images/icons/red_minus.png' : '../../assets/add.png'}
-          style= {{ width: '1em', height: '1em', marginTop: '7px', left: '5px' }}
-        />}
+        listToggle ?
+          <ContentRemoveCircle color='#00bcd4' hoverColor='red'
+            style= {{ width: '2em', height: '2em', marginTop: '4px', marginLeft: '5px' }}
+          /> :
+          <ContentAddCircle color='#00bcd4' hoverColor='green'
+            style= {{ width: '2em', height: '2em', marginTop: '4px', marginLeft: '5px' }}
+          />
+        }
       style={{ marginBottom: '-10px' }}
       onClick={() => onClickToggleList() }
     />
@@ -55,7 +62,7 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
             needsInvite = false;
           }
         });
-       return needsInvite;
+        return needsInvite;
       })
       .map(friend =>
         <FriendItem className="friendsItems"
