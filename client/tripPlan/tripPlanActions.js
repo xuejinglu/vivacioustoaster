@@ -39,7 +39,7 @@ export const setTripAndGetDestinations = (trip, goNext) =>
     dispatch(clearDestinations());
   };
 
-export const getAllTripInfo = tripId =>
+export const getAllTripInfo = (tripId, goNext) =>
   dispatch => {
     const token = cookie.load('token');
     return fetch(`/api/trips/${tripId}`, {
@@ -52,7 +52,6 @@ export const getAllTripInfo = tripId =>
     })
     .then(res => res.json())
     .then(trip => {
-      dispatch(setTripAndGetDestinations(trip));
-      dispatch(push('/tripPlan'));
+      dispatch(setTripAndGetDestinations(trip, goNext));
     });
   };
