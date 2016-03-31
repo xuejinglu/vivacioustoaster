@@ -4,7 +4,7 @@
   "description": "Group travel made easy",
   "main": "webpack.config.js",
   "scripts": {
-    "start":"forever start redis-server && forever start server/server.js",
+    "start":"forever start server/server.js",
     "test": "karma start && mocha server/__tests__/.",
     "lint": "eslint .",
     "validate": "npm ls"
