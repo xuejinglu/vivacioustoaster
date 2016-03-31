@@ -40,10 +40,10 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
     <ListItem primaryText={listToggle ? 'Hide list' : 'Add more friends!'}
       leftAvatar={
         listToggle ?
-          <ContentRemoveCircle color='#00bcd4' hoverColor='red'
+          <ContentRemoveCircle color="#00bcd4" hoverColor="red"
             style= {{ width: '2em', height: '2em', marginTop: '4px', marginLeft: '5px' }}
           /> :
-          <ContentAddCircle color='#00bcd4' hoverColor='green'
+          <ContentAddCircle color="#00bcd4" hoverColor="green"
             style= {{ width: '2em', height: '2em', marginTop: '4px', marginLeft: '5px' }}
           />
         }
