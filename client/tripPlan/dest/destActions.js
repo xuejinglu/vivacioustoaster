@@ -47,7 +47,6 @@ export const clearAll = () => ({
 
 export const fetchDestinations = (trip, goNext) =>
   dispatch => {
-    console.log('FETCHEventsFUNC: ', fetchEvents);
     // update 'isFetching' state
     const token = cookie.load('token');
     dispatch(requestDestinations());
@@ -60,7 +59,6 @@ export const fetchDestinations = (trip, goNext) =>
       },
     }).then(res => res.json())
       .then(destinations => {
-        console.log('FETCHEventsinDEST: ', fetchEvents);
         dispatch(receiveDestinations(destinations));
         Promise.all(destinations.map(destination =>
           dispatch(fetchEvents(destination, goNext))))
