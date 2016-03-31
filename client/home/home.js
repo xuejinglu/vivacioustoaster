@@ -8,7 +8,6 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import { clearDestination, clearDestinations } from './homeActions';
 
-
 class Home extends React.Component {
   componentWillMount() {
     this.props.goClearDestinations();
@@ -27,12 +26,16 @@ class Home extends React.Component {
           />
         )}
         </List>
-        <Link to="friend"><RaisedButton label="Create Trip" /></Link>
+        <Link to="friend" style={{
+          visibility: destinations.length ? 'visible' : 'hidden',
+        }}
+        >
+          <RaisedButton label="Create Trip" />
+        </Link>
       </div>
     );
   }
 }
-
 
 Home.propTypes = {
   destinations: React.PropTypes.array.isRequired,
