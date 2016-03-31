@@ -49,6 +49,7 @@ const initialState = Immutable.Map({
       addedToTrip: false,
     },
   ]),
+  loadingEvents: false,
 });
 
 const tag = (state, action) => {
@@ -79,6 +80,12 @@ const tags = (state = initialState, action) => {
       const Tags = state.get('tags');
       const clearedTags = Tags.map(t => tag(t, action));
       return state.set('tags', clearedTags);
+    case 'START_LOAD':
+      return state.set('loadingEvents', true);
+      // console.log('STARTLOAD STATE IS NOW', state);
+      // return state;
+    case 'END_LOAD':
+      return state.set('loadingEvents', false);
     default:
       return state;
   }
