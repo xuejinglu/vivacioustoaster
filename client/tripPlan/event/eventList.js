@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EventItem from './eventItem';
 import List from 'material-ui/lib/lists/list';
 import CardTitle from 'material-ui/lib/card/card-title';
+import { voteOnEvent } from '../vote/voteActions';
 
 const mapStateToProps = state => ({
   events: state.tripPlan.event.get('events'),
@@ -10,7 +11,11 @@ const mapStateToProps = state => ({
   destinations: state.tripPlan.dest.get('destinations'),
 });
 
-let EventList = ({ destinations, destIdx, events, votes }) => (
+const mapDispatchToProps = dispatch => ({
+  voteOnEvents: eventId => dispatch(voteOnEvent(eventId)),
+});
+
+let EventList = ({ destinations, destIdx, events, votes, voteOnEvents }) => (
   <div>
     <CardTitle
       title={`Places To See In ${destinations[destIdx].location}`}
@@ -19,7 +24,9 @@ let EventList = ({ destinations, destIdx, events, votes }) => (
     <List>
       {events.get(destIdx).map(event => {
         const eventVotes = votes.filter(vote => vote.eventId === event.id);
-        return <EventItem key={ event.id } {...event} votes={eventVotes} />;
+        return (<EventItem key={ event.id } {...event} votes={eventVotes}
+          voteOn={() => voteOnEvents(event.id)}
+        />);
       })}
     </List>
   </div>
@@ -30,8 +37,9 @@ EventList.propTypes = {
   events: React.PropTypes.array.isRequired,
   votes: React.PropTypes.array.isRequired,
   destIdx: React.PropTypes.number.isRequired,
+  voteOnEvents: React.PropTypes.func.isRequired,
 };
 
-EventList = connect(mapStateToProps)(EventList);
+EventList = connect(mapStateToProps, mapDispatchToProps)(EventList);
 
 export default EventList;
