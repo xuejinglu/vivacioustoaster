@@ -9,10 +9,10 @@ import Avatar from 'material-ui/lib/avatar';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ThumbUp from 'material-ui/lib/svg-icons/action/thumb-up';
 
-const EventItem = ({ key, name, address, rating, tags, votes, photoUrl }) => (
+const EventItem = ({ key, name, address, rating, tags, votes, photoUrl, voteOn }) => (
   <Card style={ { width: '75%', margin: '5% 12.5%' } }>
     <CardHeader title={votes.length}>
-      <FloatingActionButton mini>
+      <FloatingActionButton mini onClick={voteOn}>
         <ThumbUp />
       </FloatingActionButton>
     </CardHeader>
@@ -45,6 +45,7 @@ EventItem.propTypes = {
   tags: React.PropTypes.arrayOf(React.PropTypes.string),
   votes: React.PropTypes.array.isRequired,
   photoUrl: React.PropTypes.string.isRequired,
+  voteOn: React.PropTypes.func.isRequired,
 };
 
 export default EventItem;
