@@ -13,6 +13,8 @@ import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 import { clearDest } from '../tripPlan/dest/destActions';
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
 
 const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),
@@ -39,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   goEndLoad: () => dispatch(endLoad()),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset, goStartLoad, goEndLoad, loading }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset }) => ( // eslint-disable-line
   <div>
     <img src="../assets/spinning-globe.gif"
       style={{
@@ -52,36 +54,41 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         backgroundColor: 'transparent',
       }}
     />
-    Choose the places you want to go!
-  <List
-    style={{
-      visibility: loading ? 'hidden' : 'visible',
-    }}
-  >
-      { events[currPage].map(event =>
-        <QueryItem key={ event.id } { ...event }
-          eventToggle={ () => onClickToggle(event) }
-          style={{
-            visibility: loading ? 'hidden' : 'visible',
-          }}
-        />
-      )}
-  </List>
-  <Link to="tag"><NavigationArrowBack /></Link>
-  <NavigationArrowForward onClick={ () => {
-    goStartLoad();
-    if (trip.id === undefined) {
-      onNextQuery();
-      if (currPage === destinations.length - 1) {
-        onClickSave(destinations, tripType, friends, events, goNext);
-        onClickReset();
+    <Card style={ { width: '50%', margin: '5%' } }>
+      <CardHeader
+        title={destinations.getIn([currPage, 'location'])}
+        subtitle = {'Choose the places you want to go!'}
+      />
+      <List
+        style={{
+          visibility: loading ? 'hidden' : 'visible',
+        }}
+      >
+        { events[currPage].map(event =>
+          <QueryItem key={ event.id } { ...event }
+            eventToggle={ () => onClickToggle(event) }
+            style={{
+              visibility: loading ? 'hidden' : 'visible',
+            }}
+          />
+        )}
+    </List>
+    <Link to="tag"><NavigationArrowBack /></Link>
+    <NavigationArrowForward onClick={ () => {
+      goStartLoad();
+      if (trip.id === undefined) {
+        onNextQuery();
+        if (currPage === destinations.length - 1) {
+          onClickSave(destinations, tripType, friends, events, goNext);
+          onClickReset();
+        }
+      } else {
+        onClickUpdate(events, dest, goNext, destId);
       }
-    } else {
-      onClickUpdate(events, dest, goNext, destId);
-    }
-    setTimeout(goEndLoad, 4000);
-  }}
-  />
+      setTimeout(goEndLoad, 4000);
+    }}
+    />
+    </Card>
   </div>
 );
 
