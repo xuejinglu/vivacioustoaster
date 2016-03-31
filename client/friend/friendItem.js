@@ -9,7 +9,7 @@ const FriendItem = ({ key, name, picUrl, addedToTrip, onClick }) => (
     <CardHeader
       title={name}
       avatar={picUrl}
-      onClick={addedToTrip}
+      onClick={onClick}
       style={{
         backgroundColor: addedToTrip ? 'lightgrey' : 'white',
       }}
