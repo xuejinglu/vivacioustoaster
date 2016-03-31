@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const Sequelize = require('sequelize');
 const Destination = require('../destinations/destinations');
+const extendResourceWithPhotos = require('../utils/flickrSearch');
 
 const Event = db.define('events', {
   address: Sequelize.STRING,
@@ -11,6 +12,7 @@ const Event = db.define('events', {
   placeId: Sequelize.STRING,
   rating: Sequelize.FLOAT,
   tags: Sequelize.ARRAY(Sequelize.STRING),
+  photoUrl: Sequelize.STRING,
 });
 
 // creates destId column in events table
@@ -22,7 +24,11 @@ Destination.hasMany(Event, { foreignKey: 'destId', constraints: false });
 Event.sync();
 Destination.sync();
 
-Event.createEvents = events => Event.bulkCreate(events, { returning: true })
+Event.createEvents = events =>
+  extendResourceWithPhotos(events)
+    .then(eventsWithPhotos =>
+      Event.bulkCreate(events, { returning: true })
+    )
     .catch(err => err);
 
 Event.getEvents = destId => Event.findAll({ where: { destId } })
