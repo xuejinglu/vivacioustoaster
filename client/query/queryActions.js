@@ -54,6 +54,7 @@ export const reset = () => ({
 });
 
 export const updateEvents = (events, dest, goNext, destIdx) => {
+  // events[0] takes in 0 because we only allow users update one dest at once.
   const addedEvents = events[0].filter(event => event.addedToDest);
   const token = cookie.load('token');
   const destId = dest[destIdx].id;
