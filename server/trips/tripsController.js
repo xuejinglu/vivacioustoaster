@@ -23,7 +23,7 @@ module.exports = {
                   Event.createEvents(events)
                     .then(eventsInDest =>
                       Promise.all(eventsInDest.map(event =>
-                        Vote.createVote(req.user.id, event.dataValues.id)))
+                        Vote.createOrDeleteVote(req.user.id, event.dataValues.id)))
                       .then(() =>
                         destinations.map((destination, destIdx) => { // eslint-disable-line
                         // later add logic for adding events to a single destination
