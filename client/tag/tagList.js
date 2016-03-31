@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { IconButton } from 'material-ui';
 import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
-import { toggleTag } from './tagActions';
+import { toggleTag, startLoad, endLoad } from './tagActions';
 import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
 import NavigationArrowForward

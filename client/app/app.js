@@ -9,7 +9,7 @@ injectTapEventPlugin();
 
 const App = ({ children }) => (
   <div>
-    {children.props.location.pathname !== '/auth' ?
+    {children.props.location.pathname !== 'auth' ?
       <Header /> :
       null
     }

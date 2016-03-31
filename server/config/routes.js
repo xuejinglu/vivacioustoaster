@@ -21,9 +21,9 @@ module.exports = function (app, express) {
   app.use('/api/trips', helper.decode);
   app.get('/api/trips', tripsController.getAll);
   app.get('/api/trips/:tripId', tripsController.get);
+  app.post('/api/trips/:tripId/users', tripsController.addFriends);
   app.delete('/api/trips/:tripId', tripsController.delete);
   app.post('/api/trips', tripsController.create);
-  app.post('/api/trips/:tripId/users'/* , controller function here */);
 
   // Destinations
   app.post('/api/trips/:tripId/destinations', destinationsController.createAll);
