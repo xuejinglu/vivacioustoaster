@@ -1,6 +1,6 @@
 const rp = require('request-promise');
 const Promise = require('bluebird');
-const FLICKR_PHOTOSEARCH_URL = 'http://flickr.com/services/rest';
+const FLICKR_PHOTOSEARCH_URL = 'https://api.flickr.com/services/rest';
 const PHOTOS_TO_RETURN = '10';
 const FARM_ID = '{FARM_ID}';
 const SERVER_ID = '{SERVER_ID}';
