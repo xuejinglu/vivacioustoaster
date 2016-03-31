@@ -6,7 +6,7 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save, toggleEvent, nextQuery, nextEvents, updateEvents, reset } from './queryActions';
+import { save, toggleEvent, nextQuery, updateEvents, reset } from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
@@ -21,7 +21,6 @@ const mapStateToProps = state => ({
   events: state.query.get('events'),
   trip: state.tripPlan.selectedTrip,
   dest: state.tripPlan.dest.get('destinations'),
-  currEvents: state.query.get('currEvents'),
   currPage: state.query.get('currPage'),
   destId: state.tripPlan.dest.get('key'),
 });
@@ -32,7 +31,6 @@ const mapDispatchToProps = dispatch => ({
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip, goNext, destId) => dispatch(updateEvents(events, trip, goNext, destId)),// eslint-disable-line
   onNextQuery: () => dispatch(nextQuery()),
-  onNextEvents: (currPage) => dispatch(nextEvents(currPage)),
   goNext: (name) => dispatch(push(name)),
   onClickReset: () => dispatch(reset()),
 });
@@ -41,7 +39,7 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
   <div>
     Choose the places you want to go!
   <List>
-  {currEvents.map(event =>
+      { events[currPage].map(event =>
         <QueryItem key={ event.id } { ...event }
           eventToggle={ () => onClickToggle(event) }
         />
@@ -51,11 +49,9 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
   <NavigationArrowForward onClick={ () => {
     if (trip.id === undefined) {
       onNextQuery();
-      if (currPage === destinations.length) {
+      if (currPage === destinations.length - 1) {
         onClickSave(destinations, tripType, friends, events, goNext);
         onClickReset();
-      } else {
-        onNextEvents(currPage);
       }
     } else {
       onClickUpdate(events, dest, goNext, destId);
@@ -76,9 +72,7 @@ QueryList.propTypes = {
   dest: React.PropTypes.array,
   currPage: React.PropTypes.number,
   onNextQuery: React.PropTypes.func,
-  onNextEvents: React.PropTypes.func,
   goNext: React.PropTypes.func,
-  currEvents: React.PropTypes.array,
   destId: React.PropTypes.number,
   onClickReset: React.PropTypes.func,
 };

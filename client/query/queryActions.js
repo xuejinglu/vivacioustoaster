@@ -79,13 +79,6 @@ export const nextQuery = () => ({
   type: 'NEXT_QUERY',
 });
 
-export const nextEvents = (currPage) => ({
-  type: 'NEXT_EVENTS',
-  payload: {
-    currPage,
-  },
-});
-
 export const startSearch = (goNext, tags, destinations, currPage) => {
   // once we support multiple destinations, this will no longer be needed
   const addedTags = tags.filter(tag => tag.addedToTrip);
@@ -103,7 +96,6 @@ export const startSearch = (goNext, tags, destinations, currPage) => {
     }).then(res => res.json())
       .then(events => {
         dispatch(receiveEvents(events));
-        dispatch(nextEvents(currPage));
         goNext('/query');
       })
       .catch(err => console.error(err));

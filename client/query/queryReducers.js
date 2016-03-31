@@ -3,7 +3,6 @@ import Immutable from 'immutable';
 const initialState = Immutable.Map({
   events: null,
   currPage: 0,
-  currEvents: null,
 });
 
 const event = (state, action) => {
@@ -32,10 +31,6 @@ const events = (state = initialState, action) => {
       const oldPage = state.get('currPage');
       const newPage = oldPage + 1;
       return state.set('currPage', newPage);
-    case 'NEXT_EVENTS':
-      const eventsQueue = state.get('events');
-      const newEvents = eventsQueue[action.payload.currPage];
-      return state.set('currEvents', newEvents);
     case 'RESET':
       return state.set('currPage', 0);
     default:
