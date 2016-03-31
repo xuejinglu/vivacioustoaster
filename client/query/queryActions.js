@@ -80,6 +80,14 @@ export const nextQuery = () => ({
   type: 'NEXT_QUERY',
 });
 
+export const startLoad = () => ({
+  type: 'START_LOAD'
+});
+
+export const endLoad = () => ({
+  type: 'END_LOAD'
+});
+
 export const startSearch = (goNext, tags, destinations, currPage) => {
   // once we support multiple destinations, this will no longer be needed
   const addedTags = tags.filter(tag => tag.addedToTrip);
