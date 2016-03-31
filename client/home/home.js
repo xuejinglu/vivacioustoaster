@@ -27,12 +27,16 @@ class Home extends React.Component {
           />
         )}
         </List>
-        <Link to="friend"><RaisedButton label="Create Trip" /></Link>
+        <Link to="friend" style={{
+          visibility: destinations.length ? 'visible' : 'hidden',
+        }}
+        >
+          <RaisedButton secondary label="Create Trip" />
+        </Link>
       </div>
     );
   }
 }
-
 
 Home.propTypes = {
   destinations: React.PropTypes.array.isRequired,
