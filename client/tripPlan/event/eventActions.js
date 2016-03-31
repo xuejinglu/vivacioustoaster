@@ -44,4 +44,4 @@ export const fetchEvents = destination =>
         dispatch(fetchVotes(events));
       })
       .catch(err => console.error(err)); // add proper error handling
-};
+  };
