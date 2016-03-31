@@ -50,10 +50,10 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
     <GridList
       cellHeight={200}
       style={{
-        width: 500,
-        height: 1000,
+        width: '60%',
+        height: '100%',
         overflowY: 'auto',
-        marginBottom: 24,
+        margin: '5% 20%',
         visibility: loading ? 'hidden' : 'visible',
       }}
     >
@@ -61,6 +61,7 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
         <GridTile
           key={tag.img}
           title={tag.name}
+          style={ { width: '100%', height: '100%' } }
           actionIcon=
             {<IconButton onClick={() => onToggleTag(tag.name)}>
               <StarBorder color="white" />
@@ -70,19 +71,19 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
           <img src={tag.img} />
         </GridTile>
       ))}
+    <Link to="friend"><RaisedButton label="Back" /></Link>
+    <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
+      startLoadEvents();
+      if (chosen.size === 0) {
+        onStartSearch(goNext, tags, destinations, currPage)
+        .then(() => endLoadEvents());
+      } else {
+        onStartSearch(goNext, tags, [chosen[destId]], 0, destId)
+        .then(() => endLoadEvents());
+      }
+    }}
+    />
     </GridList>
-  <Link to="friend"><RaisedButton label="Back" /></Link>
-  <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
-    startLoadEvents();
-    if (chosen.size === 0) {
-      onStartSearch(goNext, tags, destinations, currPage)
-      .then(() => endLoadEvents());
-    } else {
-      onStartSearch(goNext, tags, [chosen[destId]], 0, destId)
-      .then(() => endLoadEvents());
-    }
-  }}
-  />
   </div>
 );
 
