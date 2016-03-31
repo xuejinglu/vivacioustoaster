@@ -49,12 +49,6 @@ const extendResourceWithPhotos = resources => {
               const photos = data.photos.photo;
               redisUtils.createInRedis(key, photos);
               return photos;
-              // const maxIndex = Math.min(photos.length, PHOTOS_TO_RETURN);
-              // const photo = photos[Math.floor(Math.random() * maxIndex)];
-              // const resource = resources[index];
-
-              // resource.photoUrl = constructPhotoUrl(photo);
-              // return resource;
             });
         }
         return JSON.parse(redisPhotos);
