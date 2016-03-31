@@ -6,7 +6,8 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save, toggleEvent, nextQuery, updateEvents, reset, startLoad, endLoad } from './queryActions';
+import { save, toggleEvent, nextQuery, updateEvents, reset, startLoad, endLoad }
+  from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
@@ -47,13 +48,22 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         top: '42.5%',
         left: '48%',
         visibility: loading ? 'visible' : 'hidden',
+        zIndex: '1',
+        backgroundColor: 'transparent',
       }}
     />
     Choose the places you want to go!
-  <List>
+  <List
+    style={{
+      visibility: loading ? 'hidden' : 'visible',
+    }}
+  >
       { events[currPage].map(event =>
         <QueryItem key={ event.id } { ...event }
           eventToggle={ () => onClickToggle(event) }
+          style={{
+            visibility: loading ? 'hidden' : 'visible',
+          }}
         />
       )}
   </List>
@@ -63,14 +73,14 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
     if (trip.id === undefined) {
       onNextQuery();
       if (currPage === destinations.length - 1) {
-        onClickSave(destinations, tripType, friends, events, goNext)
-        .then(() => onClickReset())
-        .then(() => goEndLoad());
+        onClickSave(destinations, tripType, friends, events, goNext);
+        onClickReset();
       }
     } else {
-      onClickUpdate(events, dest, goNext, destId)
-      .then(() => goEndLoad);
-    }}}
+      onClickUpdate(events, dest, goNext, destId);
+    }
+    setTimeout(goEndLoad, 4000);
+  }}
   />
   </div>
 );
