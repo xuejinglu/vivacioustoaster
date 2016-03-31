@@ -149,3 +149,12 @@ div.tooltip:hover span.tooltip-text {
 .geosuggest-item--active:focus {
   background: white;
 }
+
+img.event-item {
+  max-height:400px;
+}
+
+img.dest-item {
+  min-height:600px;
+  max-height:800px;
+}

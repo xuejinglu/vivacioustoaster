@@ -8,11 +8,11 @@ import CardText from 'material-ui/lib/card/card-text';
 import Avatar from 'material-ui/lib/avatar';
 
 const EventItem = ({ key, name, address, rating, tags, photoUrl }) => (
-  <Card style={ { width: '50%', margin: '5%' } }>
+  <Card style={ { width: '75%', margin: '5% 12.5%' } }>
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
-      <img src={photoUrl} />
+      <img src={photoUrl} className="event-item" />
     </CardMedia>
     <CardText>
       {tags.map(tag =>
