@@ -6,13 +6,16 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import Avatar from 'material-ui/lib/avatar';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import ThumbUp from 'material-ui/lib/svg-icons/action/thumb-up';
 
 const EventItem = ({ key, name, address, rating, tags, votes, photoUrl }) => (
   <Card style={ { width: '75%', margin: '5% 12.5%' } }>
-    <CardHeader
-      title={votes.size()}
-      avatar="http://emojipedia.org/apple/ios-9.3/thumbs-up-sign/"
-    />
+    <CardHeader title={votes.length}>
+      <FloatingActionButton mini>
+        <ThumbUp />
+      </FloatingActionButton>
+    </CardHeader>
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
