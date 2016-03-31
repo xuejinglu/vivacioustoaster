@@ -7,36 +7,6 @@ const tagClassifier = require('../utils/tagClassifier');
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const MAX_PLACES_RETURNED = 20;
 const redisUtils = require('../utils/redisUtils');
-// const redis = require('redis');
-
-// let client;
-
-
-// const isInRedis = key => {
-//   client = redis.createClient();
-//   client.on('connect', () => {
-//     console.log('connected');
-//   });
-
-//   const redisGetAsync = Promise.promisify(client.get, { context: client });
-
-//   return redisGetAsync(key)
-//     .then(value => {
-//       client.quit();
-//       return value;
-//     });
-// };
-
-// const createInRedis = (key, events) => {
-//   client = redis.createClient();
-//   client.on('connect', () => {
-//     console.log('connected');
-//   });
-//   const newEvents = JSON.stringify(events);
-//   client.set(key, newEvents, () => {
-//     client.quit();
-//   });
-// };
 
 // Returns an object with only the desired attributes from the original Google Places place object.
 const formatPlace = (place, options) => ({
