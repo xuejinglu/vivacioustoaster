@@ -19,7 +19,7 @@ module.exports = {
           .then(destinations => {
             trip.addDestinations(destinations)
               .then(() => {
-                Promise.all(eventList.map((events, eventIdx) => { // eslint-disable-line
+                Promise.all(eventList.map((events, eventIdx) => // eslint-disable-line
                   Event.createEvents(events)
                     .then(eventsInDest =>
                       Promise.all(eventsInDest.map(event =>
@@ -32,8 +32,7 @@ module.exports = {
                           }
                         })
                       )
-                    );
-                }))
+                    )))
                 .then(() => {
                   const addUsers = [...req.body.friends, req.user];
                   Promise.all(addUsers.map(addUser =>

@@ -25,10 +25,10 @@ Event.sync();
 Destination.sync();
 
 Event.createEvents = events =>
-  // extendResourceWithPhotos(events)
-  //   .then(eventsWithPhotos =>
+  extendResourceWithPhotos(events)
+    .then(eventsWithPhotos =>
       Event.bulkCreate(events, { returning: true })
-    // )
+    )
     .catch(err => err);
 
 Event.getEvents = destId => Event.findAll({ where: { destId } })
