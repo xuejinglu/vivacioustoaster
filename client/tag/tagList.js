@@ -61,14 +61,13 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
         <GridTile
           key={tag.img}
           title={tag.name}
-          style={ { width: '100%', height: '100%' } }
           actionIcon=
             {<IconButton onClick={() => onToggleTag(tag.name)}>
               <StarBorder color="white" />
             </IconButton>}
           actionPosition={tag.addedToTrip ? 'left' : 'right'}
         >
-          <img src={tag.img} />
+          <img src={tag.img} style={ { width: '100%', height: '100%' } } />
         </GridTile>
       ))}
     <Link to="friend"><RaisedButton label="Back" /></Link>
