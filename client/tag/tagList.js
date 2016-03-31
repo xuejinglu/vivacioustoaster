@@ -19,13 +19,16 @@ const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),
   currPage: state.query.get('currPage'),
   destId: state.tripPlan.dest.get('key'),
+  loading: state.tag.get('loadingEvents'),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onToggleTag: (tag) => dispatch(toggleTag(tag)),
+  onToggleTag: tag => dispatch(toggleTag(tag)),
   onStartSearch: (goNext, tags, destinations, currPage) =>
     dispatch(startSearch(goNext, tags, destinations, currPage)),
-  goNext: (name) => dispatch(push(name)),
+  goNext: name => dispatch(push(name)),
+  startLoadEvents: () => dispatch(startLoad()),
+  endLoadEvents: () => dispatch(endLoad()),
 });
 
 const styles = {
@@ -34,19 +37,28 @@ const styles = {
     flexWrap: 'wrap',
     justifyContent: 'space-around',
   },
-  gridList: {
-    width: 500,
-    height: 1000,
-    overflowY: 'auto',
-    marginBottom: 24,
-  },
 };
 
-let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage, destId }) => ( // eslint-disable-line
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage, destId, startLoadEvents, endLoadEvents, loading }) => ( // eslint-disable-line
   <div style={styles.block}>
+    <img src="../assets/spinning-globe.gif"
+      style={{
+        position: 'fixed',
+        height: '10%',
+        top: '42.5%',
+        left: '48%',
+        visibility: loading ? 'visible' : 'hidden',
+      }}
+    />
     <GridList
       cellHeight={200}
-      style={styles.gridList}
+      style={{
+        width: 500,
+        height: 1000,
+        overflowY: 'auto',
+        marginBottom: 24,
+        visibility: loading ? 'hidden' : 'visible',
+      }}
     >
       {tags.map(tag => (
         <GridTile
@@ -63,11 +75,14 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
       ))}
     </GridList>
   <Link to="friend"><NavigationArrowBack /></Link>
-  <NavigationArrowForward onClick={() => {
+  <NavigationArrowForward onClick={ () => {
+    startLoadEvents();
     if (chosen.size === 0) {
-      onStartSearch(goNext, tags, destinations, currPage);
+      onStartSearch(goNext, tags, destinations, currPage)
+      .then(() => endLoadEvents());
     } else {
-      onStartSearch(goNext, tags, [chosen[destId]], 0, destId);
+      onStartSearch(goNext, tags, [chosen[destId]], 0, destId)
+      .then(() => endLoadEvents());
     }
   }}
   />
@@ -84,6 +99,9 @@ TagList.propTypes = {
   chosen: React.PropTypes.array.isRequired,
   currPage: React.PropTypes.number.isRequired,
   destId: React.PropTypes.any.isRequired,
+  startLoadEvents: React.PropTypes.func.isRequired,
+  endLoadEvents: React.PropTypes.func.isRequired,
+  loading: React.PropTypes.bool.isRequired,
 };
 
 TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);
