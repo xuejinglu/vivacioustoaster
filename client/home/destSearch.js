@@ -11,6 +11,7 @@ import Geosuggest from 'react-geosuggest';
 const mapStateToProps = state => ({
   startDate: state.home.getIn(['destination', 'startDate']),
   endDate: state.home.getIn(['destination', 'endDate']),
+  destinations: state.home.destinations,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,6 +43,11 @@ class DestSearch extends React.Component {
         />
         <RaisedButton
           label="Add Destination"
+          style={{
+            visibility: (this.refs.destInput && this.refs.destInput.state.userInput) &&
+              (this.refs.startDatePick && this.refs.startDatePick.state.date) &&
+              (this.refs.endDatePick && this.refs.endDatePick.state.date) ? 'visible' : 'hidden',
+          }}
           onClick={ () => {
             this.props.onAddDest();
             this.props.onResetDest();
@@ -63,6 +69,7 @@ DestSearch.propTypes = {
   endDate: React.PropTypes.object.isRequired,
   onAddDest: React.PropTypes.func.isRequired,
   onResetDest: React.PropTypes.func.isRequired,
+  destinations: React.PropTypes.object.isRequired,
 };
 
 DestSearch = connect(mapStateToProps, mapDispatchToProps)(DestSearch);
