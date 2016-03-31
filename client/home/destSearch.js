@@ -21,29 +21,39 @@ const mapDispatchToProps = dispatch => ({
   onResetDest: () => dispatch(clearDestination()),
 });
 
-let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, onChangeEndDate, onAddDest, onResetDest }) => ( // eslint-disable-line
-  <div>
-    <Geosuggest placeholder="ex: London" onBlur={event =>
-      event ? onChangeDestination(event.value) : null
-    }
-      onSuggestSelect={suggest => onChangeDestination(suggest.label)}
-    />
-    <DatePicker hintText="Departure Date" minDate={new Date()}
-      maxDate={endDate ? endDate : new Date(Date.now() * 60)} // eslint-disable-line
-      onChange={(event, newDate) => onChangeStartDate(newDate)}
-    />
-    <DatePicker hintText="End Date" minDate={startDate || new Date()}
-      onChange={(event, newDate) => onChangeEndDate(newDate)}
-    />
-    <RaisedButton
-      label="Add Destination"
-      onClick={ () => {
-        onAddDest();
-        onResetDest();
-      }}
-    />
-  </div>
-);
+class DestSearch extends React.Component {
+  render() {
+    return (
+      <div>
+        <Geosuggest placeholder="ex: London" onBlur={event =>
+          event ? this.props.onChangeDestination(event.value) : null
+        }
+          onSuggestSelect={suggest => this.props.onChangeDestination(suggest.label)}
+          ref="destInput"
+        />
+        <DatePicker hintText="Departure Date" minDate={new Date()}
+          maxDate={this.props.endDate ? this.props.endDate : new Date(Date.now() * 60)} // eslint-disable-line
+          onChange={(event, newDate) => this.props.onChangeStartDate(newDate)}
+          ref="startDatePick"
+        />
+        <DatePicker hintText="End Date" minDate={this.props.startDate || new Date()}
+          onChange={(event, newDate) => this.props.onChangeEndDate(newDate)}
+          ref="endDatePick"
+        />
+        <RaisedButton
+          label="Add Destination"
+          onClick={ () => {
+            this.props.onAddDest();
+            this.props.onResetDest();
+            this.refs.destInput.state.userInput = '';
+            this.refs.startDatePick.state.date = undefined;
+            this.refs.endDatePick.state.date = undefined;
+          }}
+        />
+      </div>
+    );
+  }
+}
 
 DestSearch.propTypes = {
   onChangeDestination: React.PropTypes.func.isRequired,
