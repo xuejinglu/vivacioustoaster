@@ -27,9 +27,8 @@ class Home extends React.Component {
           />
         )}
         </List>
-        <Link to="friend" style={{
-          visibility: this.props.destinations.length ? 'visible' : 'hidden',
-        }}
+        <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
+          style={{ visibility: destinations.length ? 'visible' : 'hidden', }}
         >
           <RaisedButton secondary label="Create Trip" />
         </Link>
@@ -42,10 +41,12 @@ Home.propTypes = {
   destinations: React.PropTypes.array.isRequired,
   goClearDestination: React.PropTypes.func.isRequired,
   goClearDestinations: React.PropTypes.func.isRequired,
+  tripType: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),
+  tripType: state.home.get('tripType'),
 });
 
 const mapDispatchToProps = dispatch => ({
