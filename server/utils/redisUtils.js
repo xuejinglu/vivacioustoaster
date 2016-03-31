@@ -16,13 +16,13 @@ module.exports = {
         return value;
       });
   },
-  createInRedis: (key, events) => {
+
+  createInRedis: (key, values) => {
     const client = redis.createClient();
     client.on('connect', () => {
       console.log('connected');
     });
-    const newEvents = JSON.stringify(events);
-    client.set(key, newEvents, () => {
+    client.set(key, JSON.stringify(values), () => {
       client.quit();
     });
   },

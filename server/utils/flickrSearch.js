@@ -57,7 +57,7 @@ const extendResourceWithPhotos = resources => {
               // return resource;
             });
         }
-        return redisPhotos;
+        return JSON.parse(redisPhotos);
       })
       .then(photos => {
         const maxIndex = Math.min(photos.length, PHOTOS_TO_RETURN);
