@@ -81,11 +81,11 @@ export const nextQuery = () => ({
 });
 
 export const startLoad = () => ({
-  type: 'START_LOAD'
+  type: 'START_LOAD',
 });
 
 export const endLoad = () => ({
-  type: 'END_LOAD'
+  type: 'END_LOAD',
 });
 
 export const startSearch = (goNext, tags, destinations, currPage) => {

@@ -37,7 +37,7 @@ const events = (state = initialState, action) => {
     case 'START_LOAD':
       return state.set('loadingTrip', true);
     case 'END_LOAD':
-      return state.set('loadingTrip', true);
+      return state.set('loadingTrip', false);
     default:
       return state;
   }
