@@ -1,11 +1,9 @@
 const Promise = require('bluebird');
 const redis = require('redis');
 
-let client;
-
 module.exports = {
   isInRedis: key => {
-    client = redis.createClient();
+    const client = redis.createClient();
     client.on('connect', () => {
       console.log('connected');
     });
@@ -19,7 +17,7 @@ module.exports = {
       });
   },
   createInRedis: (key, events) => {
-    client = redis.createClient();
+    const client = redis.createClient();
     client.on('connect', () => {
       console.log('connected');
     });
