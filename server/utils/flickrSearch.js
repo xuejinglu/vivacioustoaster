@@ -7,6 +7,7 @@ const SERVER_ID = '{SERVER_ID}';
 const PHOTO_ID = '{PHOTO_ID}';
 const PHOTO_SECRET = '{PHOTO_SECRET}';
 const FLICKR_TEMPLATE_URL = `https://farm${FARM_ID}.staticflickr.com/${SERVER_ID}/${PHOTO_ID}_${PHOTO_SECRET}.jpg`;
+const redisUtils = require('./redisUtils');
 
 const constructPhotoUrl = photo =>
   FLICKR_TEMPLATE_URL.replace(FARM_ID, photo.farm)
@@ -37,11 +38,22 @@ const extendResourceWithPhotos = resources => {
     json: true, // Automatically parses the JSON string in the response
   }));
 
-  return Promise.all(optionsArray.map((options, index) =>
-    rp(options)
-      .then(data => {
-        data = JSON.parse(data.match(/^jsonFlickrApi\((.*)\)$/)[1]);
-        const photos = data.photos.photo;
+  return Promise.all(optionsArray.map((options, index) => {
+    const key = `FLICKR_LOCATION_OR_EVENT:  ${options.qs.text}`;
+    return redisUtils.isInRedis(key)
+      .then(redisPhotos => {
+        if (!redisPhotos) {
+          return rp(options)
+            .then(data => {
+              data = JSON.parse(data.match(/^jsonFlickrApi\((.*)\)$/)[1]);
+              const photos = data.photos.photo;
+              redisUtils.createInRedis(key, photos);
+              return photos;
+            });
+        }
+        return JSON.parse(redisPhotos);
+      })
+      .then(photos => {
         const maxIndex = Math.min(photos.length, PHOTOS_TO_RETURN);
         const photo = photos[Math.floor(Math.random() * maxIndex)];
         const resource = resources[index];
@@ -49,8 +61,8 @@ const extendResourceWithPhotos = resources => {
         resource.photoUrl = constructPhotoUrl(photo);
         return resource;
       })
-      .catch(err => err)
-  ));
+      .catch(err => err);
+  }));
 };
 
 module.exports = extendResourceWithPhotos;
