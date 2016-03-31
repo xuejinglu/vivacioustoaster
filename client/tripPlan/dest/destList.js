@@ -10,8 +10,11 @@ const mapStateToProps = state => ({
 let DestList = ({ destinations }) => (
   <div>
     <List>
-      {destinations.map(destination =>
-        <DestItem key={ destination.id } {...destination} />
+      {destinations.map((destination, destIdx) =>
+        <DestItem
+          destIdx={destIdx}
+          key={ destination.id } {...destination}
+        />
       )}
     </List>
   </div>

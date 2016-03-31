@@ -15,13 +15,16 @@ import GridTile from 'material-ui/lib/grid-list/grid-tile';
 
 const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
-  destinations: state.home.get('destination'),
   chosen: state.tripPlan.dest.get('destinations'),
+  destinations: state.home.get('destinations'),
+  currPage: state.query.get('currPage'),
+  destId: state.tripPlan.dest.get('key'),
 });
 
 const mapDispatchToProps = dispatch => ({
   onToggleTag: (tag) => dispatch(toggleTag(tag)),
-  onStartSearch: (goNext, tags, destinations) => dispatch(startSearch(goNext, tags, destinations)),
+  onStartSearch: (goNext, tags, destinations, currPage) =>
+    dispatch(startSearch(goNext, tags, destinations, currPage)),
   goNext: (name) => dispatch(push(name)),
 });
 
@@ -39,7 +42,7 @@ const styles = {
   },
 };
 
-let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen }) => (
+let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen, currPage, destId }) => ( // eslint-disable-line
   <div style={styles.block}>
     <GridList
       cellHeight={200}
@@ -62,11 +65,9 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen 
   <Link to="friend"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={() => {
     if (chosen.size === 0) {
-      const newDestination = [destinations.toJS()];
-      console.log(newDestination);
-      onStartSearch(goNext, tags, newDestination);
+      onStartSearch(goNext, tags, destinations, currPage);
     } else {
-      onStartSearch(goNext, tags, chosen);
+      onStartSearch(goNext, tags, [chosen[destId]], 0, destId);
     }
   }}
   />
@@ -81,6 +82,8 @@ TagList.propTypes = {
   tags: React.PropTypes.array.isRequired,
   destinations: React.PropTypes.array.isRequired,
   chosen: React.PropTypes.array.isRequired,
+  currPage: React.PropTypes.number.isRequired,
+  destId: React.PropTypes.any.isRequired,
 };
 
 TagList = connect(mapStateToProps, mapDispatchToProps)(TagList);

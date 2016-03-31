@@ -9,8 +9,9 @@ import cookie from 'react-cookie';
 // (2) dispatches an action to update the state with the selected trip and GET
 //     destinations for that trip id
 
-export const save = (destinations, tripType, friends, events) => {
-  const addedEvents = events.filter(event => event.addedToDest);
+export const save = (destinations, tripType, friends, eventList, goNext) => {
+  const addedEvents = eventList.map(events =>
+    events.filter(event => event.addedToDest));
   const token = cookie.load('token');
   return dispatch =>
     fetch('/api/trips', {
@@ -27,7 +28,9 @@ export const save = (destinations, tripType, friends, events) => {
         events: addedEvents,
       }),
     }).then(res => res.json())
-      .then(trip => dispatch(setTripAndGetDestinations(trip)))
+      .then(trip => {
+        dispatch(setTripAndGetDestinations(trip, goNext));
+      })
       .catch(err => console.error(err)); // add proper error handling
 };
 
@@ -46,10 +49,15 @@ export const receiveEvents = (events) => ({
   },
 });
 
-export const updateEvents = (events, dest) => {
-  const addedEvents = events.filter(event => event.addedToDest);
+export const reset = () => ({
+  type: 'RESET',
+});
+
+export const updateEvents = (events, dest, goNext, destIdx) => {
+  // events[0] takes in 0 because we only allow users update one dest at once.
+  const addedEvents = events[0].filter(event => event.addedToDest);
   const token = cookie.load('token');
-  const destId = dest[0].id;
+  const destId = dest[destIdx].id;
   return dispatch =>
     fetch(`/api/destinations/${destId}/events`, {
       method: 'POST',
@@ -62,11 +70,17 @@ export const updateEvents = (events, dest) => {
         events: addedEvents,
       }),
     }).then(res => res.json())
-      .then(trip => dispatch(setTripAndGetDestinations(trip)))
+      .then(trip => {
+        dispatch(setTripAndGetDestinations(trip, goNext));
+      })
       .catch(err => console.error(err)); // add proper error handling
 };
 
-export const startSearch = (goNext, tags, destinations) => {
+export const nextQuery = () => ({
+  type: 'NEXT_QUERY',
+});
+
+export const startSearch = (goNext, tags, destinations, currPage) => {
   // once we support multiple destinations, this will no longer be needed
   const addedTags = tags.filter(tag => tag.addedToTrip);
   return dispatch =>

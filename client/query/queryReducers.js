@@ -2,6 +2,7 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
   events: null,
+  currPage: 0,
 });
 
 const event = (state, action) => {
@@ -21,11 +22,17 @@ const event = (state, action) => {
 const events = (state = initialState, action) => {
   switch (action.type) {
     case 'TOGGLE_EVENT':
-      const oldEvents = state.get('events');
-      const updatedEvents = oldEvents.map(e => event(e, action));
+      const eventList = state.get('events');
+      const updatedEvents = eventList.map(e => e.map(item => event(item, action)));
       return state.set('events', updatedEvents);
     case 'RECEIVE_EVENTS':
       return state.set('events', action.payload.events);
+    case 'NEXT_QUERY':
+      const oldPage = state.get('currPage');
+      const newPage = oldPage + 1;
+      return state.set('currPage', newPage);
+    case 'RESET':
+      return state.set('currPage', 0);
     default:
       return state;
   }

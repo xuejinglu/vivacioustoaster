@@ -1,14 +1,19 @@
-import fetch from 'isomorphic-fetch';
 import cookie from 'react-cookie';
 
+export const RECEIVE_EVENTS_IN_DEST = 'RECEIVE_EVENTS_IN_DEST';
+
 const receiveEventsInDest = events => ({
-  type: 'RECEIVE_EVENTS_IN_DEST',
+  type: RECEIVE_EVENTS_IN_DEST,
   payload: {
     events,
   },
 });
 
-export const fetchEvents = destination => {
+export const clearDest = () => ({
+  type: 'CLEAR_DEST',
+});
+
+export const fetchEvents = (destination) => {
   const token = cookie.load('token');
   return dispatch =>
     fetch(`/api/destinations/${destination.id}/events`, {
@@ -24,3 +29,4 @@ export const fetchEvents = destination => {
       })
       .catch(err => console.error(err)); // add proper error handling
 };
+

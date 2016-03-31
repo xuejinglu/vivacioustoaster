@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { routeActions } from 'react-router-redux';
-import { fetchEvents } from '../event/eventActions';
 import cookie from 'react-cookie';
+import Promise from 'bluebird';
+import { fetchEvents } from '../event/eventActions';
 
 export const REQUEST_DESTINATIONS = 'REQUEST_DESTINATIONS';
 export const RECEIVE_DESTINATIONS = 'RECEIVE_DESTINATIONS';
@@ -25,6 +26,18 @@ const fetchDestinationsError = message => ({
   },
 });
 
+export const chooseDest = key => ({
+  type: 'CHOOSE_DEST',
+  payload: {
+    key,
+  },
+});
+
+export const clearAll = () => ({
+  type: 'CLEAR_ALL',
+});
+
+
 // Redux-Thunk Middleware (see configureStore.js) allows us to return a function that
 // can dispatch other actions. In this case, we return a function that:
 // (1) dispatches an action that updates the isFetching boolean on the state
@@ -32,7 +45,7 @@ const fetchDestinationsError = message => ({
 // (2) dispatches another action to GET destinations for the trip id
 // (3) dispatches another action upon success to update destinations on state
 
-export const fetchDestinations = trip =>
+export const fetchDestinations = (trip, goNext) =>
   dispatch => {
     // update 'isFetching' state
     const token = cookie.load('token');
@@ -47,8 +60,9 @@ export const fetchDestinations = trip =>
     }).then(res => res.json())
       .then(destinations => {
         dispatch(receiveDestinations(destinations));
-        destinations.map(destination =>
-          dispatch(fetchEvents(destination)));
+        Promise.all(destinations.map(destination =>
+          dispatch(fetchEvents(destination))))
+          .then(() => goNext('/tripPlan'));
       })
       .catch(err => console.error(err)); // add proper error handling
   };

@@ -2,7 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import { TextField, RaisedButton } from 'material-ui';
 import { connect } from 'react-redux';
-import { changeStartDate, changeEndDate, changeDestination } from './homeActions';
+import { changeStartDate, changeEndDate,
+changeDestination, addDestination, clearDestination } from './homeActions';
 import DatePicker
 from '../../node_modules/material-ui/lib/date-picker/date-picker';
 import Geosuggest from 'react-geosuggest';
@@ -16,9 +17,11 @@ const mapDispatchToProps = dispatch => ({
   onChangeDestination: destination => dispatch(changeDestination(destination)),
   onChangeStartDate: newStartDate => dispatch(changeStartDate(newStartDate)),
   onChangeEndDate: newEndDate => dispatch(changeEndDate(newEndDate)),
+  onAddDest: () => dispatch(addDestination()),
+  onResetDest: () => dispatch(clearDestination()),
 });
 
-let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, onChangeEndDate }) => ( // eslint-disable-line
+let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, onChangeEndDate, onAddDest, onResetDest }) => ( // eslint-disable-line
   <div>
     <Geosuggest placeholder="ex: London" onBlur={event =>
       event ? onChangeDestination(event.value) : null
@@ -32,7 +35,13 @@ let DestSearch = ({ startDate, endDate, onChangeDestination, onChangeStartDate, 
     <DatePicker hintText="End Date" minDate={startDate || new Date()}
       onChange={(event, newDate) => onChangeEndDate(newDate)}
     />
-    <RaisedButton label="Add another Destination" secondary href="#" />
+    <RaisedButton
+      label="Add Destination"
+      onClick={ () => {
+        onAddDest();
+        onResetDest();
+      }}
+    />
   </div>
 );
 
@@ -42,6 +51,8 @@ DestSearch.propTypes = {
   onChangeEndDate: React.PropTypes.func.isRequired,
   startDate: React.PropTypes.object.isRequired,
   endDate: React.PropTypes.object.isRequired,
+  onAddDest: React.PropTypes.func.isRequired,
+  onResetDest: React.PropTypes.func.isRequired,
 };
 
 DestSearch = connect(mapStateToProps, mapDispatchToProps)(DestSearch);
