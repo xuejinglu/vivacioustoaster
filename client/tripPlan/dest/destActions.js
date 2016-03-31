@@ -61,7 +61,7 @@ export const fetchDestinations = (trip, goNext) =>
       .then(destinations => {
         dispatch(receiveDestinations(destinations));
         Promise.all(destinations.map(destination =>
-          dispatch(fetchEvents(destination, goNext))))
+          dispatch(fetchEvents(destination))))
           .then(() => goNext('/tripPlan'));
       })
       .catch(err => console.error(err)); // add proper error handling
