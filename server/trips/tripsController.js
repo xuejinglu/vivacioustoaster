@@ -12,7 +12,6 @@ module.exports = {
   // Returns: created trip
   create: (req, res, next) => {
     const eventList = req.body.events;
-    console.log(eventList);
     Trip.createTrip(req.body.name, req.body.tripType)
       .then(trip => {
         Destination.createDestinations(req.body.destinations)
