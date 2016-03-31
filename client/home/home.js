@@ -8,6 +8,7 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import { clearDestination, clearDestinations } from './homeActions';
 
+
 class Home extends React.Component {
   componentWillMount() {
     this.props.goClearDestinations();
@@ -30,7 +31,7 @@ class Home extends React.Component {
           visibility: destinations.length ? 'visible' : 'hidden',
         }}
         >
-          <RaisedButton label="Create Trip" />
+          <RaisedButton secondary label="Create Trip" />
         </Link>
       </div>
     );
