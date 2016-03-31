@@ -4,9 +4,8 @@ import Immutable from 'immutable';
 import FriendItem from './friendItem';
 import { toggleAddFriend } from './friendActions';
 import List from 'material-ui/lib/lists/list';
-import NavigationArrowForward
-from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import { Link } from 'react-router';
+import { RaisedButton } from 'material-ui';
 
 const mapStateToProps = state => ({ friends: state.friend.get('friends') });
 
@@ -25,7 +24,7 @@ let FriendList = ({ friends, onFriendClick }) => (
         <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
       )}
     </List>
-    <Link to="tag"><NavigationArrowForward /></Link>
+    <Link to="tag"><RaisedButton secondary label="Next" style={ { float: 'right' } } /></Link>
   </div>
 );
 
