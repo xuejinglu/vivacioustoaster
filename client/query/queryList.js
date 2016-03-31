@@ -53,12 +53,12 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         zIndex: '1',
         backgroundColor: 'transparent',
       }}
+    >
+  <Card style={ { width: '60%', margin: '5% 20%' } }>
+    <CardHeader
+      title={destinations.getIn([currPage, 'location'])}
+      subtitle = {'Choose the places you want to go!'}
     />
-    <Card style={ { width: '50%', margin: '5%' } }>
-      <CardHeader
-        title={destinations.getIn([currPage, 'location'])}
-        subtitle = {'Choose the places you want to go!'}
-      />
       <List
         style={{
           visibility: loading ? 'hidden' : 'visible',

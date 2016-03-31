@@ -6,7 +6,7 @@ import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 
 const QueryItem = ({ key, icon, name, address, rating, eventToggle, addedToDest }) => (
-  <Card style={ { width: '70%', margin: '5%' } }>
+  <Card style={ { width: '90%', margin: '0% 5%' } }>
     <CardHeader
       title={name}
       subtitle={'Rating: ' + rating || 'Not Available'} // eslint-disable-line
