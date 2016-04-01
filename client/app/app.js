@@ -13,7 +13,13 @@ const App = ({ children }) => (
       <Header /> :
       null
     }
-    <div>{children}</div>
+    <div id="children"
+      style={{
+        marginTop: children.props.location.pathname !== 'auth' ? '80px' : '0px',
+      }}
+    >
+      {children}
+    </div>
   </div>
 );
 
