@@ -77,6 +77,7 @@ let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList,
         <RaisedButton
           secondary label="Add Friends"
           onClick={ () => onClickAddFriends(addedFriends, trip.id) }
+          style = { { margin: '8px' } }
         />
       </CardActions>
     </Card>
@@ -87,7 +88,7 @@ TravelFriendList.propTypes = {
   travelFriends: React.PropTypes.object.isRequired,
   friends: React.PropTypes.object.isRequired,
   addedFriends: React.PropTypes.object.isRequired,
-  trip: React.PropTypes.number.isRequired,
+  trip: React.PropTypes.object.isRequired,
   listToggle: React.PropTypes.bool.isRequired,
   onClickToggleList: React.PropTypes.func.isRequired,
   onFriendClick: React.PropTypes.func.isRequired,
