@@ -220,6 +220,7 @@ img.dest-item {
     width: 60% !important;
     margin: 3% 0%;
   }
+
   .landingDescrip {
     font-size: 1.2em;
     opacity: 0.8;
@@ -228,7 +229,10 @@ img.dest-item {
     margin: 10% 10% 10% 10%;
     padding: 0.5em;
   }
-}
+
+  .xs-fullWidth {
+    width: 100%
+  }
 
   .logo {
     font-size: 3em;
@@ -239,4 +243,5 @@ img.dest-item {
     right: 0;
     top: 60%;
   }
+}
 

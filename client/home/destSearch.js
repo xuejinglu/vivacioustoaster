@@ -54,7 +54,7 @@ class DestSearch extends React.Component {
             margin: '0% 0%',
             width: '40%',
           }}
-
+          className="xs-fullWidth"
           onClick={ () => {
             this.props.onAddDest();
             this.props.onResetDest();
