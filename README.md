@@ -36,6 +36,7 @@ Run `npm test` to run tests.
 ## Development
 
 ### File Hierarchy 
+```js
 Root
   |__client__
   |   |__app__
@@ -43,7 +44,10 @@ Root
   |   |   |- header.js
   |   |   |- reducers.js
   |   |   |- routes.js
-  |   |   
+  |   | 
+  |   |__assets__
+  |   |   |- pictures
+  |   |     
   |   |__auth__
   |   |   |- auth.js
   |   |   |- authAction.js
@@ -65,7 +69,6 @@ Root
   |   |   
   |   |__tag__
   |   |   |- tagList.js
-  |   |   |- tagItem.js
   |   |   |- tagActions.js
   |   |   |- tagReducer.js
   |   |   
@@ -74,12 +77,22 @@ Root
   |   |   |- queryItem.js
   |   |   |- queryActions.js
   |   |   |- queryReducer.js
+  |   |
+  |   |__home__
+  |   |   |- destSearch.js
+  |   |   |- home.js
+  |   |   |- homeActions.js
+  |   |   |- homeReducer.js
+  |   |   |- tripTypeList.js
   |   |   
   |   |__trip__
   |   |   |- tripList.js
   |   |   |- tripItem.js
   |   |   |- tripActions.js
   |   |   |- tripReducers.js
+  |   |
+  |   |__store__
+  |   |   |- configureStore.js
   |   |    
   |   |__tripPlan__
   |   |   |__tripOverview__
@@ -99,6 +112,10 @@ Root
   |   |   |   |- eventItem.js
   |   |   |   |- eventActions.js
   |   |   |   |- eventReducers.js
+  |   |   | 
+  |   |   |- index.js
+  |   |   |- index.html
+  |   |   |- index.min.js
   |   
   |__specs__
   |   |__client__
@@ -112,7 +129,41 @@ Root
   |   |   |- tag-spec.js
   |   |   |- auth-spec.js
   |   |
-  |   |__server__
+  |__server__  
+  |   |__config__
+  |   |   |- db.js
+  |   |   |- helper.js
+  |   |   |- middleware.js
+  |   |   |- routes.js
+  |   |
+  |   |__destinations__
+  |   |   |- destinations.js
+  |   |   |- destinationsController.js
+  |   |   
+  |   |__events__
+  |   |   |- events.js
+  |   |   |- eventsController.js
+  |   |   
+  |   |__placeSearch__
+  |   |   |- placeSearchController.js
+  |   |
+  |   |__trips__
+  |   |   |- trips.js
+  |   |   |- tripsController.js
+  |   |   
+  |   |__users__
+  |   |   |- users.js
+  |   |   |- usersController.js
+  |   |
+  |   |__utils__
+  |   |   |- flickrSearch.js
+  |   |   |- redisUtils.js
+  |   |   |- tagClassifier.js
+  |   |   
+  |   |__votes__
+  |   |   |- votes.js
+  |   |   |- votesController.js
+```
 
 ### Installing Dependencies
 
