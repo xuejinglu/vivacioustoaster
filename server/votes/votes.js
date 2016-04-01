@@ -18,15 +18,17 @@ Vote.sync();
 User.sync();
 Event.sync();
 
-Vote.createVote = (userId, eventId) =>
-    Vote.create({ userId, eventId }, { returning: true })
-    .catch(err => err);
+Vote.createOrDeleteVote = (userId, eventId) =>
+  Vote.findOne({ where: { userId, eventId } }).then(vote => {
+    if (vote) {
+      return Vote.destroy({ where: { id: vote.dataValues.id } });
+    }
+    return Vote.create({ userId, eventId }, { returning: true });
+  })
+  .catch(err => err);
 
 Vote.getAllVotes = eventId => Event.findOne({ where: { id: eventId } })
   .then(event => event.getVotes())
-  .catch(err => err);
-
-Vote.deleteVote = id => Vote.destroy({ where: { id } })
   .catch(err => err);
 
 module.exports = Vote;

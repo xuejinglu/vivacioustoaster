@@ -35,9 +35,9 @@ module.exports = function (app, express) {
   app.get('/api/destinations/:destId/events', eventsController.getAll);
 
   // Votes
+  app.use('/api/events/:eventId/votes', helper.decode);
   app.get('/api/events/:eventId/votes', votesController.getAll);
-  app.post('/api/events/:eventId/votes', votesController.create);
-  app.delete('/api/votes/:voteId', votesController.delete);
+  app.post('/api/events/:eventId/votes', votesController.createOrDelete);
 
   // Google Places
   app.post('/api/placeSearch', placeSearchController.search);

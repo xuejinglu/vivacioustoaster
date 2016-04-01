@@ -6,9 +6,16 @@ import CardMedia from 'material-ui/lib/card/card-media';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import Avatar from 'material-ui/lib/avatar';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import ThumbUp from 'material-ui/lib/svg-icons/action/thumb-up';
 
-const EventItem = ({ key, name, address, rating, tags, photoUrl }) => (
+const EventItem = ({ key, name, address, rating, tags, votes, photoUrl, voteOn }) => (
   <Card style={ { width: '75%', margin: '5% 12.5%' } }>
+    <CardHeader title={votes.length}
+      avatar={<FloatingActionButton mini secondary onClick={voteOn}>
+        <ThumbUp />
+      </FloatingActionButton>}
+    />
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
@@ -36,7 +43,9 @@ EventItem.propTypes = {
   address: React.PropTypes.string.isRequired,
   rating: React.PropTypes.number.isRequired,
   tags: React.PropTypes.arrayOf(React.PropTypes.string),
+  votes: React.PropTypes.array.isRequired,
   photoUrl: React.PropTypes.string.isRequired,
+  voteOn: React.PropTypes.func.isRequired,
 };
 
 export default EventItem;

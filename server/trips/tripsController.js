@@ -22,16 +22,11 @@ module.exports = {
                 Promise.all(eventList.map((events, eventIdx) => // eslint-disable-line
                   Event.createEvents(events)
                     .then(eventsInDest =>
-                      Promise.all(eventsInDest.map(event =>
-                        Vote.createVote(req.user.id, event.dataValues.id)))
-                      .then(() =>
-                        destinations.map((destination, destIdx) => { // eslint-disable-line
-                        // later add logic for adding events to a single destination
-                          if (destIdx === eventIdx) {
-                            destination.addEvents(eventsInDest);
-                          }
-                        })
-                      )
+                      destinations.map((destination, destIdx) => { // eslint-disable-line
+                        if (destIdx === eventIdx) {
+                          destination.addEvents(eventsInDest);
+                        }
+                      })
                     )))
                 .then(() => {
                   const addUsers = [...req.body.friends, req.user];

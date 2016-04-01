@@ -45,7 +45,7 @@ export const clearAll = () => ({
 // (2) dispatches another action to GET destinations for the trip id
 // (3) dispatches another action upon success to update destinations on state
 
-export const fetchDestinations = (trip, goNext) =>
+export const fetchDestinations = (trip, goNext, userId) =>
   dispatch => {
     // update 'isFetching' state
     const token = cookie.load('token');
@@ -61,7 +61,7 @@ export const fetchDestinations = (trip, goNext) =>
       .then(destinations => {
         dispatch(receiveDestinations(destinations));
         Promise.all(destinations.map(destination =>
-          dispatch(fetchEvents(destination))))
+          dispatch(fetchEvents(destination, userId))))
           .then(() => goNext('/tripPlan'));
       })
       .catch(err => console.error(err)); // add proper error handling
