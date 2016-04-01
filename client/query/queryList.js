@@ -68,6 +68,7 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
     </List>
     <Link to="tag"><RaisedButton label="Back" /></Link>
     <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
+      goStartLoad();
       if (trip.id === undefined) {
         onNextQuery();
         if (currPage === destinations.length - 1) {
