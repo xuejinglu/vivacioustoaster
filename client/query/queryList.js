@@ -84,7 +84,7 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
             onNextQuery();
             if (currPage === destinations.length - 1) {
               goStartLoad();
-              onClickSave(destinations, tripType, friends, events, goNext);
+              onClickSave(destinations, tripType, friends, events, goNext, user);
               onClickReset();
             }
           } else {
