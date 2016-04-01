@@ -6,12 +6,9 @@ import StarBorder from 'material-ui/lib/svg-icons/toggle/star-border';
 import { toggleTag, startLoad, endLoad } from './tagActions';
 import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
-import NavigationArrowForward
-from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
-import NavigationArrowBack
-from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import { RaisedButton } from 'material-ui';
 
 const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
@@ -74,8 +71,8 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
         </GridTile>
       ))}
     </GridList>
-  <Link to="friend"><NavigationArrowBack /></Link>
-  <NavigationArrowForward onClick={ () => {
+  <Link to="friend"><RaisedButton label="Back" /></Link>
+  <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
     startLoadEvents();
     if (chosen.size === 0) {
       onStartSearch(goNext, tags, destinations, currPage)

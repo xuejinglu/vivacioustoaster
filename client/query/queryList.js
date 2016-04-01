@@ -1,10 +1,7 @@
 import React from 'react';
 import QueryItem from './queryItem';
 import { connect } from 'react-redux';
-import NavigationArrowForward
-from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
-import NavigationArrowBack
-from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
+import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router';
 import { save, toggleEvent, nextQuery, updateEvents, reset, startLoad, endLoad }
   from './queryActions';
@@ -69,8 +66,8 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
           />
         )}
     </List>
-    <Link to="tag"><NavigationArrowBack /></Link>
-    <NavigationArrowForward onClick={ () => {
+    <Link to="tag"><RaisedButton label="Back" /></Link>
+    <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
       goStartLoad();
       if (trip.id === undefined) {
         onNextQuery();
