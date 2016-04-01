@@ -51,10 +51,8 @@ class DestSearch extends React.Component {
           }
           style={{
             opacity: this.props.startDate && this.props.endDate && this.props.location ? '1' : '0.4', // eslint-disable-line
-            margin: '0% 0%',
-            width: '40%',
           }}
-          className="xs-fullWidth"
+          className="addDest"
           onClick={ () => {
             this.props.onAddDest();
             this.props.onResetDest();
