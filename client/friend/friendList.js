@@ -6,6 +6,9 @@ import { toggleAddFriend } from './friendActions';
 import List from 'material-ui/lib/lists/list';
 import { Link } from 'react-router';
 import { RaisedButton } from 'material-ui';
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
+
 
 const mapStateToProps = state => ({ friends: state.friend.get('friends') });
 
@@ -14,18 +17,20 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let FriendList = ({ friends, onFriendClick }) => (
-  <div>
-    {
-      friends.length ? <p>Choose the friends you want to travel with!</p> :
-      <p>You have no friends using Voyager :( Invite them to join, or travel solo!</p>
-    }
+    <Card style={ { width: '60%', margin: '5% 20%' } }>
+    <CardHeader
+      title={
+        friends.length ? 'Choose the friends you want to travel with!' :
+        'You have no friends using Voyager :( Invite them to join, or travel solo!'
+      }
+    />
     <List>
       {friends.map(friend =>
         <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
       )}
     </List>
     <Link to="tag"><RaisedButton secondary label="Next" style={ { float: 'right' } } /></Link>
-  </div>
+    </Card>
 );
 
 FriendList.propTypes = {
