@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onClearDest, photoUrl }) => (// eslint-disable-line
-  <Card style={ { width: '60%', margin: '5% 20%' } }>
+  <Card style={ { width: '60%', margin: '2.5% 20%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
         subtitle={`${Moment(startDate).format('MM/DD/YYYY')} -
@@ -29,9 +29,11 @@ let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onCl
     </CardMedia>
     <Link to="tag">
       <RaisedButton
+        secondary
         label="Add Events"
         onMouseDown={ () => onChooseDest(destIdx) }
         onMouseUp={ () => onClearDest() }
+        style = { { margin: '16px' } }
       />
     </Link>
     <EventList destIdx={destIdx} />
@@ -43,7 +45,6 @@ DestItem.propTypes = {
   location: React.PropTypes.string.isRequired,
   startDate: React.PropTypes.any.isRequired,
   endDate: React.PropTypes.any.isRequired,
-  events: React.PropTypes.any.isRequired,
   onChooseDest: React.PropTypes.func.isRequired,
   onClearDest: React.PropTypes.func.isRequired,
   destIdx: React.PropTypes.any,
