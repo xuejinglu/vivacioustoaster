@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   goEndLoad: () => dispatch(endLoad()),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset, loading, goEndLoad, goStartLoad }) => ( // eslint-disable-line
   <div>
     <img src="../assets/spinning-globe.gif"
       style={{
@@ -53,17 +53,13 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         zIndex: '1',
         backgroundColor: 'transparent',
       }}
-    >
-  <Card style={ { width: '60%', margin: '5% 20%' } }>
+    />
+  <Card style={ { width: '60%', margin: '5% 20%', visibility: loading ? 'hidden' : 'visible' } }>
     <CardHeader
       title={destinations.getIn([currPage, 'location'])}
       subtitle = {'Choose the places you want to go!'}
     />
-      <List
-        style={{
-          visibility: loading ? 'hidden' : 'visible',
-        }}
-      >
+      <List style={ { visibility: loading ? 'hidden' : 'visible' } }>
         { events[currPage].map(event =>
           <QueryItem key={ event.id } { ...event }
             eventToggle={ () => onClickToggle(event) }
