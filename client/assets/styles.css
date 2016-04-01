@@ -128,7 +128,7 @@ div.tooltip:hover span.tooltip-text {
   height: 22px;
   justify-content: center;
   margin-bottom: 2%;
-  position: flex;
+  position: relative;
   width: 35%;
   text-align: left;
 }
@@ -219,6 +219,9 @@ img.dest-item {
     left: 0;
     text-align: left;
     margin-bottom: 20px;
+  }
+  .geosuggest__suggests {
+    width:250px;
   }
 
   .datePicker {
