@@ -21,7 +21,9 @@ const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) =
       onClick={ goGetTripInfo }
       overlay={<CardTitle title={name} />}
     >
-      <img src={ destinations[0].photoUrl } className="dest-item" />
+      <img src={ destinations[0].photoUrl || '../assets/abstract-large.jpg' }
+        className="dest-item"
+      />
     </CardMedia>
     <CardTitle title="Destinations" />
     <CardText>
