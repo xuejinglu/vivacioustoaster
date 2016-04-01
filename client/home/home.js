@@ -28,7 +28,7 @@ class Home extends React.Component {
         )}
         </List>
         <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
-          style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden', }}
+          style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden' }}
         >
           <RaisedButton secondary label="Create Trip" />
         </Link>

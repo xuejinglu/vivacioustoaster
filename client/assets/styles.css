@@ -1,3 +1,12 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px
+}
+
 div.tooltip {
   position: relative;
   display: inline-block;
@@ -29,48 +38,70 @@ div.tooltip:hover span.tooltip-text {
 .landingDescrip {
   background-color: black;
   color: white;
-  border: 2.5px solid #1f7a1f;
+  border: 2.5px solid #00cc00;
+  flex-grow: 1;
   font-size: 2em;
   opacity: 0.8;
-  max-width: 100%;
   position: relative;
   text-align: center;
-  top: 60px;
-  max-width: 600px;
-  margin-left: 350px;
-  padding: 10px;
+  margin: 3% 20% 3% 20%;
+  padding: 1em;
 }
 
 .landingPage {
   background-image: url("background.jpeg");
+  background-size: 100% 45em;
   background-repeat: no-repeat;
-  background-size: 1300px 900px;
-  height: 900px;
-  width: 1300px;
   border: 0;
-  position: absolute;
+  flex-wrap: wrap;
+  min-width: 100%;
+  justify-content: center;
+  height: 45em;
+  position: flex;
 }
 
 .loginBtn {
-  font-size: .85em;
-  margin-left: 565px;
-  margin-top: 75px;
+  font-size: 1em;
   height: 55px;
-  width: 165px;
+  width: 150px;
+  justify-content: center;
+  position: flex;
   background-color: #3b5998;
   color: white;
   border-radius: 4px;
 }
 
-.logo {
-  color: #1f7a1f;
+.loginForm {
+  justify-content: center;
+  position: flex;
   text-align: center;
-  text-shadow: -7px 4px #777777;
-  font-size: 8em;
-  position: relative;
-  margin-top: 50px;
 }
 
+.logoPic {
+  background-color: transparent;
+  top: 45%;
+  right: 7%;
+  padding-bottom: 2%;
+  position: absolute;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  height: 5em;
+}
+
+.logo {
+  color: #00cc00;
+  text-align: center;
+  text-shadow: -0.07em 0.04em #777777;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 8em;
+  position: flex;
+  right: 5%;
+}
 
 .geosuggest {
   font-size: 18px;
@@ -158,4 +189,25 @@ img.event-item {
 img.dest-item {
   min-height:55em;
   max-height:80em;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 3em;
+  }
+
+  .logoPic {
+    height: 3em;
+    right: 0;
+    top: 60%;
+  }
+
+  .landingDescrip {
+    font-size: 1.2em;
+    opacity: 0.8;
+    position: relative;
+    text-align: center;
+    margin: 10% 10% 10% 10%;
+    padding: 0.5em;
+  }
 }
