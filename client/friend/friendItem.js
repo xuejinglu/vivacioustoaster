@@ -5,7 +5,7 @@ import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 
 const FriendItem = ({ key, name, picUrl, addedToTrip, onClick }) => (
-   <Card style={ { width: '90%', margin: '0% 5%' } }>
+   <Card>
     <CardHeader
       title={name}
       avatar={picUrl}
@@ -26,3 +26,4 @@ FriendItem.propTypes = {
 };
 
 export default FriendItem;
+// style={ { width: '90%', margin: '0% 5%' } }

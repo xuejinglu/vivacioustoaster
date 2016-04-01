@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 let FriendList = ({ friends, onFriendClick }) => (
   <div>
-    <Card style={ { width: '60%', margin: '5% 20%' } }>
+    <Card style={ { width: '60%', margin: '5% 20%', padding: '1.5%' } }>
       <CardHeader
         title={
           friends.length ? 'Choose the friends you want to travel with!' :
