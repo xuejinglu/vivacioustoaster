@@ -38,7 +38,7 @@ div.tooltip:hover span.tooltip-text {
 .landingDescrip {
   background-color: black;
   color: white;
-  border: 2.5px solid #1f7a1f;
+  border: 2.5px solid #00cc00;
   flex-grow: 1;
   font-size: 2em;
   opacity: 0.8;
@@ -199,6 +199,7 @@ img.dest-item {
   .logoPic {
     height: 3em;
     right: 0;
+    top: 60%;
   }
 
   .landingDescrip {

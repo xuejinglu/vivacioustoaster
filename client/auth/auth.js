@@ -20,7 +20,7 @@ class Auth extends React.Component {
           <div className="logo">
           voyAger
           </div>
-          <img className="logoPic" src="http://cdn.shopify.com/s/files/1/0193/4518/files/plane.png?1324" />
+          <img className="logoPic" src="../assets/planelogo.png" />
         </div>
         <div className="landingDescrip">
         Where to next? Voyager, for the solo adventurer or group expeditions.
