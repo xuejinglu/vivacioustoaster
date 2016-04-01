@@ -17,20 +17,25 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let FriendList = ({ friends, onFriendClick }) => (
+  <div>
     <Card style={ { width: '60%', margin: '5% 20%' } }>
-    <CardHeader
-      title={
-        friends.length ? 'Choose the friends you want to travel with!' :
-        'You have no friends using Voyager :( Invite them to join, or travel solo!'
-      }
-    />
-    <List>
-      {friends.map(friend =>
-        <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
-      )}
-    </List>
-    <Link to="tag"><RaisedButton secondary label="Next" style={ { float: 'right' } } /></Link>
+      <CardHeader
+        title={
+          friends.length ? 'Choose the friends you want to travel with!' :
+          'You have no friends using Voyager :( Invite them to join, or travel solo!'
+        }
+      />
+      <List>
+        {friends.map(friend =>
+          <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
+        )}
+      </List>
+      <Link to="home"><RaisedButton label="Back" /></Link>
+      <Link to="tag">
+        <RaisedButton secondary label="Next" style={ { float: 'right' } } />
+      </Link>
     </Card>
+  </div>
 );
 
 FriendList.propTypes = {
