@@ -19,7 +19,7 @@ let DestOverview = ({ destinations }) => (
       <strong>Destinations: </strong>
       {
         destinations.map(destination => destination.location)
-        .join(' --> ')
+        .join(' ✈ ')
       }
     </CardText>
   </Card>
