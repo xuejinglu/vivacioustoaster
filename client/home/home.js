@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import { clearDestination, clearDestinations } from './homeActions';
-
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
 
 class Home extends React.Component {
   componentWillMount() {
@@ -18,20 +19,31 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <DestSearch />
+      <Card style={ { width: '60%', margin: '2% 20%' } }>
+        <CardHeader
+          title={'To Begin!'}
+        />
+        <DestSearch style={ { width: '100%', margin: '5% 20%' } } />
         <TripTypeList />
-        <List>
-        {this.props.destinations.map(destination =>
-          <ListItem
-            primaryText={destination.get('location')}
-          />
-        )}
+        <List
+          style={ { width: '60%', margin: '0% 18%' } }
+          subheader={'Oh the places you will go!'}
+        >
+          {this.props.destinations.map(destination =>
+            <ListItem
+              primaryText={destination.get('location')}
+            />
+          )}
         </List>
         <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
           style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden' }}
         >
-          <RaisedButton secondary label="Create Trip" />
+          <RaisedButton
+            secondary label="Create Trip"
+            style={ { width: '60%', margin: '5% 20%' } }
+          />
         </Link>
+      </Card>
       </div>
     );
   }
