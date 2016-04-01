@@ -24,7 +24,6 @@ let EventList = ({ destinations, destIdx, events, votes, voteOnEvents, user }) =
     />
     <List>
       {events.get(destIdx).map((event, i) => {
-        console.log('VOTESSSSSS', votes);
         const eventVotes = votes.filter(v => v.eventId === event.id);
         return (<EventItem key={ event.id } {...event} votes={eventVotes}
           voteOn={() => voteOnEvents(event.id, user.id, event.hasVoted)}
