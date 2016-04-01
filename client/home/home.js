@@ -42,12 +42,10 @@ Home.propTypes = {
   destinations: React.PropTypes.array.isRequired,
   goClearDestination: React.PropTypes.func.isRequired,
   goClearDestinations: React.PropTypes.func.isRequired,
-  tripType: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   destinations: state.home.get('destinations'),
-  tripType: state.home.get('tripType'),
 });
 
 const mapDispatchToProps = dispatch => ({
