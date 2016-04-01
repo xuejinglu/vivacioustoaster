@@ -16,16 +16,17 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="landingPage">
-        <div className="logo">
-        voyAger
+        <div style={{ position: 'relative' }}>
+          <div className="logo">
+          voyAger
+          </div>
+          <img className="logoPic" src="http://cdn.shopify.com/s/files/1/0193/4518/files/plane.png?1324" />
         </div>
         <div className="landingDescrip">
-        Where to next? For the solo adventurer or group expeditions,
-        Voyager will make planning a breeze.
+        Where to next? Voyager, for the solo adventurer or group expeditions.
         </div>
-        <form action="/auth/facebook">
+        <form action="/auth/facebook" className="loginForm">
           <button type="login" className="loginBtn">Login with Facebook
-            <br /> to get started
           </button>
         </form>
       </div>
