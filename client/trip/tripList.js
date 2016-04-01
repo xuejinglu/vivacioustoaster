@@ -22,7 +22,9 @@ let TripList = ({ trips, getTripInfo, goNext, user }) => (
     <Card style={ { width: '60%', margin: '5% 20%' } }>
       <List>
         {trips.map(trip =>
-          <TripItem key={ trip.id } {...trip} goGetTripInfo={() => getTripInfo(trip, goNext, user)} />
+          <TripItem key={ trip.id } {...trip}
+            goGetTripInfo={() => getTripInfo(trip, goNext, user)}
+          />
         )}
       </List>
     </Card>
