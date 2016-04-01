@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Card from 'material-ui/lib/card/card';
 import Immutable from 'immutable';
 import TripItem from './tripItem';
 import List from 'material-ui/lib/lists/list';
@@ -15,11 +16,13 @@ const mapDispatchToProps = dispatch => ({
 
 let TripList = ({ trips, getTripInfo, goNext }) => (
   <div>
-    <List>
-      {trips.map(trip =>
-        <TripItem key={ trip.id } {...trip} goGetTripInfo={() => getTripInfo(trip, goNext)} />
-      )}
-    </List>
+    <Card style={ { width: '60%', margin: '5% 20%' } }>
+      <List>
+        {trips.map(trip =>
+          <TripItem key={ trip.id } {...trip} goGetTripInfo={() => getTripInfo(trip, goNext)} />
+        )}
+      </List>
+    </Card>
   </div>
 );
 

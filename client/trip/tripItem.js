@@ -11,7 +11,7 @@ import Avatar from 'material-ui/lib/avatar';
 import Moment from 'moment';
 
 const TripItem = ({ key, name, tripType, destinations, users, goGetTripInfo }) => (
-  <Card style={{ width: '50%', margin: '5%' }}>
+  <Card style={ { width: '90%', margin: '5% 5%' } }>
     <CardHeader>
       {users.map(user =>
         <FlatButton label={user.name} />
