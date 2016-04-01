@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DestList from './dest/destList';
-import TripOverview from './tripOverview/travelFriendList';
+import TripOverview from './tripOverview/tripOverview';
 
 const TripPlan = () => (
   <div>
