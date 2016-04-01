@@ -9,11 +9,6 @@ const initialState = Immutable.Map({
       addedToTrip: false,
     },
     {
-      name: 'Thrill',
-      img: '../assets/thrill.jpg',
-      addedToTrip: false,
-    },
-    {
       name: 'Relaxation',
       img: '../assets/relaxation.jpg',
       addedToTrip: false,
