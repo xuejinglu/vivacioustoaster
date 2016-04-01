@@ -7,9 +7,15 @@ html, body {
   margin-left: 0px
 }
 
+div.friendsRow {
+  margin: 0% 16px;
+  padding-bottom: 16px;
+}
+
 div.tooltip {
   position: relative;
   display: inline-block;
+  margin: 0.25% 0.25%;
 }
 
 div.tooltip span.tooltip-text {
@@ -182,12 +188,12 @@ div.tooltip:hover span.tooltip-text {
 }
 
 img.event-item {
-  min-height:35em;
-  max-height:40em;
+  min-height:15em;
+  max-height:25em;
 }
 
 img.dest-item {
-  min-height:55em;
+  min-height:25em;
   max-height:80em;
 }
 
