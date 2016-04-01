@@ -30,9 +30,11 @@ let FriendList = ({ friends, onFriendClick }) => (
           <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
         )}
       </List>
-      <Link to="home"><RaisedButton label="Back" /></Link>
+      <Link to="home">
+        <RaisedButton label="Back" style={{ marginTop: '16px' }} />
+      </Link>
       <Link to="tag">
-        <RaisedButton secondary label="Next" style={ { float: 'right' } } />
+        <RaisedButton secondary label="Next" style={ { float: 'right', marginTop: '16px' } } />
       </Link>
     </Card>
   </div>
