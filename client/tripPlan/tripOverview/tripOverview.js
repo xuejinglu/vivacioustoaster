@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 let TripOverview = ({ destinations }) => (
   <div>
-    <Card style={ { width: '60%', margin: '5% 20%' } }>
+    <Card style={ { width: '60%', margin: '2.5% 20%' } }>
       <CardTitle title="Let's Take Off!" style={{ textAlign: 'center' }} />
       <DestOverview />
       <TravelFriendList />

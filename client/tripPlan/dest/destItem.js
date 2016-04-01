@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onClearDest, photoUrl }) => (// eslint-disable-line
-  <Card style={ { width: '60%', margin: '5% 20%' } }>
+  <Card style={ { width: '60%', margin: '2.5% 20%' } }>
     <CardMedia
       overlay={<CardTitle title={location}
         subtitle={`${Moment(startDate).format('MM/DD/YYYY')} -
