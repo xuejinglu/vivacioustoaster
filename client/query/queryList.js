@@ -6,7 +6,8 @@ from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-forward';
 import NavigationArrowBack
 from '../../node_modules/material-ui/lib/svg-icons/navigation/arrow-back';
 import { Link } from 'react-router';
-import { save, toggleEvent, nextQuery, updateEvents, reset } from './queryActions';
+import { save, toggleEvent, nextQuery, updateEvents, reset, startLoad, endLoad }
+  from './queryActions';
 import { Map } from 'immutable';
 import List from 'material-ui/lib/lists/list';
 import _ from 'lodash';
@@ -23,6 +24,7 @@ const mapStateToProps = state => ({
   dest: state.tripPlan.dest.get('destinations'),
   currPage: state.query.get('currPage'),
   destId: state.tripPlan.dest.get('key'),
+  loading: state.query.get('loadingTrip'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -31,22 +33,43 @@ const mapDispatchToProps = dispatch => ({
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip, goNext, destId) => dispatch(updateEvents(events, trip, goNext, destId)),// eslint-disable-line
   onNextQuery: () => dispatch(nextQuery()),
-  goNext: (name) => dispatch(push(name)),
+  goNext: name => dispatch(push(name)),
   onClickReset: () => dispatch(reset()),
+  goStartLoad: () => dispatch(startLoad()),
+  goEndLoad: () => dispatch(endLoad()),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset, goStartLoad, goEndLoad, loading }) => ( // eslint-disable-line
   <div>
+    <img src="../assets/spinning-globe.gif"
+      style={{
+        position: 'fixed',
+        height: '10%',
+        top: '42.5%',
+        left: '48%',
+        visibility: loading ? 'visible' : 'hidden',
+        zIndex: '1',
+        backgroundColor: 'transparent',
+      }}
+    />
     Choose the places you want to go!
-  <List>
+  <List
+    style={{
+      visibility: loading ? 'hidden' : 'visible',
+    }}
+  >
       { events[currPage].map(event =>
         <QueryItem key={ event.id } { ...event }
           eventToggle={ () => onClickToggle(event) }
+          style={{
+            visibility: loading ? 'hidden' : 'visible',
+          }}
         />
       )}
   </List>
   <Link to="tag"><NavigationArrowBack /></Link>
   <NavigationArrowForward onClick={ () => {
+    goStartLoad();
     if (trip.id === undefined) {
       onNextQuery();
       if (currPage === destinations.length - 1) {
@@ -55,7 +78,9 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
       }
     } else {
       onClickUpdate(events, dest, goNext, destId);
-    }}}
+    }
+    setTimeout(goEndLoad, 4000);
+  }}
   />
   </div>
 );
@@ -75,6 +100,9 @@ QueryList.propTypes = {
   goNext: React.PropTypes.func,
   destId: React.PropTypes.number,
   onClickReset: React.PropTypes.func,
+  goStartLoad: React.PropTypes.func,
+  goEndLoad: React.PropTypes.func,
+  loading: React.PropTypes.bool,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

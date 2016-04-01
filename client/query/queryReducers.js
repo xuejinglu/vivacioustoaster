@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 const initialState = Immutable.Map({
   events: null,
   currPage: 0,
+  loadingTrip: false,
 });
 
 const event = (state, action) => {
@@ -33,6 +34,10 @@ const events = (state = initialState, action) => {
       return state.set('currPage', newPage);
     case 'RESET':
       return state.set('currPage', 0);
+    case 'START_LOAD':
+      return state.set('loadingTrip', true);
+    case 'END_LOAD':
+      return state.set('loadingTrip', false);
     default:
       return state;
   }
