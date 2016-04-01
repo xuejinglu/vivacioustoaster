@@ -13,7 +13,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
   <Provider store={store}>
     <div>
-    <Router history={history}>
+    <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
       {routes}
     </Router>
       <DevTools />

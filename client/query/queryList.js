@@ -32,7 +32,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(save(destinations, tripType, friends, events, goNext, user)),
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip, goNext, destId) => dispatch(updateEvents(events, trip, goNext, destId)),// eslint-disable-line
-  onNextQuery: () => dispatch(nextQuery()),
+  onNextQuery: () => {
+    dispatch(nextQuery());
+    window.scrollTo(0, 0);
+  },
   goNext: name => dispatch(push(name)),
   onClickReset: () => dispatch(reset()),
   goStartLoad: () => dispatch(startLoad()),
