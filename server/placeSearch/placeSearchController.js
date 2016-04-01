@@ -9,6 +9,16 @@ const MAX_PLACES_RETURNED = 20;
 const redisUtils = require('../utils/redisUtils');
 const redis = require('redis');
 
+const client = redis.createClient();
+let exist = false;
+client.on('connect', () => {
+  exist = true;
+});
+client.on('error', (err) => {
+  console.log('error', err);
+});
+client.quit();
+
 // Returns an object with only the desired attributes from the original Google Places place object.
 const formatPlace = (place, options) => ({
   address: place.formatted_address,
@@ -23,6 +33,7 @@ const formatPlace = (place, options) => ({
   tags: [options.tripsAppTag],
   addedToDest: false,
 });
+
 
 // Reduces the places list to a list of unique places, and combines tags for the places
 // that are duplicated.
@@ -74,16 +85,6 @@ module.exports = {
       // Promise.all returns an array of objects, same length as the number of tags.
       return Promise.all(optionsArray.map(options => {
         const key = `${options.qs.query}:  ${options.qs.types}`;
-        const client = redis.createClient();
-        let exist = false;
-        client.on('connect', () => {
-          exist = true;
-        });
-        client.on('error', (err) => {
-          console.log('error', err);
-        });
-        client.quit();
-        console.log(exist);
         if (exist) {
           return redisUtils.isInRedis(key).then((events) => {
             if (!events) {

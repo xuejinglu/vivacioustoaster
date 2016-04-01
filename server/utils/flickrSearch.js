@@ -11,6 +11,16 @@ const FLICKR_TEMPLATE_URL = `https://farm${FARM_ID}.staticflickr.com/${SERVER_ID
 const redisUtils = require('./redisUtils');
 const redis = require('redis');
 
+let exist = false;
+const client = redis.createClient();
+client.on('connect', () => {
+  exist = true;
+});
+client.on('error', (err) => {
+  console.log('error', err);
+});
+client.quit();
+
 const constructPhotoUrl = photo =>
   FLICKR_TEMPLATE_URL.replace(FARM_ID, photo.farm)
                      .replace(SERVER_ID, photo.server)
@@ -41,17 +51,7 @@ const extendResourceWithPhotos = resources => {
   }));
 
   return Promise.all(optionsArray.map((options, index) => {
-    let exist = false;
     const key = `FLICKR_LOCATION_OR_EVENT:  ${options.qs.text}`;
-    const client = redis.createClient();
-    client.on('connect', () => {
-      exist = true;
-    });
-    client.on('error', (err) => {
-      console.log('error', err);
-    });
-    client.quit();
-    console.log(exist);
     if (exist) {
       return redisUtils.isInRedis(key)
         .then(redisPhotos => {
