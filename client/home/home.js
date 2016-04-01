@@ -19,11 +19,12 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-      <Card style={ { width: '60%', margin: '5% 20%' } }>
+      <Card style={ { width: '60%', margin: '2% 20%' } }>
         <CardHeader
           title={'To Begin!'}
         />
         <DestSearch style={ { width: '100%', margin: '5% 20%' } } />
+        <TripTypeList />
         <List
           style={ { width: '60%', margin: '0% 18%' } }
           subheader={'Oh the places you will go!'}
@@ -34,7 +35,6 @@ class Home extends React.Component {
             />
           )}
         </List>
-        <TripTypeList />
         <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
           style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden' }}
         >

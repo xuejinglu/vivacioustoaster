@@ -8,7 +8,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 let TripTypeList = ({ onTripTypeChange }) => (
-  <div style={ { width: '90%', margin: '0% 20%' } }>
+  <div style={ { width: '90%', margin: '3% 20%' } }>
     <RadioButtonGroup defaultSelected="Group" onChange={(event, tripType) => {
       onTripTypeChange(tripType);
     }}
