@@ -7,6 +7,17 @@ const tagClassifier = require('../utils/tagClassifier');
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const MAX_PLACES_RETURNED = 20;
 const redisUtils = require('../utils/redisUtils');
+const redis = require('redis');
+
+const client = redis.createClient();
+let exist = false;
+client.on('connect', () => {
+  exist = true;
+});
+client.on('error', (err) => {
+  console.log('error', err);
+});
+client.quit();
 
 // Returns an object with only the desired attributes from the original Google Places place object.
 const formatPlace = (place, options) => ({
@@ -22,6 +33,7 @@ const formatPlace = (place, options) => ({
   tags: [options.tripsAppTag],
   addedToDest: false,
 });
+
 
 // Reduces the places list to a list of unique places, and combines tags for the places
 // that are duplicated.
@@ -73,22 +85,34 @@ module.exports = {
       // Promise.all returns an array of objects, same length as the number of tags.
       return Promise.all(optionsArray.map(options => {
         const key = `${options.qs.query}:  ${options.qs.types}`;
-        return redisUtils.isInRedis(key).then((events) => {
-          if (!events) {
-            return rp(options)
-              .then(data => {
-                // We return an object that has all the places (formatted) as the value paired to
-                // a key of the tag name.
-                const places = data.results;
-                const tagObj = {};
-                tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
-                redisUtils.createInRedis(key, tagObj);
-                return tagObj;
-              })
-              .catch(err => helpers.errorHandler(err, req, res, next));
-          }
-          return JSON.parse(events);
-        });
+        if (exist) {
+          return redisUtils.isInRedis(key).then((events) => {
+            if (!events) {
+              return rp(options)
+                .then(data => {
+                  // We return an object that has all the places (formatted) as the value paired to
+                  // a key of the tag name.
+                  const places = data.results;
+                  const tagObj = {};
+                  tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
+                  redisUtils.createInRedis(key, tagObj);
+                  return tagObj;
+                })
+                .catch(err => helpers.errorHandler(err, req, res, next));
+            }
+            return JSON.parse(events);
+          });
+        }
+        return rp(options)
+          .then(data => {
+            // We return an object that has all the places (formatted) as the value paired to
+            // a key of the tag name.
+            const places = data.results;
+            const tagObj = {};
+            tagObj[options.tripsAppTag] = places.map(place => formatPlace(place, options));
+            return tagObj;
+          })
+          .catch(err => helpers.errorHandler(err, req, res, next));
       }))
       .then(tagObjsArray => {
         // We reduce this array into a single object that contains the key-value pairs

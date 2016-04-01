@@ -76,6 +76,7 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
           onClickReset();
         }
       } else {
+        goStartLoad();
         onClickUpdate(events, dest, goNext, destId);
       }
       setTimeout(goEndLoad, 4000);
