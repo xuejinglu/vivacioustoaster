@@ -24,11 +24,12 @@ const mapStateToProps = state => ({
   currPage: state.query.get('currPage'),
   destId: state.tripPlan.dest.get('key'),
   loading: state.query.get('loadingTrip'),
+  user: state.auth.get('user'),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickSave: (destinations, tripType, friends, events, goNext) =>
-    dispatch(save(destinations, tripType, friends, events, goNext)),
+  onClickSave: (destinations, tripType, friends, events, goNext, user) =>
+    dispatch(save(destinations, tripType, friends, events, goNext, user)),
   onClickToggle: event => dispatch(toggleEvent(event)),
   onClickUpdate: (events, trip, goNext, destId) => dispatch(updateEvents(events, trip, goNext, destId)),// eslint-disable-line
   onNextQuery: () => dispatch(nextQuery()),
@@ -38,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
   goEndLoad: () => dispatch(endLoad()),
 });
 
-let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset, loading, goEndLoad, goStartLoad }) => ( // eslint-disable-line
+let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClickToggle, currPage, onNextQuery, onNextEvents, goNext, trip, onClickUpdate, dest, currEvents, destId, onClickReset, loading, goEndLoad, goStartLoad, user }) => ( // eslint-disable-line
   <div>
     <img src="../assets/spinning-globe.gif"
       style={{
@@ -115,6 +116,7 @@ QueryList.propTypes = {
   goStartLoad: React.PropTypes.func,
   goEndLoad: React.PropTypes.func,
   loading: React.PropTypes.bool,
+  user: React.PropTypes.object,
 };
 
 QueryList = connect(mapStateToProps, mapDispatchToProps)(QueryList);

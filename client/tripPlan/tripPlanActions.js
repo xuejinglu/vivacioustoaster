@@ -26,10 +26,10 @@ export const deselectTrip = () => ({
 // (1) dispatches an action that updates the selectedTrip variable
 // (2) dispatches another action to GET destinations for the selected trip
 
-export const setTripAndGetDestinations = (trip, goNext) =>
+export const setTripAndGetDestinations = (trip, goNext, userId) =>
   dispatch => {
     dispatch(selectTrip(trip));
-    dispatch(fetchDestinations(trip, goNext));
+    dispatch(fetchDestinations(trip, goNext, userId));
     dispatch(fetchFriends(trip));
     // these dispatches clears the state after info is saved
     // in db and user can now create a new trip
@@ -39,7 +39,7 @@ export const setTripAndGetDestinations = (trip, goNext) =>
     dispatch(clearDestinations());
   };
 
-export const getAllTripInfo = (tripId, goNext) =>
+export const getAllTripInfo = (tripId, goNext, userId) =>
   dispatch => {
     const token = cookie.load('token');
     return fetch(`/api/trips/${tripId}`, {
@@ -52,6 +52,6 @@ export const getAllTripInfo = (tripId, goNext) =>
     })
     .then(res => res.json())
     .then(trip => {
-      dispatch(setTripAndGetDestinations(trip, goNext));
+      dispatch(setTripAndGetDestinations(trip, goNext, userId));
     });
   };

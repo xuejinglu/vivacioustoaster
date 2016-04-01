@@ -9,7 +9,7 @@ import cookie from 'react-cookie';
 // (2) dispatches an action to update the state with the selected trip and GET
 //     destinations for that trip id
 
-export const save = (destinations, tripType, friends, eventList, goNext) => {
+export const save = (destinations, tripType, friends, eventList, goNext, user) => {
   const addedEvents = eventList.map(events =>
     events.filter(event => event.addedToDest));
   const token = cookie.load('token');
@@ -29,7 +29,7 @@ export const save = (destinations, tripType, friends, eventList, goNext) => {
       }),
     }).then(res => res.json())
       .then(trip => {
-        dispatch(setTripAndGetDestinations(trip, goNext));
+        dispatch(setTripAndGetDestinations(trip, goNext, user.id));
       })
       .catch(err => console.error(err)); // add proper error handling
 };

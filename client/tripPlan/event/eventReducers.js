@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import Immutable from 'immutable';
 import { REQUEST_EVENTS, RECEIVE_EVENTS_IN_DEST, FETCH_EVENTS_FAILURE } from './eventActions';
-import { TOGGLE_EVENT_VOTE } from '../vote/voteActions';
+import { TOGGLE_EVENT_VOTE, TOGGLE_VOTE_ATTRIBUTE } from '../vote/voteActions';
 
 const initialState = Immutable.Map({
   isFetching: false,
@@ -14,12 +15,20 @@ const event = (state, action) => {
         return state;
       }
       return Object.assign({}, state, {
-        votedOn: !state.votedOn,
+        hasVoted: !state.hasVoted,
       });
     case RECEIVE_EVENTS_IN_DEST:
       return Object.assign({}, state, {
-        votedOn: false,
+        hasVoted: false,
       });
+    case TOGGLE_VOTE_ATTRIBUTE:
+      const votedOnEvents = action.payload.events;
+      if (_.some(votedOnEvents, e => e.id === state.id)) {
+        return Object.assign({}, state, {
+          hasVoted: true,
+        });
+      }
+      return state;
     default:
       return state;
   }
@@ -41,6 +50,10 @@ const events = (state = initialState, action) => {
       const eventList = state.get('events');
       const updatedEvents = eventList.map(e => e.map(item => event(item, action)));
       return state.set('events', updatedEvents);
+    case TOGGLE_VOTE_ATTRIBUTE:
+      const nonVotedEvents = state.get('events');
+      const eventsWithVotes = nonVotedEvents.map(e => e.map(item => event(item, action)));
+      return state.set('events', eventsWithVotes);
     case FETCH_EVENTS_FAILURE:
       // return state.set('')
     default:

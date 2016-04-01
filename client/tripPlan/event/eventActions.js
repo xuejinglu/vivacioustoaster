@@ -27,7 +27,7 @@ export const clearDest = () => ({
   type: 'CLEAR_DEST',
 });
 
-export const fetchEvents = destination =>
+export const fetchEvents = (destination, userId) =>
   dispatch => {
     const token = cookie.load('token');
     dispatch(requestEvents());
@@ -41,7 +41,7 @@ export const fetchEvents = destination =>
     }).then(res => res.json())
       .then(events => {
         dispatch(receiveEventsInDest(events));
-        dispatch(fetchVotes(events));
+        dispatch(fetchVotes(events, userId));
       })
       .catch(err => console.error(err)); // add proper error handling
   };
