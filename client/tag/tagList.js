@@ -8,7 +8,11 @@ import { startSearch } from '../query/queryActions';
 import { push } from 'react-router-redux';
 import GridList from 'material-ui/lib/grid-list/grid-list';
 import GridTile from 'material-ui/lib/grid-list/grid-tile';
+import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 import { RaisedButton } from 'material-ui';
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
 
 const mapStateToProps = state => ({
   tags: state.tag.get('tags'),
@@ -47,42 +51,50 @@ let TagList = ({ onToggleTag, onStartSearch, goNext, tags, destinations, chosen,
         visibility: loading ? 'visible' : 'hidden',
       }}
     />
-    <GridList
-      cellHeight={200}
-      style={{
-        width: '60%',
-        height: '100%',
-        overflowY: 'auto',
-        margin: '5% 20%',
-        visibility: loading ? 'hidden' : 'visible',
-      }}
-    >
-      {tags.map(tag => (
-        <GridTile
-          key={tag.img}
-          title={tag.name}
-          actionIcon=
-            {<IconButton onClick={() => onToggleTag(tag.name)}>
-              <StarBorder color="white" />
-            </IconButton>}
-          actionPosition={tag.addedToTrip ? 'left' : 'right'}
-        >
-          <img src={tag.img} style={ { width: '100%', height: '100%' } } />
-        </GridTile>
-      ))}
-    <Link to="friend"><RaisedButton label="Back" /></Link>
-    <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
-      startLoadEvents();
-      if (chosen.size === 0) {
-        onStartSearch(goNext, tags, destinations, currPage)
-        .then(() => endLoadEvents());
-      } else {
-        onStartSearch(goNext, tags, [chosen[destId]], 0, destId)
-        .then(() => endLoadEvents());
-      }
-    }}
-    />
-    </GridList>
+    <Card style={ { width: '60%', margin: '5% 20%', padding: '1.5%' } }>
+      <CardHeader
+        title={'Sightseeing, relaxation, adventure...choose a few tags below, and we\'ll suggest places you\'ll love!'} // eslint-disable-line
+      />
+      <GridList
+        cellHeight={200}
+        style={{
+          visibility: loading ? 'hidden' : 'visible',
+        }}
+      >
+        {tags.map(tag => (
+          <GridTile
+            key={tag.img}
+            title={tag.name}
+            actionIcon=
+              {<IconButton onClick={() => onToggleTag(tag.name)}>
+                {tag.addedToTrip ?
+                  <ActionFavorite color={ loading ? 'white' : '#00bcd4' } /> :
+                  <ActionFavoriteBorder color="white" />
+                }
+              </IconButton>}
+          >
+            <img src={tag.img} style={ { width: '100%', height: '100%' } } />
+          </GridTile>
+        ))}
+      </GridList>
+      <Link to="friend">
+        <RaisedButton label="Back"
+          style={{ visibility: loading ? 'hidden' : 'visible', marginTop: '16px' }}
+        />
+      </Link>
+      <RaisedButton secondary label="Next" style={ { float: 'right', marginTop: '16px' } }
+        onMouseDown={ () => {
+          startLoadEvents();
+          if (chosen.size === 0) {
+            onStartSearch(goNext, tags, destinations, currPage)
+            .then(() => endLoadEvents());
+          } else {
+            onStartSearch(goNext, tags, [chosen[destId]], 0, destId)
+            .then(() => endLoadEvents());
+          }
+        }}
+      />
+    </Card>
   </div>
 );
 
