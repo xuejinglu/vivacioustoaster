@@ -20,30 +20,33 @@ class Home extends React.Component {
     return (
       <div>
       <Card style={ { width: '80%', margin: '2% 10% 2% 10%' } }>
-        <CardHeader
-          title={'Enter a destination and date to begin:'}
-        />
-        <DestSearch style={ { width: '100%', margin: '5% 20%' } } />
-        <TripTypeList />
-        <List
-          style={ { width: '60%', margin: '-3% 19%' } }
-          subheader={'Oh the places you will go!'}
-        >
-          {this.props.destinations.map(destination =>
-            <ListItem
-              style={{ marginTop: '-17px' }}
-              primaryText={destination.get('location')}
-            />
-          )}
-        </List>
-        <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
-          style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden' }}
-        >
-          <RaisedButton
-            secondary label="Create Trip"
-            style={ { width: '40%', margin: '5% 20%' } }
+        <div className="cardContainer">
+          <CardHeader
+            title={'Enter a destination and dates:'}
+            style={{ left: '10% !important' }}
           />
-        </Link>
+          <DestSearch style={ { width: '100%', margin: '5% 20%' } } />
+          <TripTypeList />
+          <List
+            style={ { width: '60%', margin: '-3% 19%' } }
+            subheader={'Oh the places you will go!'}
+          >
+            {this.props.destinations.map(destination =>
+              <ListItem
+                style={{ marginTop: '-17px' }}
+                primaryText={destination.get('location')}
+              />
+            )}
+          </List>
+          <Link to={this.props.tripType === 'Solo' ? 'tag' : 'friend' }
+            style={{ visibility: this.props.destinations.length ? 'visible' : 'hidden' }}
+          >
+            <RaisedButton
+              secondary label="Create Trip"
+              style={ { width: '40%', margin: '5% 20%' } }
+            />
+          </Link>
+        </div>
       </Card>
       </div>
     );

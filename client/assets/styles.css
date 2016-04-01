@@ -68,6 +68,10 @@ div.tooltip:hover span.tooltip-text {
   top: 0;
 }
 
+.cardContainer {
+  margin-left: 19%;
+}
+
 .datePicker {
   justify-content: center;
   margin: 3% 0% 0% 0%;
@@ -229,6 +233,10 @@ img.dest-item {
 }
 
 @media (max-width: 600px) {
+  .cardContainer {
+    margin-left: 0%;
+  }
+
   .geosuggest {
     width: 53%;
     left: 0;
@@ -251,10 +259,6 @@ img.dest-item {
     text-align: center;
     margin: 10% 10% 10% 10%;
     padding: 0.5em;
-  }
-
-  .logout {
-    margin-right: -30px;
   }
 
   .addDest {
