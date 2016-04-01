@@ -25,7 +25,9 @@ let DestItem = ({ destIdx, key, location, startDate, endDate, onChooseDest, onCl
         ${Moment(endDate).format('MM/DD/YYYY')}`}
       />}
     >
-      <img src={photoUrl} className="dest-item" />
+      <img src={photoUrl || '../assets/abstract-large.jpg'}
+        className="dest-item"
+      />
     </CardMedia>
     <Link to="tag">
       <RaisedButton
