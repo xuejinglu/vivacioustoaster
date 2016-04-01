@@ -63,7 +63,9 @@ div.tooltip:hover span.tooltip-text {
 
 .header {
   font-family: 'Cinzel', serif !important;
-  position: flex;
+  position: fixed !important;
+  left: 0;
+  top: 0;
 }
 
 .datePicker {
