@@ -8,7 +8,7 @@ const injectTapEventPlugin = require('react-tap-event-plugin');
 injectTapEventPlugin();
 
 const App = ({ children }) => (
-  <div>
+  <div style={{ height: '100%', width: '100%' }}>
     {children.props.location.pathname !== 'auth' ?
       <Header /> :
       null
