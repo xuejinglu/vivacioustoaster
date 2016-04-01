@@ -12,7 +12,9 @@ const EventItem = ({ key, name, address, rating, tags, photoUrl }) => (
     <CardMedia
       overlay={<CardTitle title={name} subtitle={`${rating} : ${address}`} />}
     >
-      <img src={photoUrl} className="event-item" />
+      <img src={photoUrl || '../assets/abstract.jpg' }
+        className="event-item"
+      />
     </CardMedia>
     <CardText>
       {tags.map(tag =>
