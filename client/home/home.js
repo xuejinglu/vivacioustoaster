@@ -19,7 +19,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-      <Card style={ { width: '60%', margin: '2% 20%' } }>
+      <Card style={ { width: '80%', margin: '2% 10% 2% 10%' } }>
         <CardHeader
           title={'To Begin!'}
         />

@@ -26,24 +26,23 @@ const mapDispatchToProps = dispatch => ({
 class DestSearch extends React.Component {
   render() {
     return (
-      <div style={ { width: '100%', margin: '0% 20%' } }>
+      <div id="destSearch">
         <Geosuggest placeholder="ex: London" onBlur={event =>
           event ? this.props.onChangeDestination(event.value) : null
         }
           onSuggestSelect={suggest => this.props.onChangeDestination(suggest.label)}
           ref="destInput"
-          style={ { width: '60%', margin: '5% 0%' } }
         />
         <DatePicker hintText="Departure Date" minDate={new Date()}
           maxDate={this.props.endDate ? this.props.endDate : new Date(Date.now() * 60)} // eslint-disable-line
           onChange={(event, newDate) => this.props.onChangeStartDate(newDate)}
           ref="startDatePick"
-          style={ { width: '60%', margin: '5% 0%' } }
+          className="datePicker"
         />
         <DatePicker hintText="End Date" minDate={this.props.startDate || new Date()}
           onChange={(event, newDate) => this.props.onChangeEndDate(newDate)}
           ref="endDatePick"
-          style={ { width: '60%', margin: '5% 0%' } }
+          className="datePicker"
         />
         <RaisedButton
           label="Add Destination"
@@ -52,10 +51,8 @@ class DestSearch extends React.Component {
           }
           style={{
             opacity: this.props.startDate && this.props.endDate && this.props.location ? '1' : '0.4', // eslint-disable-line
-            margin: '0% 0%',
-            width: '60%',
           }}
-
+          className="addDest"
           onClick={ () => {
             this.props.onAddDest();
             this.props.onResetDest();

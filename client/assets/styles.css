@@ -35,6 +35,25 @@ div.tooltip:hover span.tooltip-text {
   opacity: 1;
 }
 
+#destSearch {
+  justify-content: center;
+  margin: 0% 80% 0% 20%;
+  position: flex;
+  width: 100%;
+}
+
+.addDest {
+  margin: 0% 0%;
+  width: 40%;
+}
+
+.datePicker {
+  justify-content: center;
+  margin: 3% 0% 0% 0%;
+  position: flex;
+  width: 40% !important;
+}
+
 .landingDescrip {
   background-color: black;
   color: white;
@@ -107,16 +126,18 @@ div.tooltip:hover span.tooltip-text {
   font-size: 18px;
   font-size: 1rem;
   height: 22px;
-  margin-bottom: 11px;
+  justify-content: center;
+  margin-bottom: 2%;
   position: relative;
-  width: 230px;
+  width: 35%;
   text-align: left;
 }
 .geosuggest__input {
   border: 2px solid transparent;
   box-shadow: 0 0 1px #2b462b;
   height: 100%;
-  padding: .5em 1em;
+  padding: .5em;
+  font-size: 1em;
 
   -webkit-transition: border 0.2s, box-shadow 0.2s;
           transition: border 0.2s, box-shadow 0.2s;
@@ -167,7 +188,8 @@ div.tooltip:hover span.tooltip-text {
 
 .geosuggest-item:hover,
 .geosuggest-item:focus {
-  background: white;
+  background: #00bcd4;
+  color:white;
 }
 
 .geosuggest-item--active {
@@ -192,14 +214,19 @@ img.dest-item {
 }
 
 @media (max-width: 600px) {
-  .logo {
-    font-size: 3em;
+  .geosuggest {
+    width: 53%;
+    left: 0;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  .geosuggest__suggests {
+    width:250px;
   }
 
-  .logoPic {
-    height: 3em;
-    right: 0;
-    top: 60%;
+  .datePicker {
+    width: 60% !important;
+    margin: 3% 0%;
   }
 
   .landingDescrip {
@@ -210,4 +237,19 @@ img.dest-item {
     margin: 10% 10% 10% 10%;
     padding: 0.5em;
   }
+
+  .addDest {
+    width: 60%;
+  }
+
+  .logo {
+    font-size: 3em;
+  }
+
+  .logoPic {
+    height: 3em;
+    right: 0;
+    top: 60%;
+  }
 }
+
