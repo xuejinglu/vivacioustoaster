@@ -51,37 +51,48 @@ let QueryList = ({ destinations, tripType, onClickSave, friends, events, onClick
         backgroundColor: 'transparent',
       }}
     />
-  <Card style={ { width: '60%', margin: '5% 20%', visibility: loading ? 'hidden' : 'visible' } }>
-    <CardHeader
-      title={destinations.getIn([currPage, 'location'])}
-      subtitle = {'Choose the places you want to go!'}
-    />
-      <List style={ { visibility: loading ? 'hidden' : 'visible' } }>
-        { events[currPage].map(event =>
-          <QueryItem key={ event.id } { ...event }
-            eventToggle={ () => onClickToggle(event) }
-            style={{
-              visibility: loading ? 'hidden' : 'visible',
-            }}
-          />
-        )}
-    </List>
-    <Link to="tag"><RaisedButton label="Back" /></Link>
-    <RaisedButton secondary label="Next" style={ { float: 'right' } } onMouseDown={ () => {
-      if (trip.id === undefined) {
-        onNextQuery();
-        if (currPage === destinations.length - 1) {
-          goStartLoad();
-          onClickSave(destinations, tripType, friends, events, goNext);
-          onClickReset();
-        }
-      } else {
-        goStartLoad();
-        onClickUpdate(events, dest, goNext, destId);
-      }
-      setTimeout(goEndLoad, 4000);
+    <Card style={{
+      width: '60%',
+      margin: '5% 20%',
+      visibility: loading ? 'hidden' : 'visible',
+      padding: '1.5%',
     }}
-    />
+    >
+      <CardHeader
+        title={destinations.getIn([currPage, 'location'])}
+        subtitle = {'Choose the places you want to go!'}
+      />
+        <List style={ { visibility: loading ? 'hidden' : 'visible' } }>
+          { events[currPage].map(event =>
+            <QueryItem key={ event.id } { ...event }
+              eventToggle={ () => onClickToggle(event) }
+              style={{
+                visibility: loading ? 'hidden' : 'visible',
+              }}
+            />
+          )}
+      </List>
+      <Link to="tag">
+        <RaisedButton label="Back" style={ { marginTop: '16px' } } />
+      </Link>
+      <RaisedButton secondary
+        label="Next"
+        style={ { float: 'right', marginTop: '16px' } }
+        onMouseDown={ () => {
+          if (trip.id === undefined) {
+            onNextQuery();
+            if (currPage === destinations.length - 1) {
+              goStartLoad();
+              onClickSave(destinations, tripType, friends, events, goNext);
+              onClickReset();
+            }
+          } else {
+            goStartLoad();
+            onClickUpdate(events, dest, goNext, destId);
+          }
+          setTimeout(goEndLoad, 4000);
+        }}
+      />
     </Card>
   </div>
 );
