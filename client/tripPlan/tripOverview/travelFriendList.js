@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => ({
 let TravelFriendList = ({ travelFriends, friends, listToggle, onClickToggleList, onFriendClick, addedFriends, trip, onClickAddFriends }) => ( // eslint-disable-line
   <Card>
     <CardText>
-      <strong>Who's Going?</strong>
+      <strong>Who is Going?</strong>
     </CardText>
     <div className="friendsRow">
       {travelFriends.map(friend =>
