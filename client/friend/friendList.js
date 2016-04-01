@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 let FriendList = ({ friends, onFriendClick }) => (
   <div>
-    <Card style={ { width: '60%', margin: '5% 20%' } }>
+    <Card style={ { width: '60%', margin: '5% 20%', padding: '1.5%' } }>
       <CardHeader
         title={
           friends.length ? 'Choose the friends you want to travel with!' :
@@ -30,9 +30,11 @@ let FriendList = ({ friends, onFriendClick }) => (
           <FriendItem key={ friend.id } {...friend} onClick={() => onFriendClick(friend.id)} />
         )}
       </List>
-      <Link to="home"><RaisedButton label="Back" /></Link>
+      <Link to="home">
+        <RaisedButton label="Back" style={{ marginTop: '16px' }} />
+      </Link>
       <Link to="tag">
-        <RaisedButton secondary label="Next" style={ { float: 'right' } } />
+        <RaisedButton secondary label="Next" style={ { float: 'right', marginTop: '16px' } } />
       </Link>
     </Card>
   </div>
